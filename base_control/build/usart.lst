@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
   28:Core/Src/usart.c **** DMA_HandleTypeDef hdma_usart1_rx;
   29:Core/Src/usart.c **** DMA_HandleTypeDef hdma_usart1_tx;
   30:Core/Src/usart.c **** 
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 2
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 2
 
 
   31:Core/Src/usart.c **** /* USART1 init function */
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
   50:Core/Src/usart.c ****   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
   64              		.loc 1 50 3 is_stmt 1 view .LVU15
   65              		.loc 1 50 28 is_stmt 0 view .LVU16
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 3
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 3
 
 
   66 001c C361     		str	r3, [r0, #28]
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
  109              		.cfi_offset 4, -12
  110              		.cfi_offset 5, -8
  111              		.cfi_offset 14, -4
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 4
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 4
 
 
  112 0002 89B0     		sub	sp, sp, #36
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
   96:Core/Src/usart.c ****     hdma_usart1_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
   97:Core/Src/usart.c ****     if (HAL_DMA_Init(&hdma_usart1_rx) != HAL_OK)
   98:Core/Src/usart.c ****     {
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 5
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 5
 
 
   99:Core/Src/usart.c ****       Error_Handler();
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
  153 002c 5A6C     		ldr	r2, [r3, #68]
  154 002e 42F01002 		orr	r2, r2, #16
  155 0032 5A64     		str	r2, [r3, #68]
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 6
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 6
 
 
   71:Core/Src/usart.c **** 
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
  193              		.loc 1 82 5 is_stmt 1 view .LVU51
   82:Core/Src/usart.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
  194              		.loc 1 82 31 is_stmt 0 view .LVU52
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 7
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 7
 
 
  195 0060 0723     		movs	r3, #7
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
  231 0086 C561     		str	r5, [r0, #28]
   95:Core/Src/usart.c ****     hdma_usart1_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
  232              		.loc 1 95 5 is_stmt 1 view .LVU71
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 8
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 8
 
 
   95:Core/Src/usart.c ****     hdma_usart1_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
  109:Core/Src/usart.c ****     hdma_usart1_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
  269              		.loc 1 109 5 is_stmt 1 view .LVU90
  109:Core/Src/usart.c ****     hdma_usart1_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 9
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 9
 
 
  270              		.loc 1 109 32 is_stmt 0 view .LVU91
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
  306 00ce FFF7FEFF 		bl	HAL_NVIC_SetPriority
  307              	.LVL9:
  124:Core/Src/usart.c ****   /* USER CODE BEGIN USART1_MspInit 1 */
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 10
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 10
 
 
  308              		.loc 1 124 5 view .LVU110
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
  357 0008 7047     		bx	lr
  358              	.L23:
  132:Core/Src/usart.c **** 
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 11
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 11
 
 
  359              		.loc 1 132 1 view .LVU118
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
  158:Core/Src/usart.c **** }
  390              		.loc 1 158 1 is_stmt 0 view .LVU125
  391 0034 10BD     		pop	{r4, pc}
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 12
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 12
 
 
  392              	.LVL19:
@@ -713,26 +713,26 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 1
  436              		.file 9 "Core/Inc/usart.h"
  437              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
  438              		.file 11 "Core/Inc/main.h"
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s 			page 13
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usart.c
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:18     .text.MX_USART1_UART_Init:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:26     .text.MX_USART1_UART_Init:00000000 MX_USART1_UART_Init
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:85     .text.MX_USART1_UART_Init:0000002c $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:91     .text.HAL_UART_MspInit:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:98     .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:327    .text.HAL_UART_MspInit:000000e8 $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:336    .text.HAL_UART_MspDeInit:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:343    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:397    .text.HAL_UART_MspDeInit:00000038 $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:418    .bss.hdma_usart1_tx:00000000 hdma_usart1_tx
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:411    .bss.hdma_usart1_rx:00000000 hdma_usart1_rx
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:425    .bss.huart1:00000000 huart1
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:407    .bss.hdma_usart1_rx:00000000 $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:414    .bss.hdma_usart1_tx:00000000 $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cc6c7u8Q.s:421    .bss.huart1:00000000 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:18     .text.MX_USART1_UART_Init:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:26     .text.MX_USART1_UART_Init:00000000 MX_USART1_UART_Init
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:85     .text.MX_USART1_UART_Init:0000002c $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:91     .text.HAL_UART_MspInit:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:98     .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:327    .text.HAL_UART_MspInit:000000e8 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:336    .text.HAL_UART_MspDeInit:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:343    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:397    .text.HAL_UART_MspDeInit:00000038 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:418    .bss.hdma_usart1_tx:00000000 hdma_usart1_tx
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:411    .bss.hdma_usart1_rx:00000000 hdma_usart1_rx
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:425    .bss.huart1:00000000 huart1
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:407    .bss.hdma_usart1_rx:00000000 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:414    .bss.hdma_usart1_tx:00000000 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccnYVwll.s:421    .bss.huart1:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_UART_Init

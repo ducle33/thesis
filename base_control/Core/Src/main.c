@@ -20,12 +20,17 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "string.h"
+#include <stdio.h>
+#include <string.h>
+#include "stm32f4xx_it.h"
+#include "PID.h"
+#include "config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -35,6 +40,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define FALSE   0
+#define TRUE    1
 
 /* USER CODE END PD */
 
@@ -47,12 +54,42 @@
 
 /* USER CODE BEGIN PV */
 
+// Arrays
+uint8_t MSG[50] = "Init";
+uint8_t period[200] = "\n";
+uint8_t encoder_f[20] = "\n";
+uint8_t rx_buffer[RX_BUFFER_SIZE];
+uint8_t tx_buffer[TX_BUFFER_SIZE];
+
+// Cross processes values 
+volatile uint16_t cnt = 0;
+volatile uint16_t last_cnt = 0;
+volatile double enc_cnt = 0.0f;
+volatile double last_enc_cnt = 0.0f;
+volatile double d_measure = 0.0f;
+volatile double last_d_measure = 0.0f;
+volatile uint32_t tick = 0;
+volatile uint32_t last_tick = 0;
+volatile uint32_t d_tick = 0;
+
+volatile uint32_t *RIGHT_DUTY_ADDR = &(TIM4->CCR3);
+volatile uint32_t *RIGHT_ENCODER_ADDR = &(TIM3->CNT);
+
+double set_speed = 0.0f; // RPM
+
+
+// Custom typedef
+MOTOR_TypeDef str_right_motor;
+PID_TypeDef str_right_pid;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+void dma_rx_cplt(void);
+void dma_rx_half_cplt(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -90,31 +127,42 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_USART1_UART_Init();
+  MX_TIM4_Init();
+  MX_TIM3_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
+
+
+  #ifdef ENABLE_PID
+
+  PID_MotorInit(&str_right_motor, &str_right_pid, GPIOA, GPIO_PIN_6 | GPIO_PIN_7, 100.0f, 10.0f, &(TIM3->CNT), &(TIM4->CCR3));
+
+  // Start Timer4 for PWM function on channel 3 and channel 4
+  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
+
+  // Reset PWM Duty Cycle to zero on TIM 4 output channel 3 and channel 4
+  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_3, 0);
+  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, 0);
   
-	// //Enbale IDLE Line interrupt
-	// __HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
-	// //Enable DMA TX complete interrupt
-	// __HAL_DMA_ENABLE_IT(&hdma_uart1_tx, DMA_IT_TC);
-	
-	// HAL_UART_Receive_DMA(&huart1, DMA_RX_Buffer, DMA_RX_BUFFER_SIZE);
-	// // Get address of base register of hdma_usart1_rx then 
-	// // point to CR (Config register) and filter it by a Half Transfer Interrupt Enbale mask
-	// // Purpose -> Disable half transfer interrupt.
-	// hdma_usart1_rx.Instance->CR &= ~DMA_SxCR_HTIE;
+  // Start Timer3 for RIGHT Encoder Interfacing.
+  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+
+  // Start Timer5 for sampling loop interrupt
+  HAL_TIM_Base_Start_IT(&htim5);
+
+  #endif
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  char msg[] = "Hello World\n";
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    HAL_Delay(1000);
-    HAL_UART_Transmit_DMA(&huart1, (uint8_t *)msg,(uint16_t) strlen(msg));
+
   }
   /* USER CODE END 3 */
 }
@@ -149,8 +197,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB buses clocks
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
@@ -163,10 +210,60 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart)
+
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_6);
+  if (htim == &htim5)
+  {
+    #ifdef TEST_HARDWARE
+    // Do sampling and calculate stuff
+    cnt++;
+    if (cnt == 100)
+    {
+        
+        enc_cnt = TIM3->CNT;
+        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_7);
+        if (enc_cnt!=last_enc_cnt)
+        {
+          sprintf((char *)period, "-> %d pulses/sec\n", (enc_cnt-last_enc_cnt));
+          HAL_UART_Transmit_DMA(&huart1, period, sizeof(period));
+        }
+        cnt = 0;
+        last_enc_cnt = enc_cnt;
+        
+    }
+    #endif
+
+    #ifdef ENABLE_RIGHT_MOTOR
+    /* =================
+    * MAIN PID CLOSE-LOOP SAMPLING AND COMPUTE
+    *  =================== */
+    // RIGHT MOTOR PI CONTROL 
+    PID_PreProcess(&str_right_motor, set_speed);
+    PID_ComputeOutput(&str_right_motor);
+    PID_SetDuty(&str_right_motor );
+    #endif
+  }
 }
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    sprintf( (char *) MSG, (char *) rx_buffer, RX_BUFFER_SIZE);
+    HAL_UART_Transmit_DMA(&huart1, tx_buffer, TX_BUFFER_SIZE);
+    HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
+}
+
+void dma_rx_cplt()
+{
+    __NOP();
+}
+
+void dma_rx_half_cplt()
+{
+    __NOP();
+}
+
 /* USER CODE END 4 */
 
 /**
@@ -184,7 +281,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

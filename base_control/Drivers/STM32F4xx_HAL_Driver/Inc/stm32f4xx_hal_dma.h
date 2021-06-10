@@ -138,7 +138,7 @@ typedef enum
   */
 typedef struct __DMA_HandleTypeDef
 {
-  DMA_Stream_TypeDef         *Instance;     // Base address of handle type111def or                                                    /*!< Register base address                  */
+  DMA_Stream_TypeDef         *Instance;                                                        /*!< Register base address                  */
 
   DMA_InitTypeDef            Init;                                                             /*!< DMA communication parameters           */ 
 
