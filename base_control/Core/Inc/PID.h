@@ -43,10 +43,10 @@ typedef struct
     uint32_t            last_enc_cnt;
     double      pwm_output;
     uint8_t     dir;
-    uint32_t    DIR1_PIN;
-    uint32_t    DIR2_PIN;
+    uint16_t    DIR1_PIN;
+    uint16_t    DIR2_PIN;
     PID_TypeDef     *pPID_params;
-    GPIO_TypeDef    *PORT;
+    GPIO_TypeDef    *GPIO;
     volatile uint32_t *PWM_ADDR;
     volatile uint32_t *ENC_ADDR;
 }MOTOR_TypeDef;
@@ -67,8 +67,8 @@ void PID_ComputeOutput(MOTOR_TypeDef *motor);
 void PID_ComputeError(MOTOR_TypeDef *motor);
 void PID_SetDuty(MOTOR_TypeDef *motor);
 void PID_SetTunings(PID_TypeDef *pPID_Params, double setKp, double setKi, double setKd);
-void PID_SetSpeedMPS(MOTOR_TypeDef *motor, int16_t set_speed_mps);
-void PID_SetSpeedRPM(MOTOR_TypeDef *motor, double set_speed);
+void PID_SetSpeedMPS(MOTOR_TypeDef *motor, int16_t _set_speed_mps);
+void PID_SetSpeedRPM(MOTOR_TypeDef *motor, double _set_speed);
 void PID_PreProcess(MOTOR_TypeDef *motor, double _set_speed);
 double PID_FirstOrderFilter(double raw_sig, double last_filtered_sig, double a);
 
@@ -77,12 +77,13 @@ double PID_FirstOrderFilter(double raw_sig, double last_filtered_sig, double a);
 void PID_MotorInit( MOTOR_TypeDef *motor,               // Motor str address
                     PID_TypeDef *pPID_Params,           // PID str address
                     GPIO_TypeDef* PORT,                 // GPIO PORT for direction control
-                    uint32_t PINS,                      // GPIO PINS for direction control
+                    uint16_t PIN1,                      // GPIO PINS for direction control
+                    uint16_t PIN2,                      // GPIO PINS for direction control
                     double max_output,                  // Max Output of PWM
                     double min_output,                  // Min Input of PWM
                     volatile uint32_t * TIM_ENC_ADDR,   // TIMER interfacing encoder's counter register address: TIMx->CNT 
-                    volatile uint32_t * TIM_PWM_ADDR );  // TIMER Captur and Compare Register address: TIMx->CCRx
-
+                    volatile uint32_t * TIM_PWM_ADDR,   // TIMER Captur and Compare Register address: TIMx->CCRx
+                    double* pSet_Params);               // Set PID parameters array
 
 #ifdef __cplusplus
 }

@@ -9,6 +9,8 @@
 #include "string.h"
 #include "math.h"
 #include "config.h"
+#include "gpio.h"
+#include "stm32f4xx_hal_def.h"
 
 volatile double i_term;
 volatile double p_term;
@@ -29,15 +31,24 @@ void PID_ComputeSpeedRPM(MOTOR_TypeDef *motor, uint32_t tick)
     motor->speed = ((motor->measure) / (MOTOR_PPR * tick))*60000;
 }
 
-void PID_SetSpeedRPM(MOTOR_TypeDef *motor, double set_speed)
+void PID_SetSpeedRPM(MOTOR_TypeDef *motor, double _set_speed)
 {
-    motor->set_speed = set_speed;
+    if (_set_speed >= 0) 
+    {
+        motor->dir = 1;
+        motor->set_speed = _set_speed;
+    } 
+    else 
+    {
+        motor->dir = 0;
+        motor->set_speed = - (_set_speed);
+    }    
 }
 
 // Convert speed in M/S to RPM and write to SET SPEED
-void PID_SetSpeedMPS(MOTOR_TypeDef *motor, int16_t set_speed_mps)
+void PID_SetSpeedMPS(MOTOR_TypeDef *motor, int16_t _set_speed_mps)
 {
-    double speed_rps = set_speed_mps / (PI * ROBOT_WHEEL_DIAMETER);
+    double speed_rps = _set_speed_mps / (PI * ROBOT_WHEEL_DIAMETER);
     motor->set_speed = (double)(speed_rps) * 60;
 }
 
@@ -118,13 +129,13 @@ void PID_SetDuty(MOTOR_TypeDef *motor)
     *(motor->PWM_ADDR) = 0;
     if (motor->dir == 1)
     {
-        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, 1);
-        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, 0);
+        HAL_GPIO_WritePin(motor->GPIO, motor->DIR1_PIN, 0);
+        HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 1);
     }
     else 
     {
-        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, 0);
-        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, 1);  
+        HAL_GPIO_WritePin(motor->GPIO, motor->DIR1_PIN, 1);
+        HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 0);  
     }
     if (motor->set_speed != 0)
     {
@@ -132,8 +143,8 @@ void PID_SetDuty(MOTOR_TypeDef *motor)
     }
     else
     {
-        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, 0);
-        HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, 0);
+        HAL_GPIO_WritePin(motor->GPIO, motor->DIR1_PIN, 0);
+        HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 0);
     }
     
 }
@@ -151,17 +162,19 @@ void PID_SetTunings(PID_TypeDef *pPID_Params, double setKp, double setKi, double
 void PID_MotorInit( MOTOR_TypeDef *motor,               // Motor str address
                     PID_TypeDef *pPID_Params,           // PID str address
                     GPIO_TypeDef* PORT,                 // GPIO PORT for direction control
-                    uint32_t PINS,                      // GPIO PINS for direction control
+                    uint16_t PIN1,                      // GPIO PINS for direction control
+                    uint16_t PIN2,                      // GPIO PINS for direction control
                     double max_output,                  // Max Output of PWM
                     double min_output,                  // Min Input of PWM
                     volatile uint32_t * TIM_ENC_ADDR,   // TIMER interfacing encoder's counter register address: TIMx->CNT 
-                    volatile uint32_t * TIM_PWM_ADDR )  // TIMER Captur and Compare Register address: TIMx->CCRx
+                    volatile uint32_t * TIM_PWM_ADDR,   // TIMER Capture and Compare Register address: TIMx->CCRx
+                    double* pSet_Params)                // Set PID parameters array
 {
 
     #ifndef __GPIO_H__
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
-    GPIO_InitStruct.Pin = PINS;
+    GPIO_InitStruct.Pin = PIN1 | PIN2;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -169,15 +182,21 @@ void PID_MotorInit( MOTOR_TypeDef *motor,               // Motor str address
     #endif
 
     memset(pPID_Params , 0, sizeof(PID_TypeDef) );
+
     motor->pPID_params = pPID_Params;
-    motor->PORT = PORT;
+    motor->GPIO = PORT;
+    motor->DIR1_PIN = PIN1;
+    motor->DIR2_PIN = PIN2;
+
     motor->dir = 1;
+
     motor->ENC_ADDR = TIM_ENC_ADDR;
     motor->PWM_ADDR = TIM_PWM_ADDR;
+
     pPID_Params->OUTPUT_MAX = max_output;
     pPID_Params->OUTPUT_MIN = min_output;
 
-    PID_SetTunings(pPID_Params, RIGHT_MOTOR_KP , RIGHT_MOTOR_KI, RIGHT_MOTOR_KD);
+    PID_SetTunings(pPID_Params, pSet_Params[0] , pSet_Params[1], pSet_Params[2]);
 }
 
 

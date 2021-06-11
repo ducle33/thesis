@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "stm32f4xx_it.h"
+#include "stm32f4xx_hal_def.h"
 #include "PID.h"
 #include "config.h"
 /* USER CODE END Includes */
@@ -75,13 +76,16 @@ volatile uint32_t d_tick = 0;
 volatile uint32_t *RIGHT_DUTY_ADDR = &(TIM4->CCR3);
 volatile uint32_t *RIGHT_ENCODER_ADDR = &(TIM3->CNT);
 
-double set_speed = 0.0f; // RPM
-
+double right_set_speed = 0.0f; // RPM
+double left_set_speed = 0.0f; // RPM
+double right_pid_params[3] = {RIGHT_MOTOR_KP , RIGHT_MOTOR_KI, RIGHT_MOTOR_KD};
+double left_pid_params[3] = {LEFT_MOTOR_KP , LEFT_MOTOR_KI, LEFT_MOTOR_KD};
 
 // Custom typedef
 MOTOR_TypeDef str_right_motor;
 PID_TypeDef str_right_pid;
-
+MOTOR_TypeDef str_left_motor;
+PID_TypeDef str_left_pid;
 
 /* USER CODE END PV */
 
@@ -130,12 +134,14 @@ int main(void)
   MX_TIM4_Init();
   MX_TIM3_Init();
   MX_TIM5_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
 
   #ifdef ENABLE_PID
 
-  PID_MotorInit(&str_right_motor, &str_right_pid, GPIOA, GPIO_PIN_6 | GPIO_PIN_7, 100.0f, 10.0f, &(TIM3->CNT), &(TIM4->CCR3));
+  PID_MotorInit(&str_right_motor, &str_right_pid, GPIOB, GPIO_PIN_6 , GPIO_PIN_7, 100.0f, 10.0f, &(TIM3->CNT), &(TIM4->CCR3), right_pid_params);
+  PID_MotorInit(&str_left_motor, &str_left_pid, GPIOA, GPIO_PIN_6 , GPIO_PIN_7, 100.0f, 10.0f, &(TIM2->CNT), &(TIM4->CCR4), left_pid_params);
 
   // Start Timer4 for PWM function on channel 3 and channel 4
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
@@ -147,6 +153,8 @@ int main(void)
   
   // Start Timer3 for RIGHT Encoder Interfacing.
   HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+  // Start Timer2 for LEFT Encoder Interfacing.
+  HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
 
   // Start Timer5 for sampling loop interrupt
   HAL_TIM_Base_Start_IT(&htim5);
@@ -162,7 +170,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
+    TIM4->CCR4 = left_set_speed;
+    HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }
@@ -197,7 +206,8 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB buses clocks
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
@@ -240,12 +250,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     * MAIN PID CLOSE-LOOP SAMPLING AND COMPUTE
     *  =================== */
     // RIGHT MOTOR PI CONTROL 
-    PID_PreProcess(&str_right_motor, set_speed);
+    PID_PreProcess(&str_right_motor, right_set_speed);
     PID_ComputeOutput(&str_right_motor);
     PID_SetDuty(&str_right_motor );
+    PID_PreProcess(&str_left_motor, left_set_speed);
+    PID_ComputeOutput(&str_left_motor);
+    PID_SetDuty(&str_left_motor );
     #endif
   }
 }
+
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
@@ -281,7 +295,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef USE_FULL_ASSERT
+#ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
