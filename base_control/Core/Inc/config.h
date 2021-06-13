@@ -11,14 +11,15 @@
 #define _CONFIG_H_
 
 
-#define ENABLE_PID
+// #define ENABLE_PID
 
 
 // Config UART
-#define RX_BUFFER_SIZE   10
-#define TX_BUFFER_SIZE   10
+#define RX_BUFFER_SIZE   16
+#define TX_BUFFER_SIZE   16
 
 
+#ifdef ENABLE_PID
 // Right motor PID config
 #define ENABLE_RIGHT_MOTOR
 #define RIGHT_MOTOR_KP  2.0F  
@@ -44,6 +45,8 @@
 
 #ifdef USE_ADVANCED_PID
 #define ALPHA                  0.0f         // Parameter for filter of Derivative term. DISABLED
+#endif
+
 #endif
 
 #endif

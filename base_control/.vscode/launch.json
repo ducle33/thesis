@@ -12,6 +12,7 @@
             "type": "cortex-debug",
             "servertype": "openocd",
             "device": "STM32F407VE",
+            "gdbPath": "/usr/bin/gdb-multiarch", 
             "configFiles": [
                 "interface/stlink-v2.cfg",
                 "target/stm32f4x.cfg"

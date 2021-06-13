@@ -60,7 +60,8 @@ Core/Src/gpio.c \
 Core/Src/dma.c \
 Core/Src/usart.c \
 Core/Src/tim.c \
-Core/Src/PID.c
+Core/Src/PID.c \
+Core/Src/frame_resolve.c
 
 # ASM sources
 ASM_SOURCES =  \

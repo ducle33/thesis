@@ -32,6 +32,7 @@
 #include "stm32f4xx_hal_def.h"
 #include "PID.h"
 #include "config.h"
+#include "frame_resolve.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -63,29 +64,38 @@ uint8_t rx_buffer[RX_BUFFER_SIZE];
 uint8_t tx_buffer[TX_BUFFER_SIZE];
 
 // Cross processes values 
+
+#ifdef TEST_HARDWARE
 volatile uint16_t cnt = 0;
 volatile uint16_t last_cnt = 0;
 volatile double enc_cnt = 0.0f;
 volatile double last_enc_cnt = 0.0f;
-volatile double d_measure = 0.0f;
-volatile double last_d_measure = 0.0f;
-volatile uint32_t tick = 0;
-volatile uint32_t last_tick = 0;
-volatile uint32_t d_tick = 0;
+#endif
+
+#ifdef ENABLE_PID
+/* PID Init Variables */
 
 volatile uint32_t *RIGHT_DUTY_ADDR = &(TIM4->CCR3);
 volatile uint32_t *RIGHT_ENCODER_ADDR = &(TIM3->CNT);
+
 
 double right_set_speed = 0.0f; // RPM
 double left_set_speed = 0.0f; // RPM
 double right_pid_params[3] = {RIGHT_MOTOR_KP , RIGHT_MOTOR_KI, RIGHT_MOTOR_KD};
 double left_pid_params[3] = {LEFT_MOTOR_KP , LEFT_MOTOR_KI, LEFT_MOTOR_KD};
 
+
 // Custom typedef
 MOTOR_TypeDef str_right_motor;
 PID_TypeDef str_right_pid;
 MOTOR_TypeDef str_left_motor;
 PID_TypeDef str_left_pid;
+
+#endif
+/* Other definitions*/
+uint8_t ready_flag = FALSE;
+
+
 
 /* USER CODE END PV */
 
@@ -137,6 +147,7 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
 
   #ifdef ENABLE_PID
 
@@ -170,8 +181,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    TIM4->CCR4 = left_set_speed;
-    HAL_Delay(100);
+
   }
   /* USER CODE END 3 */
 }
@@ -256,6 +266,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     PID_PreProcess(&str_left_motor, left_set_speed);
     PID_ComputeOutput(&str_left_motor);
     PID_SetDuty(&str_left_motor );
+    #else 
+    __NOP();
     #endif
   }
 }
@@ -263,9 +275,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    sprintf( (char *) MSG, (char *) rx_buffer, RX_BUFFER_SIZE);
-    HAL_UART_Transmit_DMA(&huart1, tx_buffer, TX_BUFFER_SIZE);
+    if (rx_buffer[0] == 0xF0 && rx_buffer[1] == 0xF0 && rx_buffer[2] == 0xF0)
+    {
+        ready_flag = TRUE;
+    }
+    if (ready_flag)
+    {
+        // Do things
+        sprintf( (char *) MSG, (char *) rx_buffer, RX_BUFFER_SIZE);
+        HAL_UART_Transmit_DMA(&huart1, rx_buffer, TX_BUFFER_SIZE);
+        HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
+    }
+	sprintf( (char *) MSG, (char *) rx_buffer, RX_BUFFER_SIZE);
+    HAL_UART_Transmit_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
     HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
+	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_6);
 }
 
 void dma_rx_cplt()

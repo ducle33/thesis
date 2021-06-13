@@ -12,7 +12,7 @@
                 "USE_HAL_DRIVER",
                 "STM32F407VE"
             ],
-            "compilerPath": "${env:ARMGCC_DIR}/arm-none-eabi-gcc",
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-arm",

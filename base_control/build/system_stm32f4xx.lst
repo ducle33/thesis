@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 1
+ARM GAS  /tmp/ccXy651P.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 1
   28:Core/Src/system_stm32f4xx.c ****   * This software component is licensed by ST under BSD 3-Clause license,
   29:Core/Src/system_stm32f4xx.c ****   * the "License"; You may not use this file except in compliance with the
   30:Core/Src/system_stm32f4xx.c ****   * License. You may obtain a copy of the License at:
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 2
+ARM GAS  /tmp/ccXy651P.s 			page 2
 
 
   31:Core/Src/system_stm32f4xx.c ****   *                        opensource.org/licenses/BSD-3-Clause
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 1
   85:Core/Src/system_stm32f4xx.c ****  || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
   86:Core/Src/system_stm32f4xx.c **** /* #define DATA_IN_ExtSDRAM */
   87:Core/Src/system_stm32f4xx.c **** #endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx ||
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 3
+ARM GAS  /tmp/ccXy651P.s 			page 3
 
 
   88:Core/Src/system_stm32f4xx.c ****           STM32F479xx */
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 1
  142:Core/Src/system_stm32f4xx.c ****   * @}
  143:Core/Src/system_stm32f4xx.c ****   */
  144:Core/Src/system_stm32f4xx.c **** 
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 4
+ARM GAS  /tmp/ccXy651P.s 			page 4
 
 
  145:Core/Src/system_stm32f4xx.c **** /** @addtogroup STM32F4xx_System_Private_FunctionPrototypes
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 1
   44              	.L2:
   45 0010 00ED00E0 		.word	-536810240
   46              		.cfi_endproc
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 5
+ARM GAS  /tmp/ccXy651P.s 			page 5
 
 
   47              	.LFE130:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 1
  223:Core/Src/system_stm32f4xx.c ****   uint32_t tmp = 0, pllvco = 0, pllp = 2, pllsource = 0, pllm = 2;
   64              		.loc 1 223 3 view .LVU5
   65              	.LVL0:
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 6
+ARM GAS  /tmp/ccXy651P.s 			page 6
 
 
  224:Core/Src/system_stm32f4xx.c ****   
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 1
   84 0014 1F4A     		ldr	r2, .L12+8
   85 0016 1A60     		str	r2, [r3]
  260:Core/Src/system_stm32f4xx.c ****       break;
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 7
+ARM GAS  /tmp/ccXy651P.s 			page 7
 
 
   86              		.loc 1 260 7 is_stmt 1 view .LVU13
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 1
  126 003a 1A60     		str	r2, [r3]
  235:Core/Src/system_stm32f4xx.c ****     case 0x08:  /* PLL used as system clock source */
  127              		.loc 1 235 7 is_stmt 1 view .LVU28
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 8
+ARM GAS  /tmp/ccXy651P.s 			page 8
 
 
  128 003c F0E7     		b	.L8
@@ -432,162 +432,168 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 1
  134              	.LVL10:
  241:Core/Src/system_stm32f4xx.c ****       pllm = RCC->PLLCFGR & RCC_PLLCFGR_PLLM;
  135              		.loc 1 241 23 view .LVU31
- 136 0040 5968     		ldr	r1, [r3, #4]
+ 136 0040 5A68     		ldr	r2, [r3, #4]
  137              	.LVL11:
  242:Core/Src/system_stm32f4xx.c ****       
  138              		.loc 1 242 7 is_stmt 1 view .LVU32
  242:Core/Src/system_stm32f4xx.c ****       
  139              		.loc 1 242 17 is_stmt 0 view .LVU33
- 140 0042 5A68     		ldr	r2, [r3, #4]
+ 140 0042 5B68     		ldr	r3, [r3, #4]
  242:Core/Src/system_stm32f4xx.c ****       
  141              		.loc 1 242 12 view .LVU34
- 142 0044 02F03F02 		and	r2, r2, #63
+ 142 0044 03F03F03 		and	r3, r3, #63
  143              	.LVL12:
  244:Core/Src/system_stm32f4xx.c ****       {
  144              		.loc 1 244 7 is_stmt 1 view .LVU35
  244:Core/Src/system_stm32f4xx.c ****       {
  145              		.loc 1 244 10 is_stmt 0 view .LVU36
- 146 0048 11F4800F 		tst	r1, #4194304
+ 146 0048 12F4800F 		tst	r2, #4194304
  147 004c 13D0     		beq	.L9
  247:Core/Src/system_stm32f4xx.c ****       }
  148              		.loc 1 247 9 is_stmt 1 view .LVU37
  247:Core/Src/system_stm32f4xx.c ****       }
  149              		.loc 1 247 29 is_stmt 0 view .LVU38
- 150 004e 134B     		ldr	r3, .L12+16
- 151 0050 B3FBF2F3 		udiv	r3, r3, r2
+ 150 004e 134A     		ldr	r2, .L12+16
+ 151              	.LVL13:
  247:Core/Src/system_stm32f4xx.c ****       }
- 152              		.loc 1 247 44 view .LVU39
- 153 0054 0D4A     		ldr	r2, .L12
- 154              	.LVL13:
+ 152              		.loc 1 247 29 view .LVU39
+ 153 0050 B2FBF3F2 		udiv	r2, r2, r3
  247:Core/Src/system_stm32f4xx.c ****       }
- 155              		.loc 1 247 44 view .LVU40
- 156 0056 5268     		ldr	r2, [r2, #4]
+ 154              		.loc 1 247 44 view .LVU40
+ 155 0054 0D4B     		ldr	r3, .L12
+ 156              	.LVL14:
  247:Core/Src/system_stm32f4xx.c ****       }
- 157              		.loc 1 247 74 view .LVU41
- 158 0058 C2F38812 		ubfx	r2, r2, #6, #9
+ 157              		.loc 1 247 44 view .LVU41
+ 158 0056 5B68     		ldr	r3, [r3, #4]
  247:Core/Src/system_stm32f4xx.c ****       }
- 159              		.loc 1 247 16 view .LVU42
- 160 005c 02FB03F3 		mul	r3, r2, r3
- 161              	.LVL14:
- 162              	.L10:
+ 159              		.loc 1 247 74 view .LVU42
+ 160 0058 C3F38813 		ubfx	r3, r3, #6, #9
+ 247:Core/Src/system_stm32f4xx.c ****       }
+ 161              		.loc 1 247 16 view .LVU43
+ 162 005c 03FB02F3 		mul	r3, r3, r2
+ 163              	.LVL15:
+ 164              	.L10:
  255:Core/Src/system_stm32f4xx.c ****       SystemCoreClock = pllvco/pllp;
- 163              		.loc 1 255 7 is_stmt 1 view .LVU43
+ 165              		.loc 1 255 7 is_stmt 1 view .LVU44
  255:Core/Src/system_stm32f4xx.c ****       SystemCoreClock = pllvco/pllp;
- 164              		.loc 1 255 20 is_stmt 0 view .LVU44
- 165 0060 0A4A     		ldr	r2, .L12
- 166 0062 5268     		ldr	r2, [r2, #4]
- 255:Core/Src/system_stm32f4xx.c ****       SystemCoreClock = pllvco/pllp;
- 167              		.loc 1 255 50 view .LVU45
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 9
+ 166              		.loc 1 255 20 is_stmt 0 view .LVU45
+ 167 0060 0A4A     		ldr	r2, .L12
+ARM GAS  /tmp/ccXy651P.s 			page 9
 
 
- 168 0064 C2F30142 		ubfx	r2, r2, #16, #2
+ 168 0062 5268     		ldr	r2, [r2, #4]
  255:Core/Src/system_stm32f4xx.c ****       SystemCoreClock = pllvco/pllp;
- 169              		.loc 1 255 56 view .LVU46
- 170 0068 0132     		adds	r2, r2, #1
+ 169              		.loc 1 255 50 view .LVU46
+ 170 0064 C2F30142 		ubfx	r2, r2, #16, #2
  255:Core/Src/system_stm32f4xx.c ****       SystemCoreClock = pllvco/pllp;
- 171              		.loc 1 255 12 view .LVU47
- 172 006a 5200     		lsls	r2, r2, #1
- 173              	.LVL15:
+ 171              		.loc 1 255 56 view .LVU47
+ 172 0068 0132     		adds	r2, r2, #1
+ 255:Core/Src/system_stm32f4xx.c ****       SystemCoreClock = pllvco/pllp;
+ 173              		.loc 1 255 12 view .LVU48
+ 174 006a 5200     		lsls	r2, r2, #1
+ 175              	.LVL16:
  256:Core/Src/system_stm32f4xx.c ****       break;
- 174              		.loc 1 256 7 is_stmt 1 view .LVU48
+ 176              		.loc 1 256 7 is_stmt 1 view .LVU49
  256:Core/Src/system_stm32f4xx.c ****       break;
- 175              		.loc 1 256 31 is_stmt 0 view .LVU49
- 176 006c B3FBF2F3 		udiv	r3, r3, r2
- 177              	.LVL16:
+ 177              		.loc 1 256 31 is_stmt 0 view .LVU50
+ 178 006c B3FBF2F3 		udiv	r3, r3, r2
+ 179              	.LVL17:
  256:Core/Src/system_stm32f4xx.c ****       break;
- 178              		.loc 1 256 23 view .LVU50
- 179 0070 074A     		ldr	r2, .L12+4
- 180              	.LVL17:
+ 180              		.loc 1 256 23 view .LVU51
+ 181 0070 074A     		ldr	r2, .L12+4
+ 182              	.LVL18:
  256:Core/Src/system_stm32f4xx.c ****       break;
- 181              		.loc 1 256 23 view .LVU51
- 182 0072 1360     		str	r3, [r2]
+ 183              		.loc 1 256 23 view .LVU52
+ 184 0072 1360     		str	r3, [r2]
  257:Core/Src/system_stm32f4xx.c ****     default:
- 183              		.loc 1 257 7 is_stmt 1 view .LVU52
- 184 0074 D4E7     		b	.L8
- 185              	.LVL18:
- 186              	.L9:
+ 185              		.loc 1 257 7 is_stmt 1 view .LVU53
+ 186 0074 D4E7     		b	.L8
+ 187              	.LVL19:
+ 188              	.L9:
  252:Core/Src/system_stm32f4xx.c ****       }
- 187              		.loc 1 252 9 view .LVU53
+ 189              		.loc 1 252 9 view .LVU54
  252:Core/Src/system_stm32f4xx.c ****       }
- 188              		.loc 1 252 29 is_stmt 0 view .LVU54
- 189 0076 074B     		ldr	r3, .L12+8
- 190 0078 B3FBF2F3 		udiv	r3, r3, r2
+ 190              		.loc 1 252 29 is_stmt 0 view .LVU55
+ 191 0076 074A     		ldr	r2, .L12+8
+ 192              	.LVL20:
  252:Core/Src/system_stm32f4xx.c ****       }
- 191              		.loc 1 252 44 view .LVU55
- 192 007c 034A     		ldr	r2, .L12
- 193              	.LVL19:
+ 193              		.loc 1 252 29 view .LVU56
+ 194 0078 B2FBF3F2 		udiv	r2, r2, r3
  252:Core/Src/system_stm32f4xx.c ****       }
- 194              		.loc 1 252 44 view .LVU56
- 195 007e 5268     		ldr	r2, [r2, #4]
+ 195              		.loc 1 252 44 view .LVU57
+ 196 007c 034B     		ldr	r3, .L12
+ 197              	.LVL21:
  252:Core/Src/system_stm32f4xx.c ****       }
- 196              		.loc 1 252 74 view .LVU57
- 197 0080 C2F38812 		ubfx	r2, r2, #6, #9
+ 198              		.loc 1 252 44 view .LVU58
+ 199 007e 5B68     		ldr	r3, [r3, #4]
  252:Core/Src/system_stm32f4xx.c ****       }
- 198              		.loc 1 252 16 view .LVU58
- 199 0084 02FB03F3 		mul	r3, r2, r3
- 200              	.LVL20:
+ 200              		.loc 1 252 74 view .LVU59
+ 201 0080 C3F38813 		ubfx	r3, r3, #6, #9
  252:Core/Src/system_stm32f4xx.c ****       }
- 201              		.loc 1 252 16 view .LVU59
- 202 0088 EAE7     		b	.L10
- 203              	.L13:
- 204 008a 00BF     		.align	2
- 205              	.L12:
- 206 008c 00380240 		.word	1073887232
- 207 0090 00000000 		.word	.LANCHOR0
- 208 0094 0024F400 		.word	16000000
- 209 0098 00000000 		.word	.LANCHOR1
- 210 009c 00127A00 		.word	8000000
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 10
+ 202              		.loc 1 252 16 view .LVU60
+ 203 0084 03FB02F3 		mul	r3, r3, r2
+ 204              	.LVL22:
+ 252:Core/Src/system_stm32f4xx.c ****       }
+ 205              		.loc 1 252 16 view .LVU61
+ 206 0088 EAE7     		b	.L10
+ 207              	.L13:
+ 208 008a 00BF     		.align	2
+ARM GAS  /tmp/ccXy651P.s 			page 10
 
 
- 211              		.cfi_endproc
- 212              	.LFE131:
- 214              		.global	APBPrescTable
- 215              		.global	AHBPrescTable
- 216              		.global	SystemCoreClock
- 217              		.section	.data.SystemCoreClock,"aw"
- 218              		.align	2
- 219              		.set	.LANCHOR0,. + 0
- 222              	SystemCoreClock:
- 223 0000 0024F400 		.word	16000000
- 224              		.section	.rodata.AHBPrescTable,"a"
- 225              		.align	2
- 226              		.set	.LANCHOR1,. + 0
- 229              	AHBPrescTable:
- 230 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000\001\002\003\004\006"
- 230      00000000 
- 230      01020304 
- 230      06
- 231 000d 070809   		.ascii	"\007\010\011"
- 232              		.section	.rodata.APBPrescTable,"a"
- 233              		.align	2
- 236              	APBPrescTable:
- 237 0000 00000000 		.ascii	"\000\000\000\000\001\002\003\004"
- 237      01020304 
- 238              		.text
- 239              	.Letext0:
- 240              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
- 241              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
- 242              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
- 243              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
- 244              		.file 6 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s 			page 11
+ 209              	.L12:
+ 210 008c 00380240 		.word	1073887232
+ 211 0090 00000000 		.word	.LANCHOR0
+ 212 0094 0024F400 		.word	16000000
+ 213 0098 00000000 		.word	.LANCHOR1
+ 214 009c 00127A00 		.word	8000000
+ 215              		.cfi_endproc
+ 216              	.LFE131:
+ 218              		.global	APBPrescTable
+ 219              		.global	AHBPrescTable
+ 220              		.global	SystemCoreClock
+ 221              		.section	.data.SystemCoreClock,"aw"
+ 222              		.align	2
+ 223              		.set	.LANCHOR0,. + 0
+ 226              	SystemCoreClock:
+ 227 0000 0024F400 		.word	16000000
+ 228              		.section	.rodata.AHBPrescTable,"a"
+ 229              		.align	2
+ 230              		.set	.LANCHOR1,. + 0
+ 233              	AHBPrescTable:
+ 234 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000\001\002\003\004\006"
+ 234      00000000 
+ 234      01020304 
+ 234      06
+ 235 000d 070809   		.ascii	"\007\010\011"
+ 236              		.section	.rodata.APBPrescTable,"a"
+ 237              		.align	2
+ 240              	APBPrescTable:
+ 241 0000 00000000 		.ascii	"\000\000\000\000\001\002\003\004"
+ 241      01020304 
+ 242              		.text
+ 243              	.Letext0:
+ 244              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 245              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
+ 246              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
+ 247              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h"
+ 248              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  /tmp/ccXy651P.s 			page 11
 
 
 DEFINED SYMBOLS
-                            *ABS*:00000000 system_stm32f4xx.c
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:18     .text.SystemInit:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:26     .text.SystemInit:00000000 SystemInit
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:45     .text.SystemInit:00000010 $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:50     .text.SystemCoreClockUpdate:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:57     .text.SystemCoreClockUpdate:00000000 SystemCoreClockUpdate
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:206    .text.SystemCoreClockUpdate:0000008c $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:236    .rodata.APBPrescTable:00000000 APBPrescTable
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:229    .rodata.AHBPrescTable:00000000 AHBPrescTable
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:222    .data.SystemCoreClock:00000000 SystemCoreClock
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:218    .data.SystemCoreClock:00000000 $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:225    .rodata.AHBPrescTable:00000000 $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cc4BBOLH.s:233    .rodata.APBPrescTable:00000000 $d
+                            *ABS*:0000000000000000 system_stm32f4xx.c
+     /tmp/ccXy651P.s:18     .text.SystemInit:0000000000000000 $t
+     /tmp/ccXy651P.s:26     .text.SystemInit:0000000000000000 SystemInit
+     /tmp/ccXy651P.s:45     .text.SystemInit:0000000000000010 $d
+     /tmp/ccXy651P.s:50     .text.SystemCoreClockUpdate:0000000000000000 $t
+     /tmp/ccXy651P.s:57     .text.SystemCoreClockUpdate:0000000000000000 SystemCoreClockUpdate
+     /tmp/ccXy651P.s:210    .text.SystemCoreClockUpdate:000000000000008c $d
+     /tmp/ccXy651P.s:240    .rodata.APBPrescTable:0000000000000000 APBPrescTable
+     /tmp/ccXy651P.s:233    .rodata.AHBPrescTable:0000000000000000 AHBPrescTable
+     /tmp/ccXy651P.s:226    .data.SystemCoreClock:0000000000000000 SystemCoreClock
+     /tmp/ccXy651P.s:222    .data.SystemCoreClock:0000000000000000 $d
+     /tmp/ccXy651P.s:229    .rodata.AHBPrescTable:0000000000000000 $d
+     /tmp/ccXy651P.s:237    .rodata.APBPrescTable:0000000000000000 $d
 
 NO UNDEFINED SYMBOLS

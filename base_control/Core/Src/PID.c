@@ -17,7 +17,7 @@ volatile double p_term;
 volatile double d_term;
 
 
-
+#ifdef ENABLE_PID
 /* Private function prototypes*/
 
 double PID_Limit(double input, double max, double min);
@@ -237,3 +237,6 @@ void PID_PreProcess(MOTOR_TypeDef *motor, double _set_speed)
     motor->last_enc_cnt = enc_cnt;
 
 }
+
+
+#endif
