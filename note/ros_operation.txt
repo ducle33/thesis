@@ -1,0 +1,4 @@
+1. Chạy server roscore
+2. Chạy rosserial qua TCP 
+	rosrun rosserial_python serial_node.py tcp
+3. Chạy ESP
