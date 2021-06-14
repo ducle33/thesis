@@ -1,4 +1,4 @@
-build/PID.o: Core/Src/PID.c Core/Inc/PID.h Core/Inc/main.h \
+build/retarget.o: Core/Src/retarget.c Core/Inc/../Inc/retarget.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  Core/Inc/stm32f4xx_hal_conf.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -24,14 +24,9 @@ build/PID.o: Core/Src/PID.c Core/Inc/PID.h Core/Inc/main.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h Core/Inc/gpio.h \
- Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h \
- Core/Inc/config.h Core/Inc/gpio.h \
- Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 
-Core/Inc/PID.h:
-
-Core/Inc/main.h:
+Core/Inc/../Inc/retarget.h:
 
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -88,13 +83,3 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-
-Core/Inc/gpio.h:
-
-Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h:
-
-Core/Inc/config.h:
-
-Core/Inc/gpio.h:
-
-Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:

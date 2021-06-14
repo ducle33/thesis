@@ -1,4 +1,4 @@
-/* USER CODE BEGIN Header */
+/* USER CODE BEGIN tail */
 /**
   ******************************************************************************
   * @file           : main.c
@@ -16,7 +16,7 @@
   *
   ******************************************************************************
   */
-/* USER CODE END Header */
+/* USER CODE END tail */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
@@ -33,6 +33,7 @@
 #include "PID.h"
 #include "config.h"
 #include "frame_resolve.h"
+#include "retarget.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,12 +59,13 @@
 /* USER CODE BEGIN PV */
 
 // Arrays
-uint8_t MSG[50] = "Init";
-uint8_t period[200] = "\n";
-uint8_t encoder_f[20] = "\n";
+uint8_t MSG[500] = "Init";
+uint8_t linear_a[100] = "\n";
+uint8_t angular_a[100] = "\n";
 uint8_t rx_buffer[RX_BUFFER_SIZE];
 uint8_t tx_buffer[TX_BUFFER_SIZE];
-
+uint8_t data[8];
+uint8_t prev_rx, last_rx;
 // Cross processes values 
 
 #ifdef TEST_HARDWARE
@@ -149,7 +151,7 @@ int main(void)
   MX_TIM5_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-
+  RetargetInit(&huart1);
   HAL_UART_Receive_DMA(&huart1, rx_buffer, 1);
 
   #ifdef ENABLE_PID
@@ -184,19 +186,23 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+
     if (vel_update_flag)
     {
         resolveRxFrame(rx_buffer, &linear_vel, &angular_vel);
         #ifdef DEBUG
         if (linear_vel != last_l_vel || angular_vel != last_a_vel)
         {
-            sprintf((char *)MSG, "Linear: %f | Angular: %f \n", linear_vel, angular_vel);
-            HAL_UART_Transmit_DMA(&huart1, MSG, sizeof(MSG));
+            // sprintf((char *)MSG, "Vel: %.3f | %.3f \n", linear_vel, angular_vel);
+            // HAL_UART_Transmit_DMA(&huart1, MSG, sizeof(MSG));
+            printf("Vel : %.5f  | %.5f \n", linear_vel, angular_vel);
         }
         #endif
         last_a_vel = angular_vel;
         last_l_vel = linear_vel;
         vel_update_flag = FALSE;
+        HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_6);
     }
     HAL_Delay(100);
   }
@@ -292,21 +298,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    static uint8_t prev_rx, last_rx;
     
     if (ready_flag == TRUE)
     {
         // Do things
-        sprintf( (char *) MSG, (char *) rx_buffer, RX_BUFFER_SIZE);
-        HAL_UART_Transmit_DMA(&huart1, MSG, RX_BUFFER_SIZE);
+        // sprintf( (char *) MSG, (char *) rx_buffer, RX_BUFFER_SIZE);
+        // HAL_UART_Transmit_DMA(&huart1, MSG, RX_BUFFER_SIZE);
         vel_update_flag = TRUE;
         ready_flag = FALSE;
         HAL_UART_Receive_DMA(&huart1, rx_buffer, 1);
     }
     else
     {
-        if ((rx_buffer[0] | prev_rx | last_rx) == 0x16) // SYN
+        if (rx_buffer[0] == 0x16 && prev_rx == 0x16 && last_rx == 0x16) // SYN
         {
+            HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_7);
             ready_flag = TRUE;
             memset(rx_buffer, 0, RX_BUFFER_SIZE);
             HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);   

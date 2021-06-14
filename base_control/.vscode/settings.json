@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "dma.h": "c",
-        "gpio.h": "c"
+        "gpio.h": "c",
+        "cstring": "cpp"
     }
 }

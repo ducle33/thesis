@@ -64,17 +64,13 @@ void print_data()
   uint8_t i;
   state =!state;
 
+  Serial.write(0x16);
+  Serial.write(0x16);
+  Serial.write(0x16);
   for (i =0 ; i<sizeof(data); i++)
   {
-    #ifdef DEBUG
-    Serial.print(data[i], HEX);
-    Serial.print(" ");
-    #else
-    Serial.print(data[i]);
-    #endif
+    Serial.write(data[i]);
   }
-  Serial.println();
-
 }
 
 // Aux fucntion
