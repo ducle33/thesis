@@ -13,7 +13,6 @@
 
 // #define ENABLE_PID
 
-
 // Config UART
 #define RX_BUFFER_SIZE   16
 #define TX_BUFFER_SIZE   16

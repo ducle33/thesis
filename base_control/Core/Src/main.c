@@ -45,6 +45,7 @@
 #define FALSE   0
 #define TRUE    1
 
+#define DEBUG
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -94,8 +95,10 @@ PID_TypeDef str_left_pid;
 #endif
 /* Other definitions*/
 uint8_t ready_flag = FALSE;
-
-
+volatile uint8_t    vel_update_flag = FALSE;
+float linear_vel;
+float angular_vel;
+float last_l_vel, last_a_vel;
 
 /* USER CODE END PV */
 
@@ -147,7 +150,7 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
+  HAL_UART_Receive_DMA(&huart1, rx_buffer, 1);
 
   #ifdef ENABLE_PID
 
@@ -181,7 +184,21 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
+    if (vel_update_flag)
+    {
+        resolveRxFrame(rx_buffer, &linear_vel, &angular_vel);
+        #ifdef DEBUG
+        if (linear_vel != last_l_vel || angular_vel != last_a_vel)
+        {
+            sprintf((char *)MSG, "Linear: %f | Angular: %f \n", linear_vel, angular_vel);
+            HAL_UART_Transmit_DMA(&huart1, MSG, sizeof(MSG));
+        }
+        #endif
+        last_a_vel = angular_vel;
+        last_l_vel = linear_vel;
+        vel_update_flag = FALSE;
+    }
+    HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }
@@ -275,21 +292,32 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    if (rx_buffer[0] == 0xF0 && rx_buffer[1] == 0xF0 && rx_buffer[2] == 0xF0)
-    {
-        ready_flag = TRUE;
-    }
-    if (ready_flag)
+    static uint8_t prev_rx, last_rx;
+    
+    if (ready_flag == TRUE)
     {
         // Do things
         sprintf( (char *) MSG, (char *) rx_buffer, RX_BUFFER_SIZE);
-        HAL_UART_Transmit_DMA(&huart1, rx_buffer, TX_BUFFER_SIZE);
-        HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
+        HAL_UART_Transmit_DMA(&huart1, MSG, RX_BUFFER_SIZE);
+        vel_update_flag = TRUE;
+        ready_flag = FALSE;
+        HAL_UART_Receive_DMA(&huart1, rx_buffer, 1);
     }
-	sprintf( (char *) MSG, (char *) rx_buffer, RX_BUFFER_SIZE);
-    HAL_UART_Transmit_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
-    HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);
-	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_6);
+    else
+    {
+        if ((rx_buffer[0] | prev_rx | last_rx) == 0x16) // SYN
+        {
+            ready_flag = TRUE;
+            memset(rx_buffer, 0, RX_BUFFER_SIZE);
+            HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);   
+        }
+        else
+        {
+            HAL_UART_Receive_DMA(&huart1, rx_buffer, 1);
+        }
+    } 
+    last_rx = prev_rx;
+    prev_rx = rx_buffer[0];
 }
 
 void dma_rx_cplt()

@@ -61,9 +61,8 @@ void parseTxFrame(uint8_t *d /* uint8_t *d */, float vel_linear, float vel_angul
 }
 
 
-float * resolveRxFrame(uint8_t * d)
+void resolveRxFrame(uint8_t * d, float * linear, float * angular)
 {
-    static float vel[2];
     uint32_t tmp1 = 0;
     uint32_t tmp2 = 0;
     uint32_t rx_crc, local_crc;
@@ -76,10 +75,7 @@ float * resolveRxFrame(uint8_t * d)
 
     if (local_crc == rx_crc)
     {
-        vel[0] = *(float *)&tmp1;
-        vel[1] = *(float *)&tmp2;
+        *linear = *(float *)&tmp1;
+        *angular = *(float *)&tmp2;
     }
-
-
-    return (float *)vel;
 }

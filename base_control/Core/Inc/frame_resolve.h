@@ -20,7 +20,7 @@ void parseTxFrame(uint8_t *d /* uint8_t *d */, float vel_linear, float vel_angul
 
 void float2byte(float *f, uint8_t *d, uint8_t s);
 
-float * resolveRxFrame(uint8_t * d);
+void resolveRxFrame(uint8_t * d, float * linear, float * angular);
 
 
 #endif

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2q5xks.s 			page 1
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccea0Smo.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -17,27 +17,37 @@ ARM GAS  /tmp/cc2q5xks.s 			page 1
   14              		.text
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
-  17              		.comm	d_term,8,8
-  18              		.comm	p_term,8,8
-  19              		.comm	i_term,8,8
-  20              	.Letext0:
-  21              		.file 1 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  22              		.file 2 "Drivers/CMSIS/Include/core_cm4.h"
-  23              		.file 3 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h"
-  24              		.file 4 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
-  25              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  26              		.file 6 "/usr/include/newlib/sys/_types.h"
-  27              		.file 7 "/usr/include/newlib/sys/reent.h"
-  28              		.file 8 "/usr/include/newlib/sys/lock.h"
-  29              		.file 9 "/usr/include/newlib/math.h"
-  30              		.file 10 "Core/Src/PID.c"
-ARM GAS  /tmp/cc2q5xks.s 			page 2
+  17              		.global	d_term
+  18              		.global	p_term
+  19              		.global	i_term
+  20              		.section	.bss.d_term,"aw",%nobits
+  21              		.align	3
+  24              	d_term:
+  25 0000 00000000 		.space	8
+  25      00000000 
+  26              		.section	.bss.i_term,"aw",%nobits
+  27              		.align	3
+  30              	i_term:
+  31 0000 00000000 		.space	8
+  31      00000000 
+  32              		.section	.bss.p_term,"aw",%nobits
+  33              		.align	3
+  36              	p_term:
+  37 0000 00000000 		.space	8
+  37      00000000 
+  38              		.text
+  39              	.Letext0:
+  40              		.file 1 "Core/Src/PID.c"
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccea0Smo.s 			page 2
 
 
 DEFINED SYMBOLS
-                            *ABS*:0000000000000000 PID.c
-                            *COM*:0000000000000008 d_term
-                            *COM*:0000000000000008 p_term
-                            *COM*:0000000000000008 i_term
+                            *ABS*:00000000 PID.c
+C:\Users\Duy_Linh\AppData\Local\Temp\ccea0Smo.s:24     .bss.d_term:00000000 d_term
+C:\Users\Duy_Linh\AppData\Local\Temp\ccea0Smo.s:36     .bss.p_term:00000000 p_term
+C:\Users\Duy_Linh\AppData\Local\Temp\ccea0Smo.s:30     .bss.i_term:00000000 i_term
+C:\Users\Duy_Linh\AppData\Local\Temp\ccea0Smo.s:21     .bss.d_term:00000000 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccea0Smo.s:27     .bss.i_term:00000000 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccea0Smo.s:33     .bss.p_term:00000000 $d
 
 NO UNDEFINED SYMBOLS
