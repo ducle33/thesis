@@ -75,6 +75,9 @@ volatile double enc_cnt = 0.0f;
 volatile double last_enc_cnt = 0.0f;
 #endif
 
+volatile double right_set_speed = 0.0f; // RPM
+volatile double left_set_speed = 0.0f; // RPM
+
 #ifdef ENABLE_PID
 /* PID Init Variables */
 
@@ -82,8 +85,7 @@ volatile uint32_t *RIGHT_DUTY_ADDR = &(TIM4->CCR3);
 volatile uint32_t *RIGHT_ENCODER_ADDR = &(TIM3->CNT);
 
 
-double right_set_speed = 0.0f; // RPM
-double left_set_speed = 0.0f; // RPM
+
 double right_pid_params[3] = {RIGHT_MOTOR_KP , RIGHT_MOTOR_KI, RIGHT_MOTOR_KD};
 double left_pid_params[3] = {LEFT_MOTOR_KP , LEFT_MOTOR_KI, LEFT_MOTOR_KD};
 
@@ -177,6 +179,8 @@ int main(void)
 
   #endif
 
+  // Last update time in tick
+  uint32_t last_update = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -189,22 +193,43 @@ int main(void)
 
 
     if (vel_update_flag)
-    {
+    {    
         resolveRxFrame(rx_buffer, &linear_vel, &angular_vel);
+        
+        // Convert from M/S to RPM
+        left_set_speed = ( linear_vel - angular_vel*ROBOT_WHEEL_BASE/2 ) * 60/ ( PI * ROBOT_WHEEL_DIAMETER ); 
+        right_set_speed = ( linear_vel + angular_vel*ROBOT_WHEEL_BASE/2) * 60/ ( PI * ROBOT_WHEEL_DIAMETER );
+
         #ifdef DEBUG
         if (linear_vel != last_l_vel || angular_vel != last_a_vel)
         {
-            // sprintf((char *)MSG, "Vel: %.3f | %.3f \n", linear_vel, angular_vel);
-            // HAL_UART_Transmit_DMA(&huart1, MSG, sizeof(MSG));
-            printf("Vel : %.5f  | %.5f \n", linear_vel, angular_vel);
+            sprintf((char *)MSG, "R: %.5f | L: %.5f \n", right_set_speed, left_set_speed);
+            HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
         }
+        // HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_6);
         #endif
+
         last_a_vel = angular_vel;
         last_l_vel = linear_vel;
         vel_update_flag = FALSE;
-        HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_6);
+        last_update = HAL_GetTick();
     }
-    HAL_Delay(100);
+    // else 
+    // {
+    //     // If update timeout: 2 seconds
+    //     // Reset speed to avoid overcontrol
+    //     if ( (HAL_GetTick() - last_update > COMMAND_TIMEOUT_MS) && (angular_vel != 0 || linear_vel !=0) )
+    //     {
+    //         angular_vel = 0;
+    //         linear_vel = 0;
+    //         #ifdef DEBUG
+    //         // printf("Vel : %.5f  | %.5f \n", linear_vel, angular_vel);
+    //         // sprintf((char *)MSG, "L: %.5f | A: %.5f \n", linear_vel, angular_vel);
+    //         // HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
+    //         #endif
+    //     }
+    // }
+    // HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }
@@ -254,6 +279,11 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+void map_speed(float a_vel, float l_vel, double *r_set_rpm, double *r_set_lpm)
+{
+    __NOP();
+}
+
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -278,7 +308,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     }
     #endif
 
-    #ifdef ENABLE_RIGHT_MOTOR
+    #ifdef ENABLE_PID
     /* =================
     * MAIN PID CLOSE-LOOP SAMPLING AND COMPUTE
     *  =================== */
@@ -301,9 +331,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     
     if (ready_flag == TRUE)
     {
-        // Do things
-        // sprintf( (char *) MSG, (char *) rx_buffer, RX_BUFFER_SIZE);
-        // HAL_UART_Transmit_DMA(&huart1, MSG, RX_BUFFER_SIZE);
         vel_update_flag = TRUE;
         ready_flag = FALSE;
         HAL_UART_Receive_DMA(&huart1, rx_buffer, 1);
@@ -312,7 +339,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     {
         if (rx_buffer[0] == 0x16 && prev_rx == 0x16 && last_rx == 0x16) // SYN
         {
-            HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_7);
             ready_flag = TRUE;
             memset(rx_buffer, 0, RX_BUFFER_SIZE);
             HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);   

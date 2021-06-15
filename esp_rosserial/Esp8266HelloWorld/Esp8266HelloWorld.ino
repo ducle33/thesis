@@ -38,7 +38,7 @@ float last_f_angular;
 const char* ssid     = "Phuong";
 const char* password = "0985587344";
 // Set the rosserial socket server IP address
-IPAddress server(192,168,1,6);
+IPAddress server(192,168,1,7);
 // Set the rosserial socket server port
 const uint16_t serverPort = 11411;
 void cmd_velCallback(const geometry_msgs::Twist& CVel);
@@ -183,9 +183,9 @@ void setup_wifi()
     // Use ESP8266 serial to monitor the process
   Serial.begin(115200);
   pinMode(2, OUTPUT); 
-//  Serial.println();
-//  Serial.print("Connecting to ");
-//  Serial.println(ssid);
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
 
   // Connect the ESP8266 the the wifi AP
   WiFi.begin(ssid, password);
@@ -193,10 +193,10 @@ void setup_wifi()
     delay(500);
 //    Serial.print(".");
   }
-//  Serial.println("");
-//  Serial.println("WiFi connected");
-//  Serial.println("IP address: ");
-//  Serial.println(WiFi.localIP());
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
 
   // Broadcast ready state
   memset(data, 0, sizeof(data));
@@ -230,16 +230,17 @@ void loop()
       // Say hello
       str_msg.data = hello;
       chatter.publish( &str_msg );
+
   }
   nh.spinOnce();
   // Loop exproximativly at 1Hz
-  if (f_linear != last_f_linear || f_angular != last_f_angular )
-  {
-      parseTxFrame(data, f_linear, f_angular);
-      print_data(); 
-  }
-  last_f_linear = f_linear;
-  last_f_angular = f_angular;
+//  if (f_linear != last_f_linear || f_angular != last_f_angular )
+//  {
+  parseTxFrame(data, f_linear, f_angular);
+  print_data(); 
   digitalWrite(2, state);
   delay(100);
+  last_f_linear = f_linear;
+  last_f_angular = f_angular;
+
 }
