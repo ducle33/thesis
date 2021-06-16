@@ -32,6 +32,9 @@ float f_angular;
 float last_f_linear;
 float last_f_angular;
 
+unsigned long last_ms;
+unsigned long ms;
+
 // WIFI CONFIGS ===============================
 
 
@@ -62,7 +65,6 @@ char hello[13] = "hello world!";
 void print_data()
 {
   uint8_t i;
-  state =!state;
 
   Serial.write(0x16);
   Serial.write(0x16);
@@ -182,7 +184,6 @@ void setup_wifi()
 {
     // Use ESP8266 serial to monitor the process
   Serial.begin(115200);
-  pinMode(2, OUTPUT); 
   Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -190,8 +191,7 @@ void setup_wifi()
   // Connect the ESP8266 the the wifi AP
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-//    Serial.print(".");
+    delay(100);
   }
   Serial.println("");
   Serial.println("WiFi connected");
@@ -210,17 +210,18 @@ void setup_wifi()
 void setup()
 {
   // Set up connection
+  pinMode(2, OUTPUT); 
+  digitalWrite(2, 1);
   setup_wifi();
-  
   // Set the connection to rosserial socket server
   nh.getHardware()->setConnection(server, serverPort);
   nh.initNode();
-
   // Start to be polite
   nh.advertise(chatter);
   nh.subscribe(Sub);
   last_f_linear = 0.0f;
   last_f_angular = 0.0f;
+  digitalWrite(2, 0);
 }
 
 void loop()
@@ -230,17 +231,33 @@ void loop()
       // Say hello
       str_msg.data = hello;
       chatter.publish( &str_msg );
-
+      if (ms>= 100)
+      {
+         ms = 0;
+         digitalWrite(2, 0);
+      }
+      else 
+      {
+        digitalWrite(2, 1);
+      }
   }
-  nh.spinOnce();
-  // Loop exproximativly at 1Hz
-//  if (f_linear != last_f_linear || f_angular != last_f_angular )
-//  {
+  else 
+  {
+      if (ms>= 5)
+      {
+         ms = 0;
+         digitalWrite(2, 0);
+      }
+      else 
+      {
+        digitalWrite(2, 1);
+      }
+  }
   parseTxFrame(data, f_linear, f_angular);
   print_data(); 
-  digitalWrite(2, state);
-  delay(100);
+  ms++;
   last_f_linear = f_linear;
   last_f_angular = f_angular;
-
+  delay(100);
+  nh.spinOnce();
 }
