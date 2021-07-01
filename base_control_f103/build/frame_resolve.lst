@@ -1,0 +1,471 @@
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"frame_resolve.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.float2byte,"ax",%progbits
+  16              		.align	1
+  17              		.global	float2byte
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	float2byte:
+  25              	.LVL0:
+  26              	.LFB68:
+  27              		.file 1 "Core/Src/frame_resolve.c"
+   1:Core/Src/frame_resolve.c **** /*
+   2:Core/Src/frame_resolve.c **** *   File name: frame_resolve.c
+   3:Core/Src/frame_resolve.c **** *   Author: Linh Nguyen
+   4:Core/Src/frame_resolve.c **** *   Last modified: 12/6/2021
+   5:Core/Src/frame_resolve.c **** *   Description: This source file contain all auxillary fucntions
+   6:Core/Src/frame_resolve.c **** *                for resolving received frame from DMA.  
+   7:Core/Src/frame_resolve.c **** */
+   8:Core/Src/frame_resolve.c **** 
+   9:Core/Src/frame_resolve.c **** 
+  10:Core/Src/frame_resolve.c **** 
+  11:Core/Src/frame_resolve.c **** #include "main.h"
+  12:Core/Src/frame_resolve.c **** #include <stdio.h>
+  13:Core/Src/frame_resolve.c **** 
+  14:Core/Src/frame_resolve.c **** 
+  15:Core/Src/frame_resolve.c **** // Aux fucntion
+  16:Core/Src/frame_resolve.c **** void float2byte(float *f, uint8_t *d, uint8_t s)
+  17:Core/Src/frame_resolve.c **** {
+  28              		.loc 1 17 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  18:Core/Src/frame_resolve.c ****     uint32_t * tmp;
+  32              		.loc 1 18 5 view .LVU1
+  19:Core/Src/frame_resolve.c ****     tmp = (uint32_t*)f;
+  33              		.loc 1 19 5 view .LVU2
+  20:Core/Src/frame_resolve.c ****     uint8_t i = 0;
+  34              		.loc 1 20 5 view .LVU3
+  21:Core/Src/frame_resolve.c ****     for (i = 0; i<s; i++)
+  35              		.loc 1 21 5 view .LVU4
+  36              		.loc 1 21 12 is_stmt 0 view .LVU5
+  37 0000 0023     		movs	r3, #0
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s 			page 2
+
+
+  38              	.LVL1:
+  39              		.loc 1 21 17 is_stmt 1 view .LVU6
+  40              		.loc 1 21 5 is_stmt 0 view .LVU7
+  41 0002 9342     		cmp	r3, r2
+  42 0004 10D2     		bcs	.L7
+  17:Core/Src/frame_resolve.c ****     uint32_t * tmp;
+  43              		.loc 1 17 1 view .LVU8
+  44 0006 00B5     		push	{lr}
+  45              	.LCFI0:
+  46              		.cfi_def_cfa_offset 4
+  47              		.cfi_offset 14, -4
+  48              	.L3:
+  22:Core/Src/frame_resolve.c ****     {      
+  23:Core/Src/frame_resolve.c ****         d[i] = *tmp>>(24-8*i);
+  49              		.loc 1 23 9 is_stmt 1 discriminator 3 view .LVU9
+  50              		.loc 1 23 25 is_stmt 0 discriminator 3 view .LVU10
+  51 0008 C3F1030C 		rsb	ip, r3, #3
+  52 000c 4FEACC0C 		lsl	ip, ip, #3
+  53              		.loc 1 23 20 discriminator 3 view .LVU11
+  54 0010 D0F800E0 		ldr	lr, [r0]
+  55 0014 2EFA0CFC 		lsr	ip, lr, ip
+  56              		.loc 1 23 14 discriminator 3 view .LVU12
+  57 0018 01F803C0 		strb	ip, [r1, r3]
+  21:Core/Src/frame_resolve.c ****     {      
+  58              		.loc 1 21 22 is_stmt 1 discriminator 3 view .LVU13
+  21:Core/Src/frame_resolve.c ****     {      
+  59              		.loc 1 21 23 is_stmt 0 discriminator 3 view .LVU14
+  60 001c 0133     		adds	r3, r3, #1
+  61              	.LVL2:
+  21:Core/Src/frame_resolve.c ****     {      
+  62              		.loc 1 21 23 discriminator 3 view .LVU15
+  63 001e DBB2     		uxtb	r3, r3
+  64              	.LVL3:
+  21:Core/Src/frame_resolve.c ****     {      
+  65              		.loc 1 21 17 is_stmt 1 discriminator 3 view .LVU16
+  21:Core/Src/frame_resolve.c ****     {      
+  66              		.loc 1 21 5 is_stmt 0 discriminator 3 view .LVU17
+  67 0020 9342     		cmp	r3, r2
+  68 0022 F1D3     		bcc	.L3
+  24:Core/Src/frame_resolve.c ****     }
+  25:Core/Src/frame_resolve.c **** }
+  69              		.loc 1 25 1 view .LVU18
+  70 0024 5DF804FB 		ldr	pc, [sp], #4
+  71              	.L7:
+  72              	.LCFI1:
+  73              		.cfi_def_cfa_offset 0
+  74              		.cfi_restore 14
+  75              		.loc 1 25 1 view .LVU19
+  76 0028 7047     		bx	lr
+  77              		.cfi_endproc
+  78              	.LFE68:
+  80              		.section	.text.checksum,"ax",%progbits
+  81              		.align	1
+  82              		.global	checksum
+  83              		.syntax unified
+  84              		.thumb
+  85              		.thumb_func
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s 			page 3
+
+
+  86              		.fpu softvfp
+  88              	checksum:
+  89              	.LVL4:
+  90              	.LFB69:
+  26:Core/Src/frame_resolve.c **** 
+  27:Core/Src/frame_resolve.c **** // Calc checksum
+  28:Core/Src/frame_resolve.c **** uint32_t checksum(uint8_t *d)
+  29:Core/Src/frame_resolve.c **** {
+  91              		.loc 1 29 1 is_stmt 1 view -0
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 0
+  94              		@ frame_needed = 0, uses_anonymous_args = 0
+  95              		@ link register save eliminated.
+  96              		.loc 1 29 1 is_stmt 0 view .LVU21
+  97 0000 0146     		mov	r1, r0
+  30:Core/Src/frame_resolve.c ****     uint32_t _crc = 0;
+  98              		.loc 1 30 5 is_stmt 1 view .LVU22
+  99              	.LVL5:
+  31:Core/Src/frame_resolve.c ****     uint8_t i = 0;
+ 100              		.loc 1 31 5 view .LVU23
+  32:Core/Src/frame_resolve.c ****     for (i = 2; i < 10; i++)
+ 101              		.loc 1 32 5 view .LVU24
+ 102              		.loc 1 32 12 is_stmt 0 view .LVU25
+ 103 0002 0223     		movs	r3, #2
+  30:Core/Src/frame_resolve.c ****     uint32_t _crc = 0;
+ 104              		.loc 1 30 14 view .LVU26
+ 105 0004 0020     		movs	r0, #0
+ 106              	.LVL6:
+ 107              		.loc 1 32 5 view .LVU27
+ 108 0006 03E0     		b	.L9
+ 109              	.LVL7:
+ 110              	.L10:
+  33:Core/Src/frame_resolve.c ****     {
+  34:Core/Src/frame_resolve.c ****         _crc+= d[i];
+ 111              		.loc 1 34 9 is_stmt 1 discriminator 3 view .LVU28
+ 112              		.loc 1 34 17 is_stmt 0 discriminator 3 view .LVU29
+ 113 0008 CA5C     		ldrb	r2, [r1, r3]	@ zero_extendqisi2
+ 114              		.loc 1 34 13 discriminator 3 view .LVU30
+ 115 000a 1044     		add	r0, r0, r2
+ 116              	.LVL8:
+  32:Core/Src/frame_resolve.c ****     for (i = 2; i < 10; i++)
+ 117              		.loc 1 32 25 is_stmt 1 discriminator 3 view .LVU31
+  32:Core/Src/frame_resolve.c ****     for (i = 2; i < 10; i++)
+ 118              		.loc 1 32 26 is_stmt 0 discriminator 3 view .LVU32
+ 119 000c 0133     		adds	r3, r3, #1
+ 120              	.LVL9:
+  32:Core/Src/frame_resolve.c ****     for (i = 2; i < 10; i++)
+ 121              		.loc 1 32 26 discriminator 3 view .LVU33
+ 122 000e DBB2     		uxtb	r3, r3
+ 123              	.LVL10:
+ 124              	.L9:
+  32:Core/Src/frame_resolve.c ****     for (i = 2; i < 10; i++)
+ 125              		.loc 1 32 17 is_stmt 1 discriminator 1 view .LVU34
+  32:Core/Src/frame_resolve.c ****     for (i = 2; i < 10; i++)
+ 126              		.loc 1 32 5 is_stmt 0 discriminator 1 view .LVU35
+ 127 0010 092B     		cmp	r3, #9
+ 128 0012 F9D9     		bls	.L10
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s 			page 4
+
+
+  35:Core/Src/frame_resolve.c ****     }
+  36:Core/Src/frame_resolve.c ****     return _crc;
+ 129              		.loc 1 36 5 is_stmt 1 view .LVU36
+  37:Core/Src/frame_resolve.c **** }
+ 130              		.loc 1 37 1 is_stmt 0 view .LVU37
+ 131 0014 7047     		bx	lr
+ 132              		.cfi_endproc
+ 133              	.LFE69:
+ 135              		.section	.text.parseTxFrame,"ax",%progbits
+ 136              		.align	1
+ 137              		.global	parseTxFrame
+ 138              		.syntax unified
+ 139              		.thumb
+ 140              		.thumb_func
+ 141              		.fpu softvfp
+ 143              	parseTxFrame:
+ 144              	.LVL11:
+ 145              	.LFB70:
+  38:Core/Src/frame_resolve.c **** 
+  39:Core/Src/frame_resolve.c **** // Parse frames for transmition
+  40:Core/Src/frame_resolve.c **** void parseTxFrame(uint8_t *d /* uint8_t *d */, float vel_linear, float vel_angular)
+  41:Core/Src/frame_resolve.c **** {
+ 146              		.loc 1 41 1 is_stmt 1 view -0
+ 147              		.cfi_startproc
+ 148              		@ args = 0, pretend = 0, frame = 8
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150              		.loc 1 41 1 is_stmt 0 view .LVU39
+ 151 0000 10B5     		push	{r4, lr}
+ 152              	.LCFI2:
+ 153              		.cfi_def_cfa_offset 8
+ 154              		.cfi_offset 4, -8
+ 155              		.cfi_offset 14, -4
+ 156 0002 82B0     		sub	sp, sp, #8
+ 157              	.LCFI3:
+ 158              		.cfi_def_cfa_offset 16
+ 159 0004 0446     		mov	r4, r0
+ 160 0006 0191     		str	r1, [sp, #4]	@ float
+ 161 0008 0092     		str	r2, [sp]	@ float
+  42:Core/Src/frame_resolve.c ****     // Header
+  43:Core/Src/frame_resolve.c ****     d[0] = 1;
+ 162              		.loc 1 43 5 is_stmt 1 view .LVU40
+ 163              		.loc 1 43 10 is_stmt 0 view .LVU41
+ 164 000a 0123     		movs	r3, #1
+ 165 000c 0370     		strb	r3, [r0]
+  44:Core/Src/frame_resolve.c ****     d[1] = 2; 
+ 166              		.loc 1 44 5 is_stmt 1 view .LVU42
+ 167              		.loc 1 44 10 is_stmt 0 view .LVU43
+ 168 000e 0223     		movs	r3, #2
+ 169 0010 4370     		strb	r3, [r0, #1]
+  45:Core/Src/frame_resolve.c ****   
+  46:Core/Src/frame_resolve.c ****     // Resolve float to 4 bytes binary.
+  47:Core/Src/frame_resolve.c ****     float2byte(&vel_linear, &d[2], 4);
+ 170              		.loc 1 47 5 is_stmt 1 view .LVU44
+ 171 0012 0422     		movs	r2, #4
+ 172              	.LVL12:
+ 173              		.loc 1 47 5 is_stmt 0 view .LVU45
+ 174 0014 C118     		adds	r1, r0, r3
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s 			page 5
+
+
+ 175              	.LVL13:
+ 176              		.loc 1 47 5 view .LVU46
+ 177 0016 0DEB0200 		add	r0, sp, r2
+ 178              	.LVL14:
+ 179              		.loc 1 47 5 view .LVU47
+ 180 001a FFF7FEFF 		bl	float2byte
+ 181              	.LVL15:
+  48:Core/Src/frame_resolve.c ****     float2byte(&vel_angular, &d[6], 4);
+ 182              		.loc 1 48 5 is_stmt 1 view .LVU48
+ 183 001e 0422     		movs	r2, #4
+ 184 0020 A11D     		adds	r1, r4, #6
+ 185 0022 6846     		mov	r0, sp
+ 186 0024 FFF7FEFF 		bl	float2byte
+ 187              	.LVL16:
+  49:Core/Src/frame_resolve.c **** 
+  50:Core/Src/frame_resolve.c ****     uint32_t crc = checksum(d);   
+ 188              		.loc 1 50 5 view .LVU49
+ 189              		.loc 1 50 20 is_stmt 0 view .LVU50
+ 190 0028 2046     		mov	r0, r4
+ 191 002a FFF7FEFF 		bl	checksum
+ 192              	.LVL17:
+  51:Core/Src/frame_resolve.c ****    
+  52:Core/Src/frame_resolve.c ****     d[10] = (crc >> 24) & 0xFF;
+ 193              		.loc 1 52 5 is_stmt 1 view .LVU51
+ 194              		.loc 1 52 18 is_stmt 0 view .LVU52
+ 195 002e 030E     		lsrs	r3, r0, #24
+ 196              		.loc 1 52 11 view .LVU53
+ 197 0030 A372     		strb	r3, [r4, #10]
+  53:Core/Src/frame_resolve.c ****     d[11] = (crc >> 16)  & 0xFF; 
+ 198              		.loc 1 53 5 is_stmt 1 view .LVU54
+ 199              		.loc 1 53 18 is_stmt 0 view .LVU55
+ 200 0032 030C     		lsrs	r3, r0, #16
+ 201              		.loc 1 53 11 view .LVU56
+ 202 0034 E372     		strb	r3, [r4, #11]
+  54:Core/Src/frame_resolve.c ****     d[12] = (crc >> 8)  & 0xFF; 
+ 203              		.loc 1 54 5 is_stmt 1 view .LVU57
+ 204              		.loc 1 54 18 is_stmt 0 view .LVU58
+ 205 0036 030A     		lsrs	r3, r0, #8
+ 206              		.loc 1 54 11 view .LVU59
+ 207 0038 2373     		strb	r3, [r4, #12]
+  55:Core/Src/frame_resolve.c ****     d[13] = (crc )  & 0xFF; 
+ 208              		.loc 1 55 5 is_stmt 1 view .LVU60
+ 209              		.loc 1 55 11 is_stmt 0 view .LVU61
+ 210 003a 6073     		strb	r0, [r4, #13]
+  56:Core/Src/frame_resolve.c ****     
+  57:Core/Src/frame_resolve.c ****     // EOF
+  58:Core/Src/frame_resolve.c ****     d[14] = '\r';
+ 211              		.loc 1 58 5 is_stmt 1 view .LVU62
+ 212              		.loc 1 58 11 is_stmt 0 view .LVU63
+ 213 003c 0D23     		movs	r3, #13
+ 214 003e A373     		strb	r3, [r4, #14]
+  59:Core/Src/frame_resolve.c ****     d[15] = '\n';
+ 215              		.loc 1 59 5 is_stmt 1 view .LVU64
+ 216              		.loc 1 59 11 is_stmt 0 view .LVU65
+ 217 0040 0A23     		movs	r3, #10
+ 218 0042 E373     		strb	r3, [r4, #15]
+  60:Core/Src/frame_resolve.c **** }
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s 			page 6
+
+
+ 219              		.loc 1 60 1 view .LVU66
+ 220 0044 02B0     		add	sp, sp, #8
+ 221              	.LCFI4:
+ 222              		.cfi_def_cfa_offset 8
+ 223              		@ sp needed
+ 224 0046 10BD     		pop	{r4, pc}
+ 225              		.loc 1 60 1 view .LVU67
+ 226              		.cfi_endproc
+ 227              	.LFE70:
+ 229              		.section	.text.resolveRxFrame,"ax",%progbits
+ 230              		.align	1
+ 231              		.global	resolveRxFrame
+ 232              		.syntax unified
+ 233              		.thumb
+ 234              		.thumb_func
+ 235              		.fpu softvfp
+ 237              	resolveRxFrame:
+ 238              	.LVL18:
+ 239              	.LFB71:
+  61:Core/Src/frame_resolve.c **** 
+  62:Core/Src/frame_resolve.c **** 
+  63:Core/Src/frame_resolve.c **** void resolveRxFrame(uint8_t * d, float * linear, float * angular)
+  64:Core/Src/frame_resolve.c **** {
+ 240              		.loc 1 64 1 is_stmt 1 view -0
+ 241              		.cfi_startproc
+ 242              		@ args = 0, pretend = 0, frame = 0
+ 243              		@ frame_needed = 0, uses_anonymous_args = 0
+ 244              		.loc 1 64 1 is_stmt 0 view .LVU69
+ 245 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 246              	.LCFI5:
+ 247              		.cfi_def_cfa_offset 24
+ 248              		.cfi_offset 4, -24
+ 249              		.cfi_offset 5, -20
+ 250              		.cfi_offset 6, -16
+ 251              		.cfi_offset 7, -12
+ 252              		.cfi_offset 8, -8
+ 253              		.cfi_offset 14, -4
+ 254 0004 0F46     		mov	r7, r1
+ 255 0006 1646     		mov	r6, r2
+  65:Core/Src/frame_resolve.c ****     uint32_t tmp1 = 0;
+ 256              		.loc 1 65 5 is_stmt 1 view .LVU70
+ 257              	.LVL19:
+  66:Core/Src/frame_resolve.c ****     uint32_t tmp2 = 0;
+ 258              		.loc 1 66 5 view .LVU71
+  67:Core/Src/frame_resolve.c ****     uint32_t rx_crc, local_crc;
+ 259              		.loc 1 67 5 view .LVU72
+  68:Core/Src/frame_resolve.c ****     
+  69:Core/Src/frame_resolve.c ****     rx_crc = d[10] << 24 | d[11]<<16 | d[12]<<8 | d[13]; 
+ 260              		.loc 1 69 5 view .LVU73
+ 261              		.loc 1 69 15 is_stmt 0 view .LVU74
+ 262 0008 827A     		ldrb	r2, [r0, #10]	@ zero_extendqisi2
+ 263              	.LVL20:
+ 264              		.loc 1 69 29 view .LVU75
+ 265 000a C57A     		ldrb	r5, [r0, #11]	@ zero_extendqisi2
+ 266              		.loc 1 69 33 view .LVU76
+ 267 000c 2D04     		lsls	r5, r5, #16
+ 268              		.loc 1 69 26 view .LVU77
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s 			page 7
+
+
+ 269 000e 45EA0265 		orr	r5, r5, r2, lsl #24
+ 270              		.loc 1 69 41 view .LVU78
+ 271 0012 027B     		ldrb	r2, [r0, #12]	@ zero_extendqisi2
+ 272              		.loc 1 69 38 view .LVU79
+ 273 0014 45EA0225 		orr	r5, r5, r2, lsl #8
+ 274              		.loc 1 69 52 view .LVU80
+ 275 0018 427B     		ldrb	r2, [r0, #13]	@ zero_extendqisi2
+ 276              		.loc 1 69 49 view .LVU81
+ 277 001a 1543     		orrs	r5, r5, r2
+ 278              	.LVL21:
+  70:Core/Src/frame_resolve.c ****     tmp1 = d[2] << 24 | d[3]<<16 | d[4]<<8 | d[5];
+ 279              		.loc 1 70 5 is_stmt 1 view .LVU82
+ 280              		.loc 1 70 13 is_stmt 0 view .LVU83
+ 281 001c 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+ 282              		.loc 1 70 26 view .LVU84
+ 283 001e C478     		ldrb	r4, [r0, #3]	@ zero_extendqisi2
+ 284              		.loc 1 70 29 view .LVU85
+ 285 0020 2404     		lsls	r4, r4, #16
+ 286              		.loc 1 70 23 view .LVU86
+ 287 0022 44EA0264 		orr	r4, r4, r2, lsl #24
+ 288              		.loc 1 70 37 view .LVU87
+ 289 0026 0279     		ldrb	r2, [r0, #4]	@ zero_extendqisi2
+ 290              		.loc 1 70 34 view .LVU88
+ 291 0028 44EA0224 		orr	r4, r4, r2, lsl #8
+ 292              		.loc 1 70 47 view .LVU89
+ 293 002c 4279     		ldrb	r2, [r0, #5]	@ zero_extendqisi2
+ 294              		.loc 1 70 44 view .LVU90
+ 295 002e 1443     		orrs	r4, r4, r2
+ 296              	.LVL22:
+  71:Core/Src/frame_resolve.c ****     tmp2 = d[6] << 24 | d[7]<<16 | d[8]<<8 | d[9];
+ 297              		.loc 1 71 5 is_stmt 1 view .LVU91
+ 298              		.loc 1 71 13 is_stmt 0 view .LVU92
+ 299 0030 8279     		ldrb	r2, [r0, #6]	@ zero_extendqisi2
+ 300              		.loc 1 71 26 view .LVU93
+ 301 0032 90F807C0 		ldrb	ip, [r0, #7]	@ zero_extendqisi2
+ 302              		.loc 1 71 29 view .LVU94
+ 303 0036 4FEA0C4C 		lsl	ip, ip, #16
+ 304              		.loc 1 71 23 view .LVU95
+ 305 003a 4CEA026C 		orr	ip, ip, r2, lsl #24
+ 306              		.loc 1 71 37 view .LVU96
+ 307 003e 027A     		ldrb	r2, [r0, #8]	@ zero_extendqisi2
+ 308              		.loc 1 71 34 view .LVU97
+ 309 0040 4CEA022C 		orr	ip, ip, r2, lsl #8
+ 310              		.loc 1 71 47 view .LVU98
+ 311 0044 90F80980 		ldrb	r8, [r0, #9]	@ zero_extendqisi2
+ 312              		.loc 1 71 44 view .LVU99
+ 313 0048 4CEA0808 		orr	r8, ip, r8
+ 314              	.LVL23:
+  72:Core/Src/frame_resolve.c ****     
+  73:Core/Src/frame_resolve.c ****     local_crc = checksum(d);
+ 315              		.loc 1 73 5 is_stmt 1 view .LVU100
+ 316              		.loc 1 73 17 is_stmt 0 view .LVU101
+ 317 004c FFF7FEFF 		bl	checksum
+ 318              	.LVL24:
+  74:Core/Src/frame_resolve.c **** 
+  75:Core/Src/frame_resolve.c ****     if (local_crc == rx_crc)
+ 319              		.loc 1 75 5 is_stmt 1 view .LVU102
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s 			page 8
+
+
+ 320              		.loc 1 75 8 is_stmt 0 view .LVU103
+ 321 0050 8542     		cmp	r5, r0
+ 322 0052 01D0     		beq	.L16
+ 323              	.LVL25:
+ 324              	.L13:
+  76:Core/Src/frame_resolve.c ****     {
+  77:Core/Src/frame_resolve.c ****         *linear = *(float *)&tmp1;
+  78:Core/Src/frame_resolve.c ****         *angular = *(float *)&tmp2;
+  79:Core/Src/frame_resolve.c ****     }
+  80:Core/Src/frame_resolve.c **** }
+ 325              		.loc 1 80 1 view .LVU104
+ 326 0054 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 327              	.LVL26:
+ 328              	.L16:
+  77:Core/Src/frame_resolve.c ****         *angular = *(float *)&tmp2;
+ 329              		.loc 1 77 9 is_stmt 1 view .LVU105
+  77:Core/Src/frame_resolve.c ****         *angular = *(float *)&tmp2;
+ 330              		.loc 1 77 17 is_stmt 0 view .LVU106
+ 331 0058 3C60     		str	r4, [r7]	@ float
+  78:Core/Src/frame_resolve.c ****     }
+ 332              		.loc 1 78 9 is_stmt 1 view .LVU107
+  78:Core/Src/frame_resolve.c ****     }
+ 333              		.loc 1 78 18 is_stmt 0 view .LVU108
+ 334 005a C6F80080 		str	r8, [r6]	@ float
+ 335              	.LVL27:
+ 336              		.loc 1 80 1 view .LVU109
+ 337 005e F9E7     		b	.L13
+ 338              		.cfi_endproc
+ 339              	.LFE71:
+ 341              		.text
+ 342              	.Letext0:
+ 343              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 344              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 frame_resolve.c
+C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s:16     .text.float2byte:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s:24     .text.float2byte:00000000 float2byte
+C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s:81     .text.checksum:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s:88     .text.checksum:00000000 checksum
+C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s:136    .text.parseTxFrame:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s:143    .text.parseTxFrame:00000000 parseTxFrame
+C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s:230    .text.resolveRxFrame:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccihNyYW.s:237    .text.resolveRxFrame:00000000 resolveRxFrame
+
+NO UNDEFINED SYMBOLS

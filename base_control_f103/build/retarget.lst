@@ -1,0 +1,579 @@
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"retarget.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.RetargetInit,"ax",%progbits
+  16              		.align	1
+  17              		.global	RetargetInit
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	RetargetInit:
+  25              	.LVL0:
+  26              	.LFB90:
+  27              		.file 1 "Core/Src/retarget.c"
+   1:Core/Src/retarget.c **** // All credit to Carmine Noviello for this code
+   2:Core/Src/retarget.c **** // https://github.com/cnoviello/mastering-stm32/blob/master/nucleo-f030R8/system/src/retarget/retar
+   3:Core/Src/retarget.c **** 
+   4:Core/Src/retarget.c **** #include <_ansi.h>
+   5:Core/Src/retarget.c **** #include <_syslist.h>
+   6:Core/Src/retarget.c **** #include <errno.h>
+   7:Core/Src/retarget.c **** #include <sys/time.h>
+   8:Core/Src/retarget.c **** #include <sys/times.h>
+   9:Core/Src/retarget.c **** #include <limits.h>
+  10:Core/Src/retarget.c **** #include <signal.h>
+  11:Core/Src/retarget.c **** #include <../Inc/retarget.h>
+  12:Core/Src/retarget.c **** #include <stdint.h>
+  13:Core/Src/retarget.c **** #include <stdio.h>
+  14:Core/Src/retarget.c **** 
+  15:Core/Src/retarget.c **** #if !defined(OS_USE_SEMIHOSTING)
+  16:Core/Src/retarget.c **** 
+  17:Core/Src/retarget.c **** #define STDIN_FILENO  0
+  18:Core/Src/retarget.c **** #define STDOUT_FILENO 1
+  19:Core/Src/retarget.c **** #define STDERR_FILENO 2
+  20:Core/Src/retarget.c **** 
+  21:Core/Src/retarget.c **** UART_HandleTypeDef *gHuart;
+  22:Core/Src/retarget.c **** 
+  23:Core/Src/retarget.c **** void RetargetInit(UART_HandleTypeDef *huart) {
+  28              		.loc 1 23 46 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 23 46 is_stmt 0 view .LVU1
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 2
+
+
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  24:Core/Src/retarget.c ****   gHuart = huart;
+  38              		.loc 1 24 3 is_stmt 1 view .LVU2
+  39              		.loc 1 24 10 is_stmt 0 view .LVU3
+  40 0002 054B     		ldr	r3, .L3
+  41 0004 1860     		str	r0, [r3]
+  25:Core/Src/retarget.c **** 
+  26:Core/Src/retarget.c ****   /* Disable I/O buffering for STDOUT stream, so that
+  27:Core/Src/retarget.c ****    * chars are sent out as soon as they are printed. */
+  28:Core/Src/retarget.c ****   setvbuf(stdout, NULL, _IONBF, 0);
+  42              		.loc 1 28 3 is_stmt 1 view .LVU4
+  43              		.loc 1 28 11 is_stmt 0 view .LVU5
+  44 0006 054B     		ldr	r3, .L3+4
+  45 0008 1868     		ldr	r0, [r3]
+  46              	.LVL1:
+  47              		.loc 1 28 3 view .LVU6
+  48 000a 0023     		movs	r3, #0
+  49 000c 0222     		movs	r2, #2
+  50 000e 1946     		mov	r1, r3
+  51 0010 8068     		ldr	r0, [r0, #8]
+  52 0012 FFF7FEFF 		bl	setvbuf
+  53              	.LVL2:
+  29:Core/Src/retarget.c **** }
+  54              		.loc 1 29 1 view .LVU7
+  55 0016 08BD     		pop	{r3, pc}
+  56              	.L4:
+  57              		.align	2
+  58              	.L3:
+  59 0018 00000000 		.word	.LANCHOR0
+  60 001c 00000000 		.word	_impure_ptr
+  61              		.cfi_endproc
+  62              	.LFE90:
+  64              		.section	.text._isatty,"ax",%progbits
+  65              		.align	1
+  66              		.global	_isatty
+  67              		.syntax unified
+  68              		.thumb
+  69              		.thumb_func
+  70              		.fpu softvfp
+  72              	_isatty:
+  73              	.LVL3:
+  74              	.LFB91:
+  30:Core/Src/retarget.c **** 
+  31:Core/Src/retarget.c **** int _isatty(int fd) {
+  75              		.loc 1 31 21 is_stmt 1 view -0
+  76              		.cfi_startproc
+  77              		@ args = 0, pretend = 0, frame = 0
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  32:Core/Src/retarget.c ****   if (fd >= STDIN_FILENO && fd <= STDERR_FILENO)
+  79              		.loc 1 32 3 view .LVU9
+  80              		.loc 1 32 6 is_stmt 0 view .LVU10
+  81 0000 0228     		cmp	r0, #2
+  82 0002 01D8     		bhi	.L12
+  33:Core/Src/retarget.c ****     return 1;
+  83              		.loc 1 33 12 view .LVU11
+  84 0004 0120     		movs	r0, #1
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 3
+
+
+  85              	.LVL4:
+  34:Core/Src/retarget.c **** 
+  35:Core/Src/retarget.c ****   errno = EBADF;
+  36:Core/Src/retarget.c ****   return 0;
+  37:Core/Src/retarget.c **** }
+  86              		.loc 1 37 1 view .LVU12
+  87 0006 7047     		bx	lr
+  88              	.LVL5:
+  89              	.L12:
+  31:Core/Src/retarget.c ****   if (fd >= STDIN_FILENO && fd <= STDERR_FILENO)
+  90              		.loc 1 31 21 view .LVU13
+  91 0008 08B5     		push	{r3, lr}
+  92              	.LCFI1:
+  93              		.cfi_def_cfa_offset 8
+  94              		.cfi_offset 3, -8
+  95              		.cfi_offset 14, -4
+  35:Core/Src/retarget.c ****   return 0;
+  96              		.loc 1 35 3 is_stmt 1 view .LVU14
+  97 000a FFF7FEFF 		bl	__errno
+  98              	.LVL6:
+  35:Core/Src/retarget.c ****   return 0;
+  99              		.loc 1 35 9 is_stmt 0 view .LVU15
+ 100 000e 0923     		movs	r3, #9
+ 101 0010 0360     		str	r3, [r0]
+  36:Core/Src/retarget.c **** }
+ 102              		.loc 1 36 3 is_stmt 1 view .LVU16
+  36:Core/Src/retarget.c **** }
+ 103              		.loc 1 36 10 is_stmt 0 view .LVU17
+ 104 0012 0020     		movs	r0, #0
+ 105              		.loc 1 37 1 view .LVU18
+ 106 0014 08BD     		pop	{r3, pc}
+ 107              		.cfi_endproc
+ 108              	.LFE91:
+ 110              		.section	.text._write,"ax",%progbits
+ 111              		.align	1
+ 112              		.global	_write
+ 113              		.syntax unified
+ 114              		.thumb
+ 115              		.thumb_func
+ 116              		.fpu softvfp
+ 118              	_write:
+ 119              	.LVL7:
+ 120              	.LFB92:
+  38:Core/Src/retarget.c **** 
+  39:Core/Src/retarget.c **** int _write(int fd, char* ptr, int len) {
+ 121              		.loc 1 39 40 is_stmt 1 view -0
+ 122              		.cfi_startproc
+ 123              		@ args = 0, pretend = 0, frame = 0
+ 124              		@ frame_needed = 0, uses_anonymous_args = 0
+ 125              		.loc 1 39 40 is_stmt 0 view .LVU20
+ 126 0000 10B5     		push	{r4, lr}
+ 127              	.LCFI2:
+ 128              		.cfi_def_cfa_offset 8
+ 129              		.cfi_offset 4, -8
+ 130              		.cfi_offset 14, -4
+  40:Core/Src/retarget.c ****   HAL_StatusTypeDef hstatus;
+ 131              		.loc 1 40 3 is_stmt 1 view .LVU21
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 4
+
+
+  41:Core/Src/retarget.c **** 
+  42:Core/Src/retarget.c ****   if (fd == STDOUT_FILENO || fd == STDERR_FILENO) {
+ 132              		.loc 1 42 3 view .LVU22
+ 133              		.loc 1 42 27 is_stmt 0 view .LVU23
+ 134 0002 0138     		subs	r0, r0, #1
+ 135              	.LVL8:
+ 136              		.loc 1 42 6 view .LVU24
+ 137 0004 0128     		cmp	r0, #1
+ 138 0006 0AD8     		bhi	.L14
+ 139 0008 1446     		mov	r4, r2
+  43:Core/Src/retarget.c ****     hstatus = HAL_UART_Transmit(gHuart, (uint8_t *) ptr, len, HAL_MAX_DELAY);
+ 140              		.loc 1 43 5 is_stmt 1 view .LVU25
+ 141              		.loc 1 43 15 is_stmt 0 view .LVU26
+ 142 000a 4FF0FF33 		mov	r3, #-1
+ 143 000e 92B2     		uxth	r2, r2
+ 144              	.LVL9:
+ 145              		.loc 1 43 15 view .LVU27
+ 146 0010 0748     		ldr	r0, .L18
+ 147              	.LVL10:
+ 148              		.loc 1 43 15 view .LVU28
+ 149 0012 0068     		ldr	r0, [r0]
+ 150 0014 FFF7FEFF 		bl	HAL_UART_Transmit
+ 151              	.LVL11:
+  44:Core/Src/retarget.c ****     if (hstatus == HAL_OK)
+ 152              		.loc 1 44 5 is_stmt 1 view .LVU29
+ 153              		.loc 1 44 8 is_stmt 0 view .LVU30
+ 154 0018 40B9     		cbnz	r0, .L16
+  45:Core/Src/retarget.c ****       return len;
+ 155              		.loc 1 45 14 view .LVU31
+ 156 001a 2046     		mov	r0, r4
+ 157              	.LVL12:
+ 158              	.L13:
+  46:Core/Src/retarget.c ****     else
+  47:Core/Src/retarget.c ****       return EIO;
+  48:Core/Src/retarget.c ****   }
+  49:Core/Src/retarget.c ****   errno = EBADF;
+  50:Core/Src/retarget.c ****   return -1;
+  51:Core/Src/retarget.c **** }
+ 159              		.loc 1 51 1 view .LVU32
+ 160 001c 10BD     		pop	{r4, pc}
+ 161              	.LVL13:
+ 162              	.L14:
+  49:Core/Src/retarget.c ****   return -1;
+ 163              		.loc 1 49 3 is_stmt 1 view .LVU33
+ 164 001e FFF7FEFF 		bl	__errno
+ 165              	.LVL14:
+  49:Core/Src/retarget.c ****   return -1;
+ 166              		.loc 1 49 9 is_stmt 0 view .LVU34
+ 167 0022 0923     		movs	r3, #9
+ 168 0024 0360     		str	r3, [r0]
+  50:Core/Src/retarget.c **** }
+ 169              		.loc 1 50 3 is_stmt 1 view .LVU35
+  50:Core/Src/retarget.c **** }
+ 170              		.loc 1 50 10 is_stmt 0 view .LVU36
+ 171 0026 4FF0FF30 		mov	r0, #-1
+ 172 002a F7E7     		b	.L13
+ 173              	.LVL15:
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 5
+
+
+ 174              	.L16:
+  47:Core/Src/retarget.c ****   }
+ 175              		.loc 1 47 14 view .LVU37
+ 176 002c 0520     		movs	r0, #5
+ 177              	.LVL16:
+  47:Core/Src/retarget.c ****   }
+ 178              		.loc 1 47 14 view .LVU38
+ 179 002e F5E7     		b	.L13
+ 180              	.L19:
+ 181              		.align	2
+ 182              	.L18:
+ 183 0030 00000000 		.word	.LANCHOR0
+ 184              		.cfi_endproc
+ 185              	.LFE92:
+ 187              		.section	.text._close,"ax",%progbits
+ 188              		.align	1
+ 189              		.global	_close
+ 190              		.syntax unified
+ 191              		.thumb
+ 192              		.thumb_func
+ 193              		.fpu softvfp
+ 195              	_close:
+ 196              	.LVL17:
+ 197              	.LFB93:
+  52:Core/Src/retarget.c **** 
+  53:Core/Src/retarget.c **** int _close(int fd) {
+ 198              		.loc 1 53 20 is_stmt 1 view -0
+ 199              		.cfi_startproc
+ 200              		@ args = 0, pretend = 0, frame = 0
+ 201              		@ frame_needed = 0, uses_anonymous_args = 0
+  54:Core/Src/retarget.c ****   if (fd >= STDIN_FILENO && fd <= STDERR_FILENO)
+ 202              		.loc 1 54 3 view .LVU40
+ 203              		.loc 1 54 6 is_stmt 0 view .LVU41
+ 204 0000 0228     		cmp	r0, #2
+ 205 0002 01D8     		bhi	.L27
+  55:Core/Src/retarget.c ****     return 0;
+ 206              		.loc 1 55 12 view .LVU42
+ 207 0004 0020     		movs	r0, #0
+ 208              	.LVL18:
+  56:Core/Src/retarget.c **** 
+  57:Core/Src/retarget.c ****   errno = EBADF;
+  58:Core/Src/retarget.c ****   return -1;
+  59:Core/Src/retarget.c **** }
+ 209              		.loc 1 59 1 view .LVU43
+ 210 0006 7047     		bx	lr
+ 211              	.LVL19:
+ 212              	.L27:
+  53:Core/Src/retarget.c ****   if (fd >= STDIN_FILENO && fd <= STDERR_FILENO)
+ 213              		.loc 1 53 20 view .LVU44
+ 214 0008 08B5     		push	{r3, lr}
+ 215              	.LCFI3:
+ 216              		.cfi_def_cfa_offset 8
+ 217              		.cfi_offset 3, -8
+ 218              		.cfi_offset 14, -4
+  57:Core/Src/retarget.c ****   return -1;
+ 219              		.loc 1 57 3 is_stmt 1 view .LVU45
+ 220 000a FFF7FEFF 		bl	__errno
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 6
+
+
+ 221              	.LVL20:
+  57:Core/Src/retarget.c ****   return -1;
+ 222              		.loc 1 57 9 is_stmt 0 view .LVU46
+ 223 000e 0923     		movs	r3, #9
+ 224 0010 0360     		str	r3, [r0]
+  58:Core/Src/retarget.c **** }
+ 225              		.loc 1 58 3 is_stmt 1 view .LVU47
+  58:Core/Src/retarget.c **** }
+ 226              		.loc 1 58 10 is_stmt 0 view .LVU48
+ 227 0012 4FF0FF30 		mov	r0, #-1
+ 228              		.loc 1 59 1 view .LVU49
+ 229 0016 08BD     		pop	{r3, pc}
+ 230              		.cfi_endproc
+ 231              	.LFE93:
+ 233              		.section	.text._lseek,"ax",%progbits
+ 234              		.align	1
+ 235              		.global	_lseek
+ 236              		.syntax unified
+ 237              		.thumb
+ 238              		.thumb_func
+ 239              		.fpu softvfp
+ 241              	_lseek:
+ 242              	.LVL21:
+ 243              	.LFB94:
+  60:Core/Src/retarget.c **** 
+  61:Core/Src/retarget.c **** int _lseek(int fd, int ptr, int dir) {
+ 244              		.loc 1 61 38 is_stmt 1 view -0
+ 245              		.cfi_startproc
+ 246              		@ args = 0, pretend = 0, frame = 0
+ 247              		@ frame_needed = 0, uses_anonymous_args = 0
+ 248              		.loc 1 61 38 is_stmt 0 view .LVU51
+ 249 0000 08B5     		push	{r3, lr}
+ 250              	.LCFI4:
+ 251              		.cfi_def_cfa_offset 8
+ 252              		.cfi_offset 3, -8
+ 253              		.cfi_offset 14, -4
+  62:Core/Src/retarget.c ****   (void) fd;
+ 254              		.loc 1 62 3 is_stmt 1 view .LVU52
+  63:Core/Src/retarget.c ****   (void) ptr;
+ 255              		.loc 1 63 3 view .LVU53
+  64:Core/Src/retarget.c ****   (void) dir;
+ 256              		.loc 1 64 3 view .LVU54
+  65:Core/Src/retarget.c **** 
+  66:Core/Src/retarget.c ****   errno = EBADF;
+ 257              		.loc 1 66 3 view .LVU55
+ 258 0002 FFF7FEFF 		bl	__errno
+ 259              	.LVL22:
+ 260              		.loc 1 66 9 is_stmt 0 view .LVU56
+ 261 0006 0923     		movs	r3, #9
+ 262 0008 0360     		str	r3, [r0]
+  67:Core/Src/retarget.c ****   return -1;
+ 263              		.loc 1 67 3 is_stmt 1 view .LVU57
+  68:Core/Src/retarget.c **** }
+ 264              		.loc 1 68 1 is_stmt 0 view .LVU58
+ 265 000a 4FF0FF30 		mov	r0, #-1
+ 266 000e 08BD     		pop	{r3, pc}
+ 267              		.cfi_endproc
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 7
+
+
+ 268              	.LFE94:
+ 270              		.section	.text._read,"ax",%progbits
+ 271              		.align	1
+ 272              		.global	_read
+ 273              		.syntax unified
+ 274              		.thumb
+ 275              		.thumb_func
+ 276              		.fpu softvfp
+ 278              	_read:
+ 279              	.LVL23:
+ 280              	.LFB95:
+  69:Core/Src/retarget.c **** 
+  70:Core/Src/retarget.c **** int _read(int fd, char* ptr, int len) {
+ 281              		.loc 1 70 39 is_stmt 1 view -0
+ 282              		.cfi_startproc
+ 283              		@ args = 0, pretend = 0, frame = 0
+ 284              		@ frame_needed = 0, uses_anonymous_args = 0
+ 285              		.loc 1 70 39 is_stmt 0 view .LVU60
+ 286 0000 08B5     		push	{r3, lr}
+ 287              	.LCFI5:
+ 288              		.cfi_def_cfa_offset 8
+ 289              		.cfi_offset 3, -8
+ 290              		.cfi_offset 14, -4
+  71:Core/Src/retarget.c ****   HAL_StatusTypeDef hstatus;
+ 291              		.loc 1 71 3 is_stmt 1 view .LVU61
+  72:Core/Src/retarget.c **** 
+  73:Core/Src/retarget.c ****   if (fd == STDIN_FILENO) {
+ 292              		.loc 1 73 3 view .LVU62
+ 293              		.loc 1 73 6 is_stmt 0 view .LVU63
+ 294 0002 48B9     		cbnz	r0, .L31
+  74:Core/Src/retarget.c ****     hstatus = HAL_UART_Receive(gHuart, (uint8_t *) ptr, 1, HAL_MAX_DELAY);
+ 295              		.loc 1 74 5 is_stmt 1 view .LVU64
+ 296              		.loc 1 74 15 is_stmt 0 view .LVU65
+ 297 0004 4FF0FF33 		mov	r3, #-1
+ 298 0008 0122     		movs	r2, #1
+ 299              	.LVL24:
+ 300              		.loc 1 74 15 view .LVU66
+ 301 000a 0848     		ldr	r0, .L35
+ 302              	.LVL25:
+ 303              		.loc 1 74 15 view .LVU67
+ 304 000c 0068     		ldr	r0, [r0]
+ 305 000e FFF7FEFF 		bl	HAL_UART_Receive
+ 306              	.LVL26:
+  75:Core/Src/retarget.c ****     if (hstatus == HAL_OK)
+ 307              		.loc 1 75 5 is_stmt 1 view .LVU68
+ 308              		.loc 1 75 8 is_stmt 0 view .LVU69
+ 309 0012 40B9     		cbnz	r0, .L33
+  76:Core/Src/retarget.c ****       return 1;
+ 310              		.loc 1 76 14 view .LVU70
+ 311 0014 0120     		movs	r0, #1
+ 312              	.LVL27:
+ 313              	.L30:
+  77:Core/Src/retarget.c ****     else
+  78:Core/Src/retarget.c ****       return EIO;
+  79:Core/Src/retarget.c ****   }
+  80:Core/Src/retarget.c ****   errno = EBADF;
+  81:Core/Src/retarget.c ****   return -1;
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 8
+
+
+  82:Core/Src/retarget.c **** }
+ 314              		.loc 1 82 1 view .LVU71
+ 315 0016 08BD     		pop	{r3, pc}
+ 316              	.LVL28:
+ 317              	.L31:
+  80:Core/Src/retarget.c ****   return -1;
+ 318              		.loc 1 80 3 is_stmt 1 view .LVU72
+ 319 0018 FFF7FEFF 		bl	__errno
+ 320              	.LVL29:
+  80:Core/Src/retarget.c ****   return -1;
+ 321              		.loc 1 80 9 is_stmt 0 view .LVU73
+ 322 001c 0923     		movs	r3, #9
+ 323 001e 0360     		str	r3, [r0]
+  81:Core/Src/retarget.c **** }
+ 324              		.loc 1 81 3 is_stmt 1 view .LVU74
+  81:Core/Src/retarget.c **** }
+ 325              		.loc 1 81 10 is_stmt 0 view .LVU75
+ 326 0020 4FF0FF30 		mov	r0, #-1
+ 327 0024 F7E7     		b	.L30
+ 328              	.LVL30:
+ 329              	.L33:
+  78:Core/Src/retarget.c ****   }
+ 330              		.loc 1 78 14 view .LVU76
+ 331 0026 0520     		movs	r0, #5
+ 332              	.LVL31:
+  78:Core/Src/retarget.c ****   }
+ 333              		.loc 1 78 14 view .LVU77
+ 334 0028 F5E7     		b	.L30
+ 335              	.L36:
+ 336 002a 00BF     		.align	2
+ 337              	.L35:
+ 338 002c 00000000 		.word	.LANCHOR0
+ 339              		.cfi_endproc
+ 340              	.LFE95:
+ 342              		.section	.text._fstat,"ax",%progbits
+ 343              		.align	1
+ 344              		.global	_fstat
+ 345              		.syntax unified
+ 346              		.thumb
+ 347              		.thumb_func
+ 348              		.fpu softvfp
+ 350              	_fstat:
+ 351              	.LVL32:
+ 352              	.LFB96:
+  83:Core/Src/retarget.c **** 
+  84:Core/Src/retarget.c **** int _fstat(int fd, struct stat* st) {
+ 353              		.loc 1 84 37 is_stmt 1 view -0
+ 354              		.cfi_startproc
+ 355              		@ args = 0, pretend = 0, frame = 0
+ 356              		@ frame_needed = 0, uses_anonymous_args = 0
+ 357              		.loc 1 84 37 is_stmt 0 view .LVU79
+ 358 0000 08B5     		push	{r3, lr}
+ 359              	.LCFI6:
+ 360              		.cfi_def_cfa_offset 8
+ 361              		.cfi_offset 3, -8
+ 362              		.cfi_offset 14, -4
+  85:Core/Src/retarget.c ****   if (fd >= STDIN_FILENO && fd <= STDERR_FILENO) {
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 9
+
+
+ 363              		.loc 1 85 3 is_stmt 1 view .LVU80
+ 364              		.loc 1 85 6 is_stmt 0 view .LVU81
+ 365 0002 0228     		cmp	r0, #2
+ 366 0004 04D8     		bhi	.L38
+  86:Core/Src/retarget.c ****     st->st_mode = S_IFCHR;
+ 367              		.loc 1 86 5 is_stmt 1 view .LVU82
+ 368              		.loc 1 86 17 is_stmt 0 view .LVU83
+ 369 0006 4FF40053 		mov	r3, #8192
+ 370 000a 4B60     		str	r3, [r1, #4]
+  87:Core/Src/retarget.c ****     return 0;
+ 371              		.loc 1 87 5 is_stmt 1 view .LVU84
+ 372              	.LVL33:
+ 373              	.L39:
+  88:Core/Src/retarget.c ****   }
+  89:Core/Src/retarget.c **** 
+  90:Core/Src/retarget.c ****   errno = EBADF;
+  91:Core/Src/retarget.c ****   return 0;
+  92:Core/Src/retarget.c **** }
+ 374              		.loc 1 92 1 is_stmt 0 view .LVU85
+ 375 000c 0020     		movs	r0, #0
+ 376 000e 08BD     		pop	{r3, pc}
+ 377              	.LVL34:
+ 378              	.L38:
+  90:Core/Src/retarget.c ****   return 0;
+ 379              		.loc 1 90 3 is_stmt 1 view .LVU86
+ 380 0010 FFF7FEFF 		bl	__errno
+ 381              	.LVL35:
+  90:Core/Src/retarget.c ****   return 0;
+ 382              		.loc 1 90 9 is_stmt 0 view .LVU87
+ 383 0014 0923     		movs	r3, #9
+ 384 0016 0360     		str	r3, [r0]
+  91:Core/Src/retarget.c **** }
+ 385              		.loc 1 91 3 is_stmt 1 view .LVU88
+  91:Core/Src/retarget.c **** }
+ 386              		.loc 1 91 10 is_stmt 0 view .LVU89
+ 387 0018 F8E7     		b	.L39
+ 388              		.cfi_endproc
+ 389              	.LFE96:
+ 391              		.global	gHuart
+ 392              		.section	.bss.gHuart,"aw",%nobits
+ 393              		.align	2
+ 394              		.set	.LANCHOR0,. + 0
+ 397              	gHuart:
+ 398 0000 00000000 		.space	4
+ 399              		.text
+ 400              	.Letext0:
+ 401              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\lib\\gcc\\arm-none
+ 402              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 403              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 404              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 405              		.file 6 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 406              		.file 7 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 407              		.file 8 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 408              		.file 9 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 409              		.file 10 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\in
+ 410              		.file 11 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 411              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 10
+
+
+ 412              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 413              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 414              		.file 15 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\in
+ 415              		.file 16 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\in
+ 416              		.file 17 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\in
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 retarget.c
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:16     .text.RetargetInit:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:24     .text.RetargetInit:00000000 RetargetInit
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:59     .text.RetargetInit:00000018 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:65     .text._isatty:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:72     .text._isatty:00000000 _isatty
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:111    .text._write:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:118    .text._write:00000000 _write
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:183    .text._write:00000030 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:188    .text._close:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:195    .text._close:00000000 _close
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:234    .text._lseek:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:241    .text._lseek:00000000 _lseek
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:271    .text._read:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:278    .text._read:00000000 _read
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:338    .text._read:0000002c $d
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:343    .text._fstat:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:350    .text._fstat:00000000 _fstat
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:397    .bss.gHuart:00000000 gHuart
+C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:393    .bss.gHuart:00000000 $d
+
+UNDEFINED SYMBOLS
+setvbuf
+_impure_ptr
+__errno
+HAL_UART_Transmit
+HAL_UART_Receive

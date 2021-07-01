@@ -1,0 +1,1464 @@
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"PID.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.global	__aeabi_ui2f
+  16              		.global	__aeabi_fmul
+  17              		.global	__aeabi_f2d
+  18              		.global	__aeabi_ddiv
+  19              		.global	__aeabi_dmul
+  20              		.section	.text.PID_ComputeSpeedRPM,"ax",%progbits
+  21              		.align	1
+  22              		.global	PID_ComputeSpeedRPM
+  23              		.arch armv7-m
+  24              		.syntax unified
+  25              		.thumb
+  26              		.thumb_func
+  27              		.fpu softvfp
+  29              	PID_ComputeSpeedRPM:
+  30              	.LVL0:
+  31              	.LFB65:
+  32              		.file 1 "Core/Src/PID.c"
+   1:Core/Src/PID.c **** /*
+   2:Core/Src/PID.c **** *   File name: PID.c
+   3:Core/Src/PID.c **** *   Author: Linh Nguyen
+   4:Core/Src/PID.c **** *   Last modified: 1/6/2021
+   5:Core/Src/PID.c **** *   Description: This contains all interface functions for PID controlling motors
+   6:Core/Src/PID.c **** */
+   7:Core/Src/PID.c **** 
+   8:Core/Src/PID.c **** #include "PID.h"
+   9:Core/Src/PID.c **** #include "string.h"
+  10:Core/Src/PID.c **** #include "math.h"
+  11:Core/Src/PID.c **** #include "config.h"
+  12:Core/Src/PID.c **** #include "gpio.h"
+  13:Core/Src/PID.c **** #include "stm32f1xx_hal_def.h"
+  14:Core/Src/PID.c **** 
+  15:Core/Src/PID.c **** volatile double i_term;
+  16:Core/Src/PID.c **** volatile double p_term;
+  17:Core/Src/PID.c **** volatile double d_term;
+  18:Core/Src/PID.c **** 
+  19:Core/Src/PID.c **** 
+  20:Core/Src/PID.c **** #ifdef ENABLE_PID
+  21:Core/Src/PID.c **** /* Private function prototypes*/
+  22:Core/Src/PID.c **** 
+  23:Core/Src/PID.c **** double PID_Limit(double input, double max, double min);
+  24:Core/Src/PID.c **** 
+  25:Core/Src/PID.c **** 
+  26:Core/Src/PID.c **** 
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 2
+
+
+  27:Core/Src/PID.c **** 
+  28:Core/Src/PID.c **** // Convert encoder pulses count to speed in RPM, tick in milisecond
+  29:Core/Src/PID.c **** void PID_ComputeSpeedRPM(MOTOR_TypeDef *motor, uint32_t tick)
+  30:Core/Src/PID.c **** { 
+  33              		.loc 1 30 1 view -0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37              		.loc 1 30 1 is_stmt 0 view .LVU1
+  38 0000 D0B5     		push	{r4, r6, r7, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 16
+  41              		.cfi_offset 4, -16
+  42              		.cfi_offset 6, -12
+  43              		.cfi_offset 7, -8
+  44              		.cfi_offset 14, -4
+  45 0002 0446     		mov	r4, r0
+  31:Core/Src/PID.c ****     motor->speed = ((motor->measure) / (MOTOR_PPR * tick))*60000;
+  46              		.loc 1 31 5 is_stmt 1 view .LVU2
+  47              		.loc 1 31 27 is_stmt 0 view .LVU3
+  48 0004 D0E90467 		ldrd	r6, [r0, #16]
+  49              		.loc 1 31 51 view .LVU4
+  50 0008 0846     		mov	r0, r1
+  51              	.LVL1:
+  52              		.loc 1 31 51 view .LVU5
+  53 000a FFF7FEFF 		bl	__aeabi_ui2f
+  54              	.LVL2:
+  55              		.loc 1 31 51 view .LVU6
+  56 000e 0C49     		ldr	r1, .L3+8
+  57 0010 FFF7FEFF 		bl	__aeabi_fmul
+  58              	.LVL3:
+  59 0014 FFF7FEFF 		bl	__aeabi_f2d
+  60              	.LVL4:
+  61 0018 0246     		mov	r2, r0
+  62 001a 0B46     		mov	r3, r1
+  63              		.loc 1 31 38 view .LVU7
+  64 001c 3046     		mov	r0, r6
+  65 001e 3946     		mov	r1, r7
+  66 0020 FFF7FEFF 		bl	__aeabi_ddiv
+  67              	.LVL5:
+  68              		.loc 1 31 59 view .LVU8
+  69 0024 04A3     		adr	r3, .L3
+  70 0026 D3E90023 		ldrd	r2, [r3]
+  71 002a FFF7FEFF 		bl	__aeabi_dmul
+  72              	.LVL6:
+  73              		.loc 1 31 18 view .LVU9
+  74 002e C4E90001 		strd	r0, [r4]
+  32:Core/Src/PID.c **** }
+  75              		.loc 1 32 1 view .LVU10
+  76 0032 D0BD     		pop	{r4, r6, r7, pc}
+  77              	.LVL7:
+  78              	.L4:
+  79              		.loc 1 32 1 view .LVU11
+  80 0034 AFF30080 		.align	3
+  81              	.L3:
+  82 0038 00000000 		.word	0
+  83 003c 004CED40 		.word	1089293312
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 3
+
+
+  84 0040 00004844 		.word	1145569280
+  85              		.cfi_endproc
+  86              	.LFE65:
+  88              		.global	__aeabi_dcmpge
+  89              		.section	.text.PID_SetSpeedRPM,"ax",%progbits
+  90              		.align	1
+  91              		.global	PID_SetSpeedRPM
+  92              		.syntax unified
+  93              		.thumb
+  94              		.thumb_func
+  95              		.fpu softvfp
+  97              	PID_SetSpeedRPM:
+  98              	.LVL8:
+  99              	.LFB66:
+  33:Core/Src/PID.c **** 
+  34:Core/Src/PID.c **** void PID_SetSpeedRPM(MOTOR_TypeDef *motor, double _set_speed)
+  35:Core/Src/PID.c **** {
+ 100              		.loc 1 35 1 is_stmt 1 view -0
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104              		.loc 1 35 1 is_stmt 0 view .LVU13
+ 105 0000 70B5     		push	{r4, r5, r6, lr}
+ 106              	.LCFI1:
+ 107              		.cfi_def_cfa_offset 16
+ 108              		.cfi_offset 4, -16
+ 109              		.cfi_offset 5, -12
+ 110              		.cfi_offset 6, -8
+ 111              		.cfi_offset 14, -4
+ 112 0002 0646     		mov	r6, r0
+ 113 0004 1446     		mov	r4, r2
+ 114 0006 1D46     		mov	r5, r3
+  36:Core/Src/PID.c ****     if (_set_speed >= 0) 
+ 115              		.loc 1 36 5 is_stmt 1 view .LVU14
+ 116              		.loc 1 36 8 is_stmt 0 view .LVU15
+ 117 0008 0022     		movs	r2, #0
+ 118              	.LVL9:
+ 119              		.loc 1 36 8 view .LVU16
+ 120 000a 0023     		movs	r3, #0
+ 121 000c 2046     		mov	r0, r4
+ 122              	.LVL10:
+ 123              		.loc 1 36 8 view .LVU17
+ 124 000e 2946     		mov	r1, r5
+ 125 0010 FFF7FEFF 		bl	__aeabi_dcmpge
+ 126              	.LVL11:
+ 127 0014 28B1     		cbz	r0, .L10
+  37:Core/Src/PID.c ****     {
+  38:Core/Src/PID.c ****         motor->dir = 1;
+ 128              		.loc 1 38 9 is_stmt 1 view .LVU18
+ 129              		.loc 1 38 20 is_stmt 0 view .LVU19
+ 130 0016 0123     		movs	r3, #1
+ 131 0018 86F82830 		strb	r3, [r6, #40]
+  39:Core/Src/PID.c ****         motor->set_speed = _set_speed;
+ 132              		.loc 1 39 9 is_stmt 1 view .LVU20
+ 133              		.loc 1 39 26 is_stmt 0 view .LVU21
+ 134 001c C6E90245 		strd	r4, [r6, #8]
+ 135              	.L5:
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 4
+
+
+  40:Core/Src/PID.c ****     } 
+  41:Core/Src/PID.c ****     else 
+  42:Core/Src/PID.c ****     {
+  43:Core/Src/PID.c ****         motor->dir = 0;
+  44:Core/Src/PID.c ****         motor->set_speed = - (_set_speed);
+  45:Core/Src/PID.c ****     }    
+  46:Core/Src/PID.c **** }
+ 136              		.loc 1 46 1 view .LVU22
+ 137 0020 70BD     		pop	{r4, r5, r6, pc}
+ 138              	.LVL12:
+ 139              	.L10:
+  43:Core/Src/PID.c ****         motor->set_speed = - (_set_speed);
+ 140              		.loc 1 43 9 is_stmt 1 view .LVU23
+  43:Core/Src/PID.c ****         motor->set_speed = - (_set_speed);
+ 141              		.loc 1 43 20 is_stmt 0 view .LVU24
+ 142 0022 0023     		movs	r3, #0
+ 143 0024 86F82830 		strb	r3, [r6, #40]
+  44:Core/Src/PID.c ****     }    
+ 144              		.loc 1 44 9 is_stmt 1 view .LVU25
+  44:Core/Src/PID.c ****     }    
+ 145              		.loc 1 44 28 is_stmt 0 view .LVU26
+ 146 0028 2246     		mov	r2, r4
+ 147 002a 05F10043 		add	r3, r5, #-2147483648
+  44:Core/Src/PID.c ****     }    
+ 148              		.loc 1 44 26 view .LVU27
+ 149 002e C6E90223 		strd	r2, [r6, #8]
+ 150              		.loc 1 46 1 view .LVU28
+ 151 0032 F5E7     		b	.L5
+ 152              		.cfi_endproc
+ 153              	.LFE66:
+ 155              		.global	__aeabi_i2d
+ 156              		.section	.text.PID_SetSpeedMPS,"ax",%progbits
+ 157              		.align	1
+ 158              		.global	PID_SetSpeedMPS
+ 159              		.syntax unified
+ 160              		.thumb
+ 161              		.thumb_func
+ 162              		.fpu softvfp
+ 164              	PID_SetSpeedMPS:
+ 165              	.LVL13:
+ 166              	.LFB67:
+  47:Core/Src/PID.c **** 
+  48:Core/Src/PID.c **** // Convert speed in M/S to RPM and write to SET SPEED
+  49:Core/Src/PID.c **** void PID_SetSpeedMPS(MOTOR_TypeDef *motor, int16_t _set_speed_mps)
+  50:Core/Src/PID.c **** {
+ 167              		.loc 1 50 1 is_stmt 1 view -0
+ 168              		.cfi_startproc
+ 169              		@ args = 0, pretend = 0, frame = 0
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171              		.loc 1 50 1 is_stmt 0 view .LVU30
+ 172 0000 10B5     		push	{r4, lr}
+ 173              	.LCFI2:
+ 174              		.cfi_def_cfa_offset 8
+ 175              		.cfi_offset 4, -8
+ 176              		.cfi_offset 14, -4
+ 177 0002 0446     		mov	r4, r0
+  51:Core/Src/PID.c ****     double speed_rps = _set_speed_mps / (PI * ROBOT_WHEEL_DIAMETER);
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 5
+
+
+ 178              		.loc 1 51 5 is_stmt 1 view .LVU31
+ 179              		.loc 1 51 39 is_stmt 0 view .LVU32
+ 180 0004 0846     		mov	r0, r1
+ 181              	.LVL14:
+ 182              		.loc 1 51 39 view .LVU33
+ 183 0006 FFF7FEFF 		bl	__aeabi_i2d
+ 184              	.LVL15:
+ 185              		.loc 1 51 12 view .LVU34
+ 186 000a 07A3     		adr	r3, .L14
+ 187 000c D3E90023 		ldrd	r2, [r3]
+ 188 0010 FFF7FEFF 		bl	__aeabi_ddiv
+ 189              	.LVL16:
+  52:Core/Src/PID.c ****     motor->set_speed = (double)(speed_rps) * 60;
+ 190              		.loc 1 52 5 is_stmt 1 view .LVU35
+ 191              		.loc 1 52 44 is_stmt 0 view .LVU36
+ 192 0014 0022     		movs	r2, #0
+ 193 0016 064B     		ldr	r3, .L14+8
+ 194 0018 FFF7FEFF 		bl	__aeabi_dmul
+ 195              	.LVL17:
+ 196              		.loc 1 52 22 view .LVU37
+ 197 001c C4E90201 		strd	r0, [r4, #8]
+  53:Core/Src/PID.c **** }
+ 198              		.loc 1 53 1 view .LVU38
+ 199 0020 10BD     		pop	{r4, pc}
+ 200              	.LVL18:
+ 201              	.L15:
+ 202              		.loc 1 53 1 view .LVU39
+ 203 0022 00BFAFF3 		.align	3
+ 203      0080
+ 204              	.L14:
+ 205 0028 DCE14F3D 		.word	1028645340
+ 206 002c 5723CA3F 		.word	1070211927
+ 207 0030 00004E40 		.word	1078853632
+ 208              		.cfi_endproc
+ 209              	.LFE67:
+ 211              		.global	__aeabi_dsub
+ 212              		.section	.text.PID_ComputeError,"ax",%progbits
+ 213              		.align	1
+ 214              		.global	PID_ComputeError
+ 215              		.syntax unified
+ 216              		.thumb
+ 217              		.thumb_func
+ 218              		.fpu softvfp
+ 220              	PID_ComputeError:
+ 221              	.LVL19:
+ 222              	.LFB68:
+  54:Core/Src/PID.c **** 
+  55:Core/Src/PID.c **** /*
+  56:Core/Src/PID.c **** *  Note:
+  57:Core/Src/PID.c **** */
+  58:Core/Src/PID.c **** void PID_ComputeError(MOTOR_TypeDef *motor)
+  59:Core/Src/PID.c **** {
+ 223              		.loc 1 59 1 is_stmt 1 view -0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              		.loc 1 59 1 is_stmt 0 view .LVU41
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 6
+
+
+ 228 0000 10B5     		push	{r4, lr}
+ 229              	.LCFI3:
+ 230              		.cfi_def_cfa_offset 8
+ 231              		.cfi_offset 4, -8
+ 232              		.cfi_offset 14, -4
+ 233 0002 0346     		mov	r3, r0
+  60:Core/Src/PID.c ****     motor->pPID_params->error = (motor->set_speed) - (motor->speed);
+ 234              		.loc 1 60 5 is_stmt 1 view .LVU42
+ 235              		.loc 1 60 39 is_stmt 0 view .LVU43
+ 236 0004 00F10801 		add	r1, r0, #8
+ 237 0008 D1E90001 		ldrd	r0, [r1]
+ 238              	.LVL20:
+ 239              		.loc 1 60 10 view .LVU44
+ 240 000c 1C6B     		ldr	r4, [r3, #48]
+ 241              		.loc 1 60 52 view .LVU45
+ 242 000e D3E90023 		ldrd	r2, [r3]
+ 243 0012 FFF7FEFF 		bl	__aeabi_dsub
+ 244              	.LVL21:
+ 245              		.loc 1 60 31 view .LVU46
+ 246 0016 C4E90601 		strd	r0, [r4, #24]
+  61:Core/Src/PID.c **** }
+ 247              		.loc 1 61 1 view .LVU47
+ 248 001a 10BD     		pop	{r4, pc}
+ 249              		.cfi_endproc
+ 250              	.LFE68:
+ 252              		.global	__aeabi_dcmpgt
+ 253              		.global	__aeabi_dcmplt
+ 254              		.section	.text.PID_Limit,"ax",%progbits
+ 255              		.align	1
+ 256              		.global	PID_Limit
+ 257              		.syntax unified
+ 258              		.thumb
+ 259              		.thumb_func
+ 260              		.fpu softvfp
+ 262              	PID_Limit:
+ 263              	.LVL22:
+ 264              	.LFB70:
+  62:Core/Src/PID.c **** 
+  63:Core/Src/PID.c **** /*
+  64:Core/Src/PID.c **** *  Note: 
+  65:Core/Src/PID.c **** */
+  66:Core/Src/PID.c **** void PID_ComputeOutput(MOTOR_TypeDef *motor)
+  67:Core/Src/PID.c **** {   
+  68:Core/Src/PID.c ****     double output = 0.0f;
+  69:Core/Src/PID.c ****     double _OUTPUT_MAX = motor->pPID_params->OUTPUT_MAX;
+  70:Core/Src/PID.c ****     double _OUTPUT_MIN =motor->pPID_params->OUTPUT_MIN;
+  71:Core/Src/PID.c **** 
+  72:Core/Src/PID.c ****     PID_TypeDef *PID = motor->pPID_params;
+  73:Core/Src/PID.c **** 
+  74:Core/Src/PID.c ****     p_term = PID->Kp*(PID->error);
+  75:Core/Src/PID.c **** 
+  76:Core/Src/PID.c ****     // Compute upper limit of Integration Term 
+  77:Core/Src/PID.c ****     float i_term_max, i_term_min;
+  78:Core/Src/PID.c ****     if (PID->OUTPUT_MAX > p_term)
+  79:Core/Src/PID.c ****     {
+  80:Core/Src/PID.c ****         i_term_max = PID->OUTPUT_MAX - p_term;
+  81:Core/Src/PID.c ****     } 
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 7
+
+
+  82:Core/Src/PID.c ****     else 
+  83:Core/Src/PID.c ****     {
+  84:Core/Src/PID.c ****         i_term_max = 0.0f;
+  85:Core/Src/PID.c ****     }
+  86:Core/Src/PID.c ****     // Compute lower limit of Integration Term
+  87:Core/Src/PID.c ****     if (PID->OUTPUT_MIN < p_term)
+  88:Core/Src/PID.c ****     {
+  89:Core/Src/PID.c ****         i_term_min = PID->OUTPUT_MIN - p_term ;
+  90:Core/Src/PID.c ****     } 
+  91:Core/Src/PID.c ****     else 
+  92:Core/Src/PID.c ****     {
+  93:Core/Src/PID.c ****         i_term_min = 0.0f;
+  94:Core/Src/PID.c ****     }
+  95:Core/Src/PID.c **** 
+  96:Core/Src/PID.c ****     i_term += PID->Ki * ( (PID->error) + (PID->previous_error) );
+  97:Core/Src/PID.c ****     i_term = PID_Limit(i_term, i_term_max, i_term_min);
+  98:Core/Src/PID.c ****     
+  99:Core/Src/PID.c ****     output = p_term + i_term;
+ 100:Core/Src/PID.c ****     output = PID_Limit(output, _OUTPUT_MAX, _OUTPUT_MIN);
+ 101:Core/Src/PID.c ****     
+ 102:Core/Src/PID.c ****     motor->pwm_output = (output < 0) ? -output : output;
+ 103:Core/Src/PID.c ****     PID->previous_error = PID->error;
+ 104:Core/Src/PID.c **** 
+ 105:Core/Src/PID.c **** }
+ 106:Core/Src/PID.c **** 
+ 107:Core/Src/PID.c **** // Limit the signal in range (max,min)
+ 108:Core/Src/PID.c **** double PID_Limit(double input, double max, double min)
+ 109:Core/Src/PID.c **** {
+ 265              		.loc 1 109 1 is_stmt 1 view -0
+ 266              		.cfi_startproc
+ 267              		@ args = 8, pretend = 0, frame = 0
+ 268              		@ frame_needed = 0, uses_anonymous_args = 0
+ 269              		.loc 1 109 1 is_stmt 0 view .LVU49
+ 270 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 271              	.LCFI4:
+ 272              		.cfi_def_cfa_offset 24
+ 273              		.cfi_offset 3, -24
+ 274              		.cfi_offset 4, -20
+ 275              		.cfi_offset 5, -16
+ 276              		.cfi_offset 6, -12
+ 277              		.cfi_offset 7, -8
+ 278              		.cfi_offset 14, -4
+ 279 0002 0646     		mov	r6, r0
+ 280 0004 0F46     		mov	r7, r1
+ 281 0006 1446     		mov	r4, r2
+ 282 0008 1D46     		mov	r5, r3
+ 110:Core/Src/PID.c ****     if (input > max)
+ 283              		.loc 1 110 5 is_stmt 1 view .LVU50
+ 284              		.loc 1 110 8 is_stmt 0 view .LVU51
+ 285 000a FFF7FEFF 		bl	__aeabi_dcmpgt
+ 286              	.LVL23:
+ 287              		.loc 1 110 8 view .LVU52
+ 288 000e 48B9     		cbnz	r0, .L21
+ 111:Core/Src/PID.c ****     {
+ 112:Core/Src/PID.c ****         return max;
+ 113:Core/Src/PID.c ****     }
+ 114:Core/Src/PID.c ****     else if (input < min)
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 8
+
+
+ 289              		.loc 1 114 10 is_stmt 1 view .LVU53
+ 290              		.loc 1 114 13 is_stmt 0 view .LVU54
+ 291 0010 DDE90623 		ldrd	r2, [sp, #24]
+ 292 0014 3046     		mov	r0, r6
+ 293 0016 3946     		mov	r1, r7
+ 294 0018 FFF7FEFF 		bl	__aeabi_dcmplt
+ 295              	.LVL24:
+ 296 001c 28B1     		cbz	r0, .L24
+ 115:Core/Src/PID.c ****     {
+ 116:Core/Src/PID.c ****         return min;
+ 297              		.loc 1 116 16 view .LVU55
+ 298 001e DDE90601 		ldrd	r0, [sp, #24]
+ 299 0022 01E0     		b	.L18
+ 300              	.L21:
+ 112:Core/Src/PID.c ****     }
+ 301              		.loc 1 112 16 view .LVU56
+ 302 0024 2046     		mov	r0, r4
+ 303 0026 2946     		mov	r1, r5
+ 304              	.L18:
+ 117:Core/Src/PID.c ****     }
+ 118:Core/Src/PID.c ****     else
+ 119:Core/Src/PID.c ****     {
+ 120:Core/Src/PID.c ****         return input;
+ 121:Core/Src/PID.c ****     }
+ 122:Core/Src/PID.c **** }
+ 305              		.loc 1 122 1 view .LVU57
+ 306 0028 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 307              	.LVL25:
+ 308              	.L24:
+ 120:Core/Src/PID.c ****     }
+ 309              		.loc 1 120 16 view .LVU58
+ 310 002a 3046     		mov	r0, r6
+ 311 002c 3946     		mov	r1, r7
+ 312 002e FBE7     		b	.L18
+ 313              		.cfi_endproc
+ 314              	.LFE70:
+ 316              		.global	__aeabi_d2f
+ 317              		.global	__aeabi_dadd
+ 318              		.section	.text.PID_ComputeOutput,"ax",%progbits
+ 319              		.align	1
+ 320              		.global	PID_ComputeOutput
+ 321              		.syntax unified
+ 322              		.thumb
+ 323              		.thumb_func
+ 324              		.fpu softvfp
+ 326              	PID_ComputeOutput:
+ 327              	.LVL26:
+ 328              	.LFB69:
+  67:Core/Src/PID.c ****     double output = 0.0f;
+ 329              		.loc 1 67 1 is_stmt 1 view -0
+ 330              		.cfi_startproc
+ 331              		@ args = 0, pretend = 0, frame = 16
+ 332              		@ frame_needed = 0, uses_anonymous_args = 0
+  67:Core/Src/PID.c ****     double output = 0.0f;
+ 333              		.loc 1 67 1 is_stmt 0 view .LVU60
+ 334 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 335              	.LCFI5:
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 9
+
+
+ 336              		.cfi_def_cfa_offset 36
+ 337              		.cfi_offset 4, -36
+ 338              		.cfi_offset 5, -32
+ 339              		.cfi_offset 6, -28
+ 340              		.cfi_offset 7, -24
+ 341              		.cfi_offset 8, -20
+ 342              		.cfi_offset 9, -16
+ 343              		.cfi_offset 10, -12
+ 344              		.cfi_offset 11, -8
+ 345              		.cfi_offset 14, -4
+ 346 0004 87B0     		sub	sp, sp, #28
+ 347              	.LCFI6:
+ 348              		.cfi_def_cfa_offset 64
+ 349 0006 0546     		mov	r5, r0
+  68:Core/Src/PID.c ****     double _OUTPUT_MAX = motor->pPID_params->OUTPUT_MAX;
+ 350              		.loc 1 68 5 is_stmt 1 view .LVU61
+ 351              	.LVL27:
+  69:Core/Src/PID.c ****     double _OUTPUT_MIN =motor->pPID_params->OUTPUT_MIN;
+ 352              		.loc 1 69 5 view .LVU62
+  69:Core/Src/PID.c ****     double _OUTPUT_MIN =motor->pPID_params->OUTPUT_MIN;
+ 353              		.loc 1 69 31 is_stmt 0 view .LVU63
+ 354 0008 046B     		ldr	r4, [r0, #48]
+  69:Core/Src/PID.c ****     double _OUTPUT_MIN =motor->pPID_params->OUTPUT_MIN;
+ 355              		.loc 1 69 12 view .LVU64
+ 356 000a D4E90C89 		ldrd	r8, [r4, #48]
+ 357 000e CDE90489 		strd	r8, [sp, #16]
+ 358              	.LVL28:
+  70:Core/Src/PID.c **** 
+ 359              		.loc 1 70 5 is_stmt 1 view .LVU65
+  70:Core/Src/PID.c **** 
+ 360              		.loc 1 70 12 is_stmt 0 view .LVU66
+ 361 0012 D4E90E67 		ldrd	r6, [r4, #56]
+ 362              	.LVL29:
+  72:Core/Src/PID.c **** 
+ 363              		.loc 1 72 5 is_stmt 1 view .LVU67
+  74:Core/Src/PID.c **** 
+ 364              		.loc 1 74 5 view .LVU68
+  74:Core/Src/PID.c **** 
+ 365              		.loc 1 74 21 is_stmt 0 view .LVU69
+ 366 0016 D4E90623 		ldrd	r2, [r4, #24]
+ 367 001a D4E90001 		ldrd	r0, [r4]
+ 368              	.LVL30:
+  74:Core/Src/PID.c **** 
+ 369              		.loc 1 74 21 view .LVU70
+ 370 001e FFF7FEFF 		bl	__aeabi_dmul
+ 371              	.LVL31:
+ 372 0022 0246     		mov	r2, r0
+ 373 0024 0B46     		mov	r3, r1
+  74:Core/Src/PID.c **** 
+ 374              		.loc 1 74 12 view .LVU71
+ 375 0026 3F49     		ldr	r1, .L42
+ 376 0028 C1E90023 		strd	r2, [r1]
+  77:Core/Src/PID.c ****     if (PID->OUTPUT_MAX > p_term)
+ 377              		.loc 1 77 5 is_stmt 1 view .LVU72
+  78:Core/Src/PID.c ****     {
+ 378              		.loc 1 78 5 view .LVU73
+  78:Core/Src/PID.c ****     {
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 10
+
+
+ 379              		.loc 1 78 8 is_stmt 0 view .LVU74
+ 380 002c 4246     		mov	r2, r8
+ 381 002e 4B46     		mov	r3, r9
+ 382 0030 D1E90001 		ldrd	r0, [r1]
+ 383 0034 FFF7FEFF 		bl	__aeabi_dcmplt
+ 384              	.LVL32:
+ 385 0038 0028     		cmp	r0, #0
+ 386 003a 69D0     		beq	.L38
+  80:Core/Src/PID.c ****     } 
+ 387              		.loc 1 80 9 is_stmt 1 view .LVU75
+  80:Core/Src/PID.c ****     } 
+ 388              		.loc 1 80 38 is_stmt 0 view .LVU76
+ 389 003c 394B     		ldr	r3, .L42
+ 390 003e D3E90023 		ldrd	r2, [r3]
+ 391 0042 4046     		mov	r0, r8
+ 392 0044 4946     		mov	r1, r9
+ 393 0046 FFF7FEFF 		bl	__aeabi_dsub
+ 394              	.LVL33:
+  80:Core/Src/PID.c ****     } 
+ 395              		.loc 1 80 20 view .LVU77
+ 396 004a FFF7FEFF 		bl	__aeabi_d2f
+ 397              	.LVL34:
+ 398 004e 0290     		str	r0, [sp, #8]	@ float
+ 399              	.LVL35:
+ 400              	.L27:
+  87:Core/Src/PID.c ****     {
+ 401              		.loc 1 87 5 is_stmt 1 view .LVU78
+  87:Core/Src/PID.c ****     {
+ 402              		.loc 1 87 8 is_stmt 0 view .LVU79
+ 403 0050 3246     		mov	r2, r6
+ 404 0052 3B46     		mov	r3, r7
+ 405 0054 3349     		ldr	r1, .L42
+ 406 0056 D1E90001 		ldrd	r0, [r1]
+ 407 005a FFF7FEFF 		bl	__aeabi_dcmpgt
+ 408              	.LVL36:
+ 409 005e 0028     		cmp	r0, #0
+ 410 0060 59D0     		beq	.L39
+  89:Core/Src/PID.c ****     } 
+ 411              		.loc 1 89 9 is_stmt 1 view .LVU80
+  89:Core/Src/PID.c ****     } 
+ 412              		.loc 1 89 38 is_stmt 0 view .LVU81
+ 413 0062 304B     		ldr	r3, .L42
+ 414 0064 D3E90023 		ldrd	r2, [r3]
+ 415 0068 3046     		mov	r0, r6
+ 416 006a 3946     		mov	r1, r7
+ 417 006c FFF7FEFF 		bl	__aeabi_dsub
+ 418              	.LVL37:
+  89:Core/Src/PID.c ****     } 
+ 419              		.loc 1 89 20 view .LVU82
+ 420 0070 FFF7FEFF 		bl	__aeabi_d2f
+ 421              	.LVL38:
+ 422 0074 8346     		mov	fp, r0
+ 423              	.LVL39:
+ 424              	.L29:
+  96:Core/Src/PID.c ****     i_term = PID_Limit(i_term, i_term_max, i_term_min);
+ 425              		.loc 1 96 5 is_stmt 1 view .LVU83
+  96:Core/Src/PID.c ****     i_term = PID_Limit(i_term, i_term_max, i_term_min);
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 11
+
+
+ 426              		.loc 1 96 18 is_stmt 0 view .LVU84
+ 427 0076 D4E90489 		ldrd	r8, [r4, #16]
+ 428              	.LVL40:
+  96:Core/Src/PID.c ****     i_term = PID_Limit(i_term, i_term_max, i_term_min);
+ 429              		.loc 1 96 31 view .LVU85
+ 430 007a D4E90601 		ldrd	r0, [r4, #24]
+  96:Core/Src/PID.c ****     i_term = PID_Limit(i_term, i_term_max, i_term_min);
+ 431              		.loc 1 96 40 view .LVU86
+ 432 007e D4E90823 		ldrd	r2, [r4, #32]
+ 433 0082 FFF7FEFF 		bl	__aeabi_dadd
+ 434              	.LVL41:
+ 435 0086 0246     		mov	r2, r0
+ 436 0088 0B46     		mov	r3, r1
+  96:Core/Src/PID.c ****     i_term = PID_Limit(i_term, i_term_max, i_term_min);
+ 437              		.loc 1 96 23 view .LVU87
+ 438 008a 4046     		mov	r0, r8
+ 439 008c 4946     		mov	r1, r9
+ 440 008e FFF7FEFF 		bl	__aeabi_dmul
+ 441              	.LVL42:
+ 442 0092 0246     		mov	r2, r0
+ 443 0094 0B46     		mov	r3, r1
+  96:Core/Src/PID.c ****     i_term = PID_Limit(i_term, i_term_max, i_term_min);
+ 444              		.loc 1 96 12 view .LVU88
+ 445 0096 DFF890A0 		ldr	r10, .L42+4
+ 446 009a DAE90001 		ldrd	r0, [r10]
+ 447 009e FFF7FEFF 		bl	__aeabi_dadd
+ 448              	.LVL43:
+ 449 00a2 CAE90001 		strd	r0, [r10]
+  97:Core/Src/PID.c ****     
+ 450              		.loc 1 97 5 is_stmt 1 view .LVU89
+  97:Core/Src/PID.c ****     
+ 451              		.loc 1 97 14 is_stmt 0 view .LVU90
+ 452 00a6 DAE90089 		ldrd	r8, [r10]
+ 453 00aa 0298     		ldr	r0, [sp, #8]	@ float
+ 454 00ac FFF7FEFF 		bl	__aeabi_f2d
+ 455              	.LVL44:
+ 456 00b0 CDE90201 		strd	r0, [sp, #8]
+ 457              	.LVL45:
+  97:Core/Src/PID.c ****     
+ 458              		.loc 1 97 14 view .LVU91
+ 459 00b4 5846     		mov	r0, fp
+ 460 00b6 FFF7FEFF 		bl	__aeabi_f2d
+ 461              	.LVL46:
+ 462 00ba CDE90001 		strd	r0, [sp]
+ 463 00be DDE90223 		ldrd	r2, [sp, #8]
+ 464 00c2 4046     		mov	r0, r8
+ 465 00c4 4946     		mov	r1, r9
+ 466 00c6 FFF7FEFF 		bl	PID_Limit
+ 467              	.LVL47:
+  97:Core/Src/PID.c ****     
+ 468              		.loc 1 97 12 view .LVU92
+ 469 00ca CAE90001 		strd	r0, [r10]
+  99:Core/Src/PID.c ****     output = PID_Limit(output, _OUTPUT_MAX, _OUTPUT_MIN);
+ 470              		.loc 1 99 5 is_stmt 1 view .LVU93
+  99:Core/Src/PID.c ****     output = PID_Limit(output, _OUTPUT_MAX, _OUTPUT_MIN);
+ 471              		.loc 1 99 21 is_stmt 0 view .LVU94
+ 472 00ce 154B     		ldr	r3, .L42
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 12
+
+
+ 473 00d0 D3E90001 		ldrd	r0, [r3]
+  99:Core/Src/PID.c ****     output = PID_Limit(output, _OUTPUT_MAX, _OUTPUT_MIN);
+ 474              		.loc 1 99 12 view .LVU95
+ 475 00d4 DAE90023 		ldrd	r2, [r10]
+ 476 00d8 FFF7FEFF 		bl	__aeabi_dadd
+ 477              	.LVL48:
+ 100:Core/Src/PID.c ****     
+ 478              		.loc 1 100 5 is_stmt 1 view .LVU96
+ 100:Core/Src/PID.c ****     
+ 479              		.loc 1 100 14 is_stmt 0 view .LVU97
+ 480 00dc CDE90067 		strd	r6, [sp]
+ 481 00e0 DDE90423 		ldrd	r2, [sp, #16]
+ 482 00e4 FFF7FEFF 		bl	PID_Limit
+ 483              	.LVL49:
+ 100:Core/Src/PID.c ****     
+ 484              		.loc 1 100 14 view .LVU98
+ 485 00e8 0746     		mov	r7, r0
+ 486 00ea 0E46     		mov	r6, r1
+ 487              	.LVL50:
+ 102:Core/Src/PID.c ****     PID->previous_error = PID->error;
+ 488              		.loc 1 102 5 is_stmt 1 view .LVU99
+ 102:Core/Src/PID.c ****     PID->previous_error = PID->error;
+ 489              		.loc 1 102 48 is_stmt 0 view .LVU100
+ 490 00ec 0022     		movs	r2, #0
+ 491 00ee 0023     		movs	r3, #0
+ 492 00f0 3846     		mov	r0, r7
+ 102:Core/Src/PID.c ****     PID->previous_error = PID->error;
+ 493              		.loc 1 102 48 view .LVU101
+ 494 00f2 3146     		mov	r1, r6
+ 102:Core/Src/PID.c ****     PID->previous_error = PID->error;
+ 495              		.loc 1 102 48 view .LVU102
+ 496 00f4 FFF7FEFF 		bl	__aeabi_dcmplt
+ 497              	.LVL51:
+ 102:Core/Src/PID.c ****     PID->previous_error = PID->error;
+ 498              		.loc 1 102 48 view .LVU103
+ 499 00f8 80B9     		cbnz	r0, .L41
+ 500              	.LVL52:
+ 501              	.L31:
+ 102:Core/Src/PID.c ****     PID->previous_error = PID->error;
+ 502              		.loc 1 102 23 discriminator 4 view .LVU104
+ 503 00fa 3A46     		mov	r2, r7
+ 504 00fc 3346     		mov	r3, r6
+ 505 00fe C5E90823 		strd	r2, [r5, #32]
+ 103:Core/Src/PID.c **** 
+ 506              		.loc 1 103 5 is_stmt 1 discriminator 4 view .LVU105
+ 103:Core/Src/PID.c **** 
+ 507              		.loc 1 103 30 is_stmt 0 discriminator 4 view .LVU106
+ 508 0102 D4E90623 		ldrd	r2, [r4, #24]
+ 103:Core/Src/PID.c **** 
+ 509              		.loc 1 103 25 discriminator 4 view .LVU107
+ 510 0106 C4E90823 		strd	r2, [r4, #32]
+ 105:Core/Src/PID.c **** 
+ 511              		.loc 1 105 1 discriminator 4 view .LVU108
+ 512 010a 07B0     		add	sp, sp, #28
+ 513              	.LCFI7:
+ 514              		.cfi_remember_state
+ 515              		.cfi_def_cfa_offset 36
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 13
+
+
+ 516              		@ sp needed
+ 517 010c BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 518              	.LVL53:
+ 519              	.L38:
+ 520              	.LCFI8:
+ 521              		.cfi_restore_state
+  84:Core/Src/PID.c ****     }
+ 522              		.loc 1 84 20 view .LVU109
+ 523 0110 0023     		movs	r3, #0
+ 524 0112 0293     		str	r3, [sp, #8]	@ float
+ 525 0114 9CE7     		b	.L27
+ 526              	.LVL54:
+ 527              	.L39:
+  93:Core/Src/PID.c ****     }
+ 528              		.loc 1 93 20 view .LVU110
+ 529 0116 4FF0000B 		mov	fp, #0
+ 530 011a ACE7     		b	.L29
+ 531              	.LVL55:
+ 532              	.L41:
+ 102:Core/Src/PID.c ****     PID->previous_error = PID->error;
+ 533              		.loc 1 102 48 discriminator 1 view .LVU111
+ 534 011c 06F10046 		add	r6, r6, #-2147483648
+ 535              	.LVL56:
+ 102:Core/Src/PID.c ****     PID->previous_error = PID->error;
+ 536              		.loc 1 102 48 discriminator 1 view .LVU112
+ 537 0120 EBE7     		b	.L31
+ 538              	.L43:
+ 539 0122 00BF     		.align	2
+ 540              	.L42:
+ 541 0124 00000000 		.word	.LANCHOR0
+ 542 0128 00000000 		.word	.LANCHOR1
+ 543              		.cfi_endproc
+ 544              	.LFE69:
+ 546              		.global	__aeabi_dcmpeq
+ 547              		.global	__aeabi_d2uiz
+ 548              		.section	.text.PID_SetDuty,"ax",%progbits
+ 549              		.align	1
+ 550              		.global	PID_SetDuty
+ 551              		.syntax unified
+ 552              		.thumb
+ 553              		.thumb_func
+ 554              		.fpu softvfp
+ 556              	PID_SetDuty:
+ 557              	.LVL57:
+ 558              	.LFB71:
+ 123:Core/Src/PID.c **** 
+ 124:Core/Src/PID.c **** 
+ 125:Core/Src/PID.c **** 
+ 126:Core/Src/PID.c **** // PID_SetDuty(&(htimx->CCRx->CNT), MOTOR_TypeDef *motor)
+ 127:Core/Src/PID.c **** void PID_SetDuty(MOTOR_TypeDef *motor)
+ 128:Core/Src/PID.c **** {
+ 559              		.loc 1 128 1 is_stmt 1 view -0
+ 560              		.cfi_startproc
+ 561              		@ args = 0, pretend = 0, frame = 0
+ 562              		@ frame_needed = 0, uses_anonymous_args = 0
+ 563              		.loc 1 128 1 is_stmt 0 view .LVU114
+ 564 0000 10B5     		push	{r4, lr}
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 14
+
+
+ 565              	.LCFI9:
+ 566              		.cfi_def_cfa_offset 8
+ 567              		.cfi_offset 4, -8
+ 568              		.cfi_offset 14, -4
+ 569 0002 0446     		mov	r4, r0
+ 129:Core/Src/PID.c ****     *(motor->PWM_ADDR) = 0;
+ 570              		.loc 1 129 5 is_stmt 1 view .LVU115
+ 571              		.loc 1 129 12 is_stmt 0 view .LVU116
+ 572 0004 836B     		ldr	r3, [r0, #56]
+ 573              		.loc 1 129 24 view .LVU117
+ 574 0006 0022     		movs	r2, #0
+ 575 0008 1A60     		str	r2, [r3]
+ 130:Core/Src/PID.c ****     if (motor->dir == 1)
+ 576              		.loc 1 130 5 is_stmt 1 view .LVU118
+ 577              		.loc 1 130 14 is_stmt 0 view .LVU119
+ 578 000a 90F82830 		ldrb	r3, [r0, #40]	@ zero_extendqisi2
+ 579              		.loc 1 130 8 view .LVU120
+ 580 000e 012B     		cmp	r3, #1
+ 581 0010 19D0     		beq	.L53
+ 131:Core/Src/PID.c ****     {
+ 132:Core/Src/PID.c ****         HAL_GPIO_WritePin(motor->GPIO, motor->DIR1_PIN, 0);
+ 133:Core/Src/PID.c ****         HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 1);
+ 134:Core/Src/PID.c ****     }
+ 135:Core/Src/PID.c ****     else 
+ 136:Core/Src/PID.c ****     {
+ 137:Core/Src/PID.c ****         HAL_GPIO_WritePin(motor->GPIO, motor->DIR1_PIN, 1);
+ 582              		.loc 1 137 9 is_stmt 1 view .LVU121
+ 583 0012 0122     		movs	r2, #1
+ 584 0014 418D     		ldrh	r1, [r0, #42]
+ 585 0016 406B     		ldr	r0, [r0, #52]
+ 586              	.LVL58:
+ 587              		.loc 1 137 9 is_stmt 0 view .LVU122
+ 588 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 589              	.LVL59:
+ 138:Core/Src/PID.c ****         HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 0);  
+ 590              		.loc 1 138 9 is_stmt 1 view .LVU123
+ 591 001c 0022     		movs	r2, #0
+ 592 001e A18D     		ldrh	r1, [r4, #44]
+ 593 0020 606B     		ldr	r0, [r4, #52]
+ 594 0022 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 595              	.LVL60:
+ 596              	.L46:
+ 139:Core/Src/PID.c ****     }
+ 140:Core/Src/PID.c ****     if (motor->set_speed != 0)
+ 597              		.loc 1 140 5 view .LVU124
+ 598              		.loc 1 140 8 is_stmt 0 view .LVU125
+ 599 0026 0022     		movs	r2, #0
+ 600 0028 0023     		movs	r3, #0
+ 601 002a D4E90201 		ldrd	r0, [r4, #8]
+ 602 002e FFF7FEFF 		bl	__aeabi_dcmpeq
+ 603              	.LVL61:
+ 604 0032 90B9     		cbnz	r0, .L51
+ 141:Core/Src/PID.c ****     {
+ 142:Core/Src/PID.c ****         *(motor->PWM_ADDR) = round(motor->pwm_output);      
+ 605              		.loc 1 142 9 is_stmt 1 view .LVU126
+ 606              		.loc 1 142 30 is_stmt 0 view .LVU127
+ 607 0034 D4E90801 		ldrd	r0, [r4, #32]
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 15
+
+
+ 608 0038 FFF7FEFF 		bl	round
+ 609              	.LVL62:
+ 610              		.loc 1 142 16 view .LVU128
+ 611 003c A46B     		ldr	r4, [r4, #56]
+ 612              	.LVL63:
+ 613              		.loc 1 142 28 view .LVU129
+ 614 003e FFF7FEFF 		bl	__aeabi_d2uiz
+ 615              	.LVL64:
+ 616 0042 2060     		str	r0, [r4]
+ 617              	.L44:
+ 143:Core/Src/PID.c ****     }
+ 144:Core/Src/PID.c ****     else
+ 145:Core/Src/PID.c ****     {
+ 146:Core/Src/PID.c ****         HAL_GPIO_WritePin(motor->GPIO, motor->DIR1_PIN, 0);
+ 147:Core/Src/PID.c ****         HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 0);
+ 148:Core/Src/PID.c ****     }
+ 149:Core/Src/PID.c ****     
+ 150:Core/Src/PID.c **** }
+ 618              		.loc 1 150 1 view .LVU130
+ 619 0044 10BD     		pop	{r4, pc}
+ 620              	.LVL65:
+ 621              	.L53:
+ 132:Core/Src/PID.c ****         HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 1);
+ 622              		.loc 1 132 9 is_stmt 1 view .LVU131
+ 623 0046 418D     		ldrh	r1, [r0, #42]
+ 624 0048 406B     		ldr	r0, [r0, #52]
+ 625              	.LVL66:
+ 132:Core/Src/PID.c ****         HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 1);
+ 626              		.loc 1 132 9 is_stmt 0 view .LVU132
+ 627 004a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 628              	.LVL67:
+ 133:Core/Src/PID.c ****     }
+ 629              		.loc 1 133 9 is_stmt 1 view .LVU133
+ 630 004e 0122     		movs	r2, #1
+ 631 0050 A18D     		ldrh	r1, [r4, #44]
+ 632 0052 606B     		ldr	r0, [r4, #52]
+ 633 0054 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 634              	.LVL68:
+ 635 0058 E5E7     		b	.L46
+ 636              	.L51:
+ 146:Core/Src/PID.c ****         HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 0);
+ 637              		.loc 1 146 9 view .LVU134
+ 638 005a 0022     		movs	r2, #0
+ 639 005c 618D     		ldrh	r1, [r4, #42]
+ 640 005e 606B     		ldr	r0, [r4, #52]
+ 641 0060 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 642              	.LVL69:
+ 147:Core/Src/PID.c ****     }
+ 643              		.loc 1 147 9 view .LVU135
+ 644 0064 0022     		movs	r2, #0
+ 645 0066 A18D     		ldrh	r1, [r4, #44]
+ 646 0068 606B     		ldr	r0, [r4, #52]
+ 647 006a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 648              	.LVL70:
+ 649              		.loc 1 150 1 is_stmt 0 view .LVU136
+ 650 006e E9E7     		b	.L44
+ 651              		.cfi_endproc
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 16
+
+
+ 652              	.LFE71:
+ 654              		.section	.text.PID_SetTunings,"ax",%progbits
+ 655              		.align	1
+ 656              		.global	PID_SetTunings
+ 657              		.syntax unified
+ 658              		.thumb
+ 659              		.thumb_func
+ 660              		.fpu softvfp
+ 662              	PID_SetTunings:
+ 663              	.LVL71:
+ 664              	.LFB72:
+ 151:Core/Src/PID.c **** 
+ 152:Core/Src/PID.c **** 
+ 153:Core/Src/PID.c **** void PID_SetTunings(PID_TypeDef *pPID_Params, double setKp, double setKi, double setKd)
+ 154:Core/Src/PID.c **** {
+ 665              		.loc 1 154 1 is_stmt 1 view -0
+ 666              		.cfi_startproc
+ 667              		@ args = 16, pretend = 0, frame = 0
+ 668              		@ frame_needed = 0, uses_anonymous_args = 0
+ 669              		@ link register save eliminated.
+ 155:Core/Src/PID.c ****     pPID_Params->Kp = setKp;
+ 670              		.loc 1 155 5 view .LVU138
+ 671              		.loc 1 155 21 is_stmt 0 view .LVU139
+ 672 0000 C0E90023 		strd	r2, [r0]
+ 156:Core/Src/PID.c ****     pPID_Params->Ki = setKi;
+ 673              		.loc 1 156 5 is_stmt 1 view .LVU140
+ 674              		.loc 1 156 21 is_stmt 0 view .LVU141
+ 675 0004 DDE90023 		ldrd	r2, [sp]
+ 676              	.LVL72:
+ 677              		.loc 1 156 21 view .LVU142
+ 678 0008 C0E90423 		strd	r2, [r0, #16]
+ 157:Core/Src/PID.c ****     pPID_Params->Kd = setKd;
+ 679              		.loc 1 157 5 is_stmt 1 view .LVU143
+ 680              		.loc 1 157 21 is_stmt 0 view .LVU144
+ 681 000c DDE90223 		ldrd	r2, [sp, #8]
+ 682 0010 C0E90223 		strd	r2, [r0, #8]
+ 158:Core/Src/PID.c **** }
+ 683              		.loc 1 158 1 view .LVU145
+ 684 0014 7047     		bx	lr
+ 685              		.cfi_endproc
+ 686              	.LFE72:
+ 688              		.section	.text.PID_MotorInit,"ax",%progbits
+ 689              		.align	1
+ 690              		.global	PID_MotorInit
+ 691              		.syntax unified
+ 692              		.thumb
+ 693              		.thumb_func
+ 694              		.fpu softvfp
+ 696              	PID_MotorInit:
+ 697              	.LVL73:
+ 698              	.LFB73:
+ 159:Core/Src/PID.c **** 
+ 160:Core/Src/PID.c **** 
+ 161:Core/Src/PID.c **** // Init GPIOs and PID params that relevant to motor.
+ 162:Core/Src/PID.c **** void PID_MotorInit( MOTOR_TypeDef *motor,               // Motor str address
+ 163:Core/Src/PID.c ****                     PID_TypeDef *pPID_Params,           // PID str address
+ 164:Core/Src/PID.c ****                     GPIO_TypeDef* PORT,                 // GPIO PORT for direction control
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 17
+
+
+ 165:Core/Src/PID.c ****                     uint16_t PIN1,                      // GPIO PINS for direction control
+ 166:Core/Src/PID.c ****                     uint16_t PIN2,                      // GPIO PINS for direction control
+ 167:Core/Src/PID.c ****                     double max_output,                  // Max Output of PWM
+ 168:Core/Src/PID.c ****                     double min_output,                  // Min Input of PWM
+ 169:Core/Src/PID.c ****                     volatile uint32_t * TIM_ENC_ADDR,   // TIMER interfacing encoder's counter regi
+ 170:Core/Src/PID.c ****                     volatile uint32_t * TIM_PWM_ADDR,   // TIMER Capture and Compare Register addre
+ 171:Core/Src/PID.c ****                     double* pSet_Params)                // Set PID parameters array
+ 172:Core/Src/PID.c **** {
+ 699              		.loc 1 172 1 is_stmt 1 view -0
+ 700              		.cfi_startproc
+ 701              		@ args = 36, pretend = 0, frame = 0
+ 702              		@ frame_needed = 0, uses_anonymous_args = 0
+ 703              		.loc 1 172 1 is_stmt 0 view .LVU147
+ 704 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 705              	.LCFI10:
+ 706              		.cfi_def_cfa_offset 24
+ 707              		.cfi_offset 4, -24
+ 708              		.cfi_offset 5, -20
+ 709              		.cfi_offset 6, -16
+ 710              		.cfi_offset 7, -12
+ 711              		.cfi_offset 8, -8
+ 712              		.cfi_offset 14, -4
+ 713 0004 84B0     		sub	sp, sp, #16
+ 714              	.LCFI11:
+ 715              		.cfi_def_cfa_offset 40
+ 716 0006 0446     		mov	r4, r0
+ 717 0008 0D46     		mov	r5, r1
+ 718 000a 9046     		mov	r8, r2
+ 719 000c 1F46     		mov	r7, r3
+ 720 000e 129E     		ldr	r6, [sp, #72]
+ 173:Core/Src/PID.c **** 
+ 174:Core/Src/PID.c ****     #ifndef __GPIO_H__
+ 175:Core/Src/PID.c ****     GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 176:Core/Src/PID.c **** 
+ 177:Core/Src/PID.c ****     GPIO_InitStruct.Pin = PIN1 | PIN2;
+ 178:Core/Src/PID.c ****     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 179:Core/Src/PID.c ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 180:Core/Src/PID.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 181:Core/Src/PID.c ****     HAL_GPIO_Init(PORT, &GPIO_InitStruct);
+ 182:Core/Src/PID.c ****     #endif
+ 183:Core/Src/PID.c **** 
+ 184:Core/Src/PID.c ****     memset(pPID_Params , 0, sizeof(PID_TypeDef) );
+ 721              		.loc 1 184 5 is_stmt 1 view .LVU148
+ 722 0010 4022     		movs	r2, #64
+ 723              	.LVL74:
+ 724              		.loc 1 184 5 is_stmt 0 view .LVU149
+ 725 0012 0021     		movs	r1, #0
+ 726              	.LVL75:
+ 727              		.loc 1 184 5 view .LVU150
+ 728 0014 2846     		mov	r0, r5
+ 729              	.LVL76:
+ 730              		.loc 1 184 5 view .LVU151
+ 731 0016 FFF7FEFF 		bl	memset
+ 732              	.LVL77:
+ 185:Core/Src/PID.c **** 
+ 186:Core/Src/PID.c ****     motor->pPID_params = pPID_Params;
+ 733              		.loc 1 186 5 is_stmt 1 view .LVU152
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 18
+
+
+ 734              		.loc 1 186 24 is_stmt 0 view .LVU153
+ 735 001a 2563     		str	r5, [r4, #48]
+ 187:Core/Src/PID.c ****     motor->GPIO = PORT;
+ 736              		.loc 1 187 5 is_stmt 1 view .LVU154
+ 737              		.loc 1 187 17 is_stmt 0 view .LVU155
+ 738 001c C4F83480 		str	r8, [r4, #52]
+ 188:Core/Src/PID.c ****     motor->DIR1_PIN = PIN1;
+ 739              		.loc 1 188 5 is_stmt 1 view .LVU156
+ 740              		.loc 1 188 21 is_stmt 0 view .LVU157
+ 741 0020 6785     		strh	r7, [r4, #42]	@ movhi
+ 189:Core/Src/PID.c ****     motor->DIR2_PIN = PIN2;
+ 742              		.loc 1 189 5 is_stmt 1 view .LVU158
+ 743              		.loc 1 189 21 is_stmt 0 view .LVU159
+ 744 0022 BDF82830 		ldrh	r3, [sp, #40]
+ 745 0026 A385     		strh	r3, [r4, #44]	@ movhi
+ 190:Core/Src/PID.c **** 
+ 191:Core/Src/PID.c ****     motor->dir = 1;
+ 746              		.loc 1 191 5 is_stmt 1 view .LVU160
+ 747              		.loc 1 191 16 is_stmt 0 view .LVU161
+ 748 0028 0123     		movs	r3, #1
+ 749 002a 84F82830 		strb	r3, [r4, #40]
+ 192:Core/Src/PID.c **** 
+ 193:Core/Src/PID.c ****     motor->ENC_ADDR = TIM_ENC_ADDR;
+ 750              		.loc 1 193 5 is_stmt 1 view .LVU162
+ 751              		.loc 1 193 21 is_stmt 0 view .LVU163
+ 752 002e 109B     		ldr	r3, [sp, #64]
+ 753 0030 E363     		str	r3, [r4, #60]
+ 194:Core/Src/PID.c ****     motor->PWM_ADDR = TIM_PWM_ADDR;
+ 754              		.loc 1 194 5 is_stmt 1 view .LVU164
+ 755              		.loc 1 194 21 is_stmt 0 view .LVU165
+ 756 0032 119B     		ldr	r3, [sp, #68]
+ 757 0034 A363     		str	r3, [r4, #56]
+ 195:Core/Src/PID.c **** 
+ 196:Core/Src/PID.c ****     pPID_Params->OUTPUT_MAX = max_output;
+ 758              		.loc 1 196 5 is_stmt 1 view .LVU166
+ 759              		.loc 1 196 29 is_stmt 0 view .LVU167
+ 760 0036 DDE90C23 		ldrd	r2, [sp, #48]
+ 761 003a C5E90C23 		strd	r2, [r5, #48]
+ 197:Core/Src/PID.c ****     pPID_Params->OUTPUT_MIN = min_output;
+ 762              		.loc 1 197 5 is_stmt 1 view .LVU168
+ 763              		.loc 1 197 29 is_stmt 0 view .LVU169
+ 764 003e DDE90E23 		ldrd	r2, [sp, #56]
+ 765 0042 C5E90E23 		strd	r2, [r5, #56]
+ 198:Core/Src/PID.c **** 
+ 199:Core/Src/PID.c ****     PID_SetTunings(pPID_Params, pSet_Params[0] , pSet_Params[1], pSet_Params[2]);
+ 766              		.loc 1 199 5 is_stmt 1 view .LVU170
+ 767 0046 D6E90423 		ldrd	r2, [r6, #16]
+ 768 004a CDE90223 		strd	r2, [sp, #8]
+ 769 004e D6E90223 		ldrd	r2, [r6, #8]
+ 770 0052 CDE90023 		strd	r2, [sp]
+ 771 0056 D6E90023 		ldrd	r2, [r6]
+ 772 005a 2846     		mov	r0, r5
+ 773 005c FFF7FEFF 		bl	PID_SetTunings
+ 774              	.LVL78:
+ 200:Core/Src/PID.c **** }
+ 775              		.loc 1 200 1 is_stmt 0 view .LVU171
+ 776 0060 04B0     		add	sp, sp, #16
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 19
+
+
+ 777              	.LCFI12:
+ 778              		.cfi_def_cfa_offset 24
+ 779              		@ sp needed
+ 780 0062 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 781              		.loc 1 200 1 view .LVU172
+ 782              		.cfi_endproc
+ 783              	.LFE73:
+ 785              		.section	.text.PID_FirstOrderFilter,"ax",%progbits
+ 786              		.align	1
+ 787              		.global	PID_FirstOrderFilter
+ 788              		.syntax unified
+ 789              		.thumb
+ 790              		.thumb_func
+ 791              		.fpu softvfp
+ 793              	PID_FirstOrderFilter:
+ 794              	.LVL79:
+ 795              	.LFB74:
+ 201:Core/Src/PID.c **** 
+ 202:Core/Src/PID.c **** 
+ 203:Core/Src/PID.c **** // Note: Nothing
+ 204:Core/Src/PID.c **** double PID_FirstOrderFilter(double raw_sig, double last_filtered_sig, double a)
+ 205:Core/Src/PID.c **** {
+ 796              		.loc 1 205 1 is_stmt 1 view -0
+ 797              		.cfi_startproc
+ 798              		@ args = 8, pretend = 0, frame = 0
+ 799              		@ frame_needed = 0, uses_anonymous_args = 0
+ 800              		.loc 1 205 1 is_stmt 0 view .LVU174
+ 801 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 802              	.LCFI13:
+ 803              		.cfi_def_cfa_offset 32
+ 804              		.cfi_offset 3, -32
+ 805              		.cfi_offset 4, -28
+ 806              		.cfi_offset 5, -24
+ 807              		.cfi_offset 6, -20
+ 808              		.cfi_offset 7, -16
+ 809              		.cfi_offset 8, -12
+ 810              		.cfi_offset 9, -8
+ 811              		.cfi_offset 14, -4
+ 812 0004 0646     		mov	r6, r0
+ 813 0006 0F46     		mov	r7, r1
+ 814 0008 DDE90889 		ldrd	r8, [sp, #32]
+ 206:Core/Src/PID.c ****     return  (a * last_filtered_sig +  (1-a) * raw_sig);
+ 815              		.loc 1 206 5 is_stmt 1 view .LVU175
+ 816              		.loc 1 206 16 is_stmt 0 view .LVU176
+ 817 000c 4046     		mov	r0, r8
+ 818              	.LVL80:
+ 819              		.loc 1 206 16 view .LVU177
+ 820 000e 4946     		mov	r1, r9
+ 821 0010 FFF7FEFF 		bl	__aeabi_dmul
+ 822              	.LVL81:
+ 823              		.loc 1 206 16 view .LVU178
+ 824 0014 0446     		mov	r4, r0
+ 825 0016 0D46     		mov	r5, r1
+ 826              		.loc 1 206 41 view .LVU179
+ 827 0018 4246     		mov	r2, r8
+ 828 001a 4B46     		mov	r3, r9
+ 829 001c 0020     		movs	r0, #0
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 20
+
+
+ 830 001e 0749     		ldr	r1, .L59
+ 831 0020 FFF7FEFF 		bl	__aeabi_dsub
+ 832              	.LVL82:
+ 833              		.loc 1 206 45 view .LVU180
+ 834 0024 3246     		mov	r2, r6
+ 835 0026 3B46     		mov	r3, r7
+ 836 0028 FFF7FEFF 		bl	__aeabi_dmul
+ 837              	.LVL83:
+ 838 002c 0246     		mov	r2, r0
+ 839 002e 0B46     		mov	r3, r1
+ 840              		.loc 1 206 36 view .LVU181
+ 841 0030 2046     		mov	r0, r4
+ 842 0032 2946     		mov	r1, r5
+ 843 0034 FFF7FEFF 		bl	__aeabi_dadd
+ 844              	.LVL84:
+ 207:Core/Src/PID.c **** }
+ 845              		.loc 1 207 1 view .LVU182
+ 846 0038 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 847              	.LVL85:
+ 848              	.L60:
+ 849              		.loc 1 207 1 view .LVU183
+ 850              		.align	2
+ 851              	.L59:
+ 852 003c 0000F03F 		.word	1072693248
+ 853              		.cfi_endproc
+ 854              	.LFE74:
+ 856              		.global	__aeabi_ui2d
+ 857              		.section	.text.PID_PreProcess,"ax",%progbits
+ 858              		.align	1
+ 859              		.global	PID_PreProcess
+ 860              		.syntax unified
+ 861              		.thumb
+ 862              		.thumb_func
+ 863              		.fpu softvfp
+ 865              	PID_PreProcess:
+ 866              	.LVL86:
+ 867              	.LFB75:
+ 208:Core/Src/PID.c **** 
+ 209:Core/Src/PID.c **** 
+ 210:Core/Src/PID.c **** // Do sampling and computing speed in RPM and PID Error
+ 211:Core/Src/PID.c **** void PID_PreProcess(MOTOR_TypeDef *motor, double _set_speed)
+ 212:Core/Src/PID.c **** {
+ 868              		.loc 1 212 1 is_stmt 1 view -0
+ 869              		.cfi_startproc
+ 870              		@ args = 0, pretend = 0, frame = 0
+ 871              		@ frame_needed = 0, uses_anonymous_args = 0
+ 872              		.loc 1 212 1 is_stmt 0 view .LVU185
+ 873 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 874              	.LCFI14:
+ 875              		.cfi_def_cfa_offset 36
+ 876              		.cfi_offset 4, -36
+ 877              		.cfi_offset 5, -32
+ 878              		.cfi_offset 6, -28
+ 879              		.cfi_offset 7, -24
+ 880              		.cfi_offset 8, -20
+ 881              		.cfi_offset 9, -16
+ 882              		.cfi_offset 10, -12
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 21
+
+
+ 883              		.cfi_offset 11, -8
+ 884              		.cfi_offset 14, -4
+ 885 0004 83B0     		sub	sp, sp, #12
+ 886              	.LCFI15:
+ 887              		.cfi_def_cfa_offset 48
+ 888 0006 0446     		mov	r4, r0
+ 889 0008 9046     		mov	r8, r2
+ 890 000a 9946     		mov	r9, r3
+ 213:Core/Src/PID.c **** 
+ 214:Core/Src/PID.c ****     // Sampling: get ticks at the same time with getting encoder pos
+ 215:Core/Src/PID.c ****     uint32_t enc_cnt = *(motor->ENC_ADDR); // Similar to enc_cnt = TIMx->CNT
+ 891              		.loc 1 215 5 is_stmt 1 view .LVU186
+ 892              		.loc 1 215 31 is_stmt 0 view .LVU187
+ 893 000c C36B     		ldr	r3, [r0, #60]
+ 894              		.loc 1 215 14 view .LVU188
+ 895 000e D3F800B0 		ldr	fp, [r3]
+ 896              	.LVL87:
+ 216:Core/Src/PID.c ****     uint32_t tick = HAL_GetTick();
+ 897              		.loc 1 216 5 is_stmt 1 view .LVU189
+ 898              		.loc 1 216 21 is_stmt 0 view .LVU190
+ 899 0012 FFF7FEFF 		bl	HAL_GetTick
+ 900              	.LVL88:
+ 901              		.loc 1 216 21 view .LVU191
+ 902 0016 0546     		mov	r5, r0
+ 903              	.LVL89:
+ 217:Core/Src/PID.c ****     // End of sampling
+ 218:Core/Src/PID.c **** 
+ 219:Core/Src/PID.c ****     uint32_t d_tick = tick - motor->last_tick; // Calc the derivative of time
+ 904              		.loc 1 219 5 is_stmt 1 view .LVU192
+ 905              		.loc 1 219 35 is_stmt 0 view .LVU193
+ 906 0018 A369     		ldr	r3, [r4, #24]
+ 907              	.LVL90:
+ 220:Core/Src/PID.c ****     if (d_tick <= 0) d_tick = 10;
+ 908              		.loc 1 220 5 is_stmt 1 view .LVU194
+ 909              		.loc 1 220 8 is_stmt 0 view .LVU195
+ 910 001a B0EB030A 		subs	r10, r0, r3
+ 911              	.LVL91:
+ 912              		.loc 1 220 8 view .LVU196
+ 913 001e 01D1     		bne	.L62
+ 914              		.loc 1 220 29 view .LVU197
+ 915 0020 4FF00A0A 		mov	r10, #10
+ 916              	.LVL92:
+ 917              	.L62:
+ 221:Core/Src/PID.c **** 
+ 222:Core/Src/PID.c ****     uint32_t last_enc_cnt = motor->last_enc_cnt;
+ 918              		.loc 1 222 5 is_stmt 1 view .LVU198
+ 919              		.loc 1 222 14 is_stmt 0 view .LVU199
+ 920 0024 E069     		ldr	r0, [r4, #28]
+ 921              	.LVL93:
+ 223:Core/Src/PID.c **** 
+ 224:Core/Src/PID.c ****     double d_measure = (enc_cnt>last_enc_cnt) ? (enc_cnt-last_enc_cnt) : (last_enc_cnt-enc_cnt);
+ 922              		.loc 1 224 5 is_stmt 1 view .LVU200
+ 923              		.loc 1 224 12 is_stmt 0 view .LVU201
+ 924 0026 8345     		cmp	fp, r0
+ 925 0028 2DD9     		bls	.L63
+ 926              		.loc 1 224 12 discriminator 1 view .LVU202
+ 927 002a ABEB0000 		sub	r0, fp, r0
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 22
+
+
+ 928              	.LVL94:
+ 929              		.loc 1 224 12 discriminator 1 view .LVU203
+ 930 002e FFF7FEFF 		bl	__aeabi_ui2d
+ 931              	.LVL95:
+ 932              		.loc 1 224 12 discriminator 1 view .LVU204
+ 933 0032 0646     		mov	r6, r0
+ 934 0034 0F46     		mov	r7, r1
+ 935              	.L64:
+ 936              	.LVL96:
+ 225:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
+ 226:Core/Src/PID.c ****     if (d_measure > 50) d_measure = motor->measure;
+ 937              		.loc 1 226 5 is_stmt 1 discriminator 4 view .LVU205
+ 938              		.loc 1 226 8 is_stmt 0 discriminator 4 view .LVU206
+ 939 0036 0022     		movs	r2, #0
+ 940 0038 194B     		ldr	r3, .L70+8
+ 941 003a 3046     		mov	r0, r6
+ 942 003c 3946     		mov	r1, r7
+ 943 003e FFF7FEFF 		bl	__aeabi_dcmpgt
+ 944              	.LVL97:
+ 945 0042 08B1     		cbz	r0, .L65
+ 946              		.loc 1 226 25 is_stmt 1 discriminator 1 view .LVU207
+ 947              		.loc 1 226 35 is_stmt 0 discriminator 1 view .LVU208
+ 948 0044 D4E90467 		ldrd	r6, [r4, #16]
+ 949              	.LVL98:
+ 950              	.L65:
+ 227:Core/Src/PID.c ****     // Filter the measurement
+ 228:Core/Src/PID.c ****     d_measure  = PID_FirstOrderFilter(d_measure, motor->measure, _1ST_FILTER_ALPHA);
+ 951              		.loc 1 228 5 is_stmt 1 view .LVU209
+ 952              		.loc 1 228 18 is_stmt 0 view .LVU210
+ 953 0048 13A3     		adr	r3, .L70
+ 954 004a D3E90023 		ldrd	r2, [r3]
+ 955 004e CDE90023 		strd	r2, [sp]
+ 956 0052 D4E90423 		ldrd	r2, [r4, #16]
+ 957 0056 3046     		mov	r0, r6
+ 958 0058 3946     		mov	r1, r7
+ 959 005a FFF7FEFF 		bl	PID_FirstOrderFilter
+ 960              	.LVL99:
+ 229:Core/Src/PID.c **** 
+ 230:Core/Src/PID.c ****     motor->measure = d_measure;
+ 961              		.loc 1 230 5 is_stmt 1 view .LVU211
+ 962              		.loc 1 230 20 is_stmt 0 view .LVU212
+ 963 005e C4E90401 		strd	r0, [r4, #16]
+ 231:Core/Src/PID.c **** 
+ 232:Core/Src/PID.c ****     PID_ComputeSpeedRPM( motor, d_tick );
+ 964              		.loc 1 232 5 is_stmt 1 view .LVU213
+ 965 0062 5146     		mov	r1, r10
+ 966 0064 2046     		mov	r0, r4
+ 967              	.LVL100:
+ 968              		.loc 1 232 5 is_stmt 0 view .LVU214
+ 969 0066 FFF7FEFF 		bl	PID_ComputeSpeedRPM
+ 970              	.LVL101:
+ 233:Core/Src/PID.c ****     PID_SetSpeedRPM( motor , _set_speed );
+ 971              		.loc 1 233 5 is_stmt 1 view .LVU215
+ 972 006a 4246     		mov	r2, r8
+ 973 006c 4B46     		mov	r3, r9
+ 974 006e 2046     		mov	r0, r4
+ 975 0070 FFF7FEFF 		bl	PID_SetSpeedRPM
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 23
+
+
+ 976              	.LVL102:
+ 234:Core/Src/PID.c ****     PID_ComputeError( motor );
+ 977              		.loc 1 234 5 view .LVU216
+ 978 0074 2046     		mov	r0, r4
+ 979 0076 FFF7FEFF 		bl	PID_ComputeError
+ 980              	.LVL103:
+ 235:Core/Src/PID.c ****  
+ 236:Core/Src/PID.c ****     motor->last_tick = tick;
+ 981              		.loc 1 236 5 view .LVU217
+ 982              		.loc 1 236 22 is_stmt 0 view .LVU218
+ 983 007a A561     		str	r5, [r4, #24]
+ 237:Core/Src/PID.c ****     motor->last_enc_cnt = enc_cnt;
+ 984              		.loc 1 237 5 is_stmt 1 view .LVU219
+ 985              		.loc 1 237 25 is_stmt 0 view .LVU220
+ 986 007c C4F81CB0 		str	fp, [r4, #28]
+ 238:Core/Src/PID.c **** 
+ 239:Core/Src/PID.c **** }
+ 987              		.loc 1 239 1 view .LVU221
+ 988 0080 03B0     		add	sp, sp, #12
+ 989              	.LCFI16:
+ 990              		.cfi_remember_state
+ 991              		.cfi_def_cfa_offset 36
+ 992              		@ sp needed
+ 993 0082 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 994              	.LVL104:
+ 995              	.L63:
+ 996              	.LCFI17:
+ 997              		.cfi_restore_state
+ 224:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
+ 998              		.loc 1 224 12 discriminator 2 view .LVU222
+ 999 0086 A0EB0B00 		sub	r0, r0, fp
+ 1000              	.LVL105:
+ 224:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
+ 1001              		.loc 1 224 12 discriminator 2 view .LVU223
+ 1002 008a FFF7FEFF 		bl	__aeabi_ui2d
+ 1003              	.LVL106:
+ 224:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
+ 1004              		.loc 1 224 12 discriminator 2 view .LVU224
+ 1005 008e 0646     		mov	r6, r0
+ 1006 0090 0F46     		mov	r7, r1
+ 1007 0092 D0E7     		b	.L64
+ 1008              	.L71:
+ 1009 0094 AFF30080 		.align	3
+ 1010              	.L70:
+ 1011 0098 33333333 		.word	858993459
+ 1012 009c 3333D33F 		.word	1070805811
+ 1013 00a0 00004940 		.word	1078525952
+ 1014              		.cfi_endproc
+ 1015              	.LFE75:
+ 1017              		.global	d_term
+ 1018              		.global	p_term
+ 1019              		.global	i_term
+ 1020              		.section	.bss.d_term,"aw",%nobits
+ 1021              		.align	3
+ 1024              	d_term:
+ 1025 0000 00000000 		.space	8
+ 1025      00000000 
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 24
+
+
+ 1026              		.section	.bss.i_term,"aw",%nobits
+ 1027              		.align	3
+ 1028              		.set	.LANCHOR1,. + 0
+ 1031              	i_term:
+ 1032 0000 00000000 		.space	8
+ 1032      00000000 
+ 1033              		.section	.bss.p_term,"aw",%nobits
+ 1034              		.align	3
+ 1035              		.set	.LANCHOR0,. + 0
+ 1038              	p_term:
+ 1039 0000 00000000 		.space	8
+ 1039      00000000 
+ 1040              		.text
+ 1041              	.Letext0:
+ 1042              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 1043              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 1044              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 1045              		.file 5 "Core/Inc/PID.h"
+ 1046              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 1047              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 1048              		.file 8 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
+ 1049              		.file 9 "<built-in>"
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s 			page 25
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 PID.c
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:21     .text.PID_ComputeSpeedRPM:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:29     .text.PID_ComputeSpeedRPM:00000000 PID_ComputeSpeedRPM
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:82     .text.PID_ComputeSpeedRPM:00000038 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:90     .text.PID_SetSpeedRPM:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:97     .text.PID_SetSpeedRPM:00000000 PID_SetSpeedRPM
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:157    .text.PID_SetSpeedMPS:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:164    .text.PID_SetSpeedMPS:00000000 PID_SetSpeedMPS
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:205    .text.PID_SetSpeedMPS:00000028 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:213    .text.PID_ComputeError:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:220    .text.PID_ComputeError:00000000 PID_ComputeError
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:255    .text.PID_Limit:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:262    .text.PID_Limit:00000000 PID_Limit
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:319    .text.PID_ComputeOutput:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:326    .text.PID_ComputeOutput:00000000 PID_ComputeOutput
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:541    .text.PID_ComputeOutput:00000124 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:549    .text.PID_SetDuty:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:556    .text.PID_SetDuty:00000000 PID_SetDuty
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:655    .text.PID_SetTunings:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:662    .text.PID_SetTunings:00000000 PID_SetTunings
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:689    .text.PID_MotorInit:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:696    .text.PID_MotorInit:00000000 PID_MotorInit
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:786    .text.PID_FirstOrderFilter:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:793    .text.PID_FirstOrderFilter:00000000 PID_FirstOrderFilter
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:852    .text.PID_FirstOrderFilter:0000003c $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:858    .text.PID_PreProcess:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:865    .text.PID_PreProcess:00000000 PID_PreProcess
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:1011   .text.PID_PreProcess:00000098 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:1024   .bss.d_term:00000000 d_term
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:1038   .bss.p_term:00000000 p_term
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:1031   .bss.i_term:00000000 i_term
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:1021   .bss.d_term:00000000 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:1027   .bss.i_term:00000000 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\ccdzAezb.s:1034   .bss.p_term:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_ui2f
+__aeabi_fmul
+__aeabi_f2d
+__aeabi_ddiv
+__aeabi_dmul
+__aeabi_dcmpge
+__aeabi_i2d
+__aeabi_dsub
+__aeabi_dcmpgt
+__aeabi_dcmplt
+__aeabi_d2f
+__aeabi_dadd
+__aeabi_dcmpeq
+__aeabi_d2uiz
+HAL_GPIO_WritePin
+round
+memset
+__aeabi_ui2d
+HAL_GetTick
