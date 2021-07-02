@@ -26,19 +26,19 @@
 #ifdef ENABLE_PID
 // Right motor PID config
 #define ENABLE_RIGHT_MOTOR
-#define RIGHT_MOTOR_KP  16.0F  
-#define RIGHT_MOTOR_KI  0.25F  
+#define RIGHT_MOTOR_KP  3.25F  
+#define RIGHT_MOTOR_KI  0.15F  
 #define RIGHT_MOTOR_KD  0.0F  
 
 
 // Left motor PID config
 #define ENABLE_LEFT_MOTOR
-#define LEFT_MOTOR_KP  16.0F  
-#define LEFT_MOTOR_KI  0.25F  
+#define LEFT_MOTOR_KP  3.25F
+#define LEFT_MOTOR_KI  0.15F  
 #define LEFT_MOTOR_KD  0.0F  
 
 
-#define _1ST_FILTER_ALPHA       0.3         // Parameter of 1ST ORDER FILTER
+#define _1ST_FILTER_ALPHA       0.5         // Parameter of 1ST ORDER FILTER
 
 
 #ifdef USE_ADVANCED_PID

@@ -48,7 +48,7 @@
 #define FALSE   0
 #define TRUE    1
 
-#define DEBUG
+// #define DEBUG
 
 /* USER CODE END PD */
 
@@ -95,6 +95,7 @@ PID_TypeDef str_left_pid;
 #endif
 /* Other definitions*/
 uint8_t ready_flag = FALSE;
+uint8_t pid_flag = FALSE;
 volatile uint8_t    vel_update_flag = FALSE;
 float linear_vel;
 float angular_vel;
@@ -153,8 +154,8 @@ int main(void)
 
   #ifdef ENABLE_PID
 
-  PID_MotorInit(&str_right_motor, &str_right_pid, GPIOB, GPIO_PIN_6 , GPIO_PIN_7, 100.0f, 10.0f, &(TIM3->CNT), &(TIM4->CCR3), right_pid_params);
-  PID_MotorInit(&str_left_motor, &str_left_pid, GPIOB, GPIO_PIN_4 , GPIO_PIN_5, 100.0f, 10.0f, &(TIM2->CNT), &(TIM4->CCR4), left_pid_params);
+  PID_MotorInit(&str_right_motor, &str_right_pid, GPIOB, GPIO_PIN_6 , GPIO_PIN_7, 100.0f, 15.0f, &(TIM3->CNT), &(TIM4->CCR3), right_pid_params);
+  PID_MotorInit(&str_left_motor, &str_left_pid, GPIOB, GPIO_PIN_4 , GPIO_PIN_5, 100.0f, 15.0f, &(TIM2->CNT), &(TIM4->CCR4), left_pid_params);
 
   // Start Timer4 for PWM function on channel 3 and channel 4
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
@@ -206,8 +207,11 @@ int main(void)
         resolveRxFrame(rx_buffer, &linear_vel, &angular_vel);
         
         // Convert from M/S to RPM
-        left_set_speed = ( linear_vel - angular_vel*ROBOT_WHEEL_BASE/2 ) * 60/ ( PI * ROBOT_WHEEL_DIAMETER ); 
-        right_set_speed = ( linear_vel + angular_vel*ROBOT_WHEEL_BASE/2) * 60/ ( PI * ROBOT_WHEEL_DIAMETER );
+        if (linear_vel != last_l_vel || angular_vel != last_a_vel)
+        {
+          left_set_speed = ( linear_vel - angular_vel*ROBOT_WHEEL_BASE/2 ) * 60/ ( PI * ROBOT_WHEEL_DIAMETER ); 
+          right_set_speed = ( linear_vel + angular_vel*ROBOT_WHEEL_BASE/2) * 60/ ( PI * ROBOT_WHEEL_DIAMETER );
+        }
 
         #ifdef DEBUG
         if (linear_vel != last_l_vel || angular_vel != last_a_vel)
@@ -224,6 +228,7 @@ int main(void)
         last_update = HAL_GetTick();
     }
     #endif
+
     // else 
     // {
     //     // If update timeout: 2 seconds
@@ -319,10 +324,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     *  =================== */
     // RIGHT MOTOR PI CONTROL 
     PID_PreProcess(&str_right_motor, right_set_speed);
-    PID_ComputeOutput(&str_right_motor);
-    PID_SetDuty(&str_right_motor );
     PID_PreProcess(&str_left_motor, left_set_speed);
+    PID_ComputeOutput(&str_right_motor);
     PID_ComputeOutput(&str_left_motor);
+    PID_SetDuty(&str_right_motor );
     PID_SetDuty(&str_left_motor );
     #else 
     static uint32_t counter = 0;

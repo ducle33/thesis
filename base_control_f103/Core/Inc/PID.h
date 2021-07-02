@@ -26,7 +26,9 @@ typedef struct
     double       Ki;
     volatile double       error;
     volatile double       previous_error;
+    volatile double       last_p;
     volatile double       last_i;
+    volatile double       last_d;
     double      OUTPUT_MAX;
     double      OUTPUT_MIN;
 } PID_TypeDef;

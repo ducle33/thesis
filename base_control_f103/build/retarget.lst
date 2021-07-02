@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
   33 0000 08B5     		push	{r3, lr}
   34              	.LCFI0:
   35              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 2
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 2
 
 
   36              		.cfi_offset 3, -8
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
   33:Core/Src/retarget.c ****     return 1;
   83              		.loc 1 33 12 view .LVU11
   84 0004 0120     		movs	r0, #1
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 3
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 3
 
 
   85              	.LVL4:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
  130              		.cfi_offset 14, -4
   40:Core/Src/retarget.c ****   HAL_StatusTypeDef hstatus;
  131              		.loc 1 40 3 is_stmt 1 view .LVU21
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 4
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 4
 
 
   41:Core/Src/retarget.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
  171 0026 4FF0FF30 		mov	r0, #-1
  172 002a F7E7     		b	.L13
  173              	.LVL15:
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 5
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 5
 
 
  174              	.L16:
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
   57:Core/Src/retarget.c ****   return -1;
  219              		.loc 1 57 3 is_stmt 1 view .LVU45
  220 000a FFF7FEFF 		bl	__errno
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 6
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 6
 
 
  221              	.LVL20:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
  265 000a 4FF0FF30 		mov	r0, #-1
  266 000e 08BD     		pop	{r3, pc}
  267              		.cfi_endproc
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 7
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 7
 
 
  268              	.LFE94:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
   79:Core/Src/retarget.c ****   }
   80:Core/Src/retarget.c ****   errno = EBADF;
   81:Core/Src/retarget.c ****   return -1;
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 8
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 8
 
 
   82:Core/Src/retarget.c **** }
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
  361              		.cfi_offset 3, -8
  362              		.cfi_offset 14, -4
   85:Core/Src/retarget.c ****   if (fd >= STDIN_FILENO && fd <= STDERR_FILENO) {
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 9
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 9
 
 
  363              		.loc 1 85 3 is_stmt 1 view .LVU80
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
  409              		.file 10 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\in
  410              		.file 11 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
  411              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 10
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 10
 
 
  412              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
@@ -546,30 +546,30 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 1
  414              		.file 15 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\in
  415              		.file 16 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\in
  416              		.file 17 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\in
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s 			page 11
+ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 retarget.c
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:16     .text.RetargetInit:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:24     .text.RetargetInit:00000000 RetargetInit
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:59     .text.RetargetInit:00000018 $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:65     .text._isatty:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:72     .text._isatty:00000000 _isatty
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:111    .text._write:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:118    .text._write:00000000 _write
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:183    .text._write:00000030 $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:188    .text._close:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:195    .text._close:00000000 _close
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:234    .text._lseek:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:241    .text._lseek:00000000 _lseek
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:271    .text._read:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:278    .text._read:00000000 _read
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:338    .text._read:0000002c $d
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:343    .text._fstat:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:350    .text._fstat:00000000 _fstat
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:397    .bss.gHuart:00000000 gHuart
-C:\Users\Duy_Linh\AppData\Local\Temp\cczxJDvq.s:393    .bss.gHuart:00000000 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:16     .text.RetargetInit:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:24     .text.RetargetInit:00000000 RetargetInit
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:59     .text.RetargetInit:00000018 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:65     .text._isatty:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:72     .text._isatty:00000000 _isatty
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:111    .text._write:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:118    .text._write:00000000 _write
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:183    .text._write:00000030 $d
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:188    .text._close:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:195    .text._close:00000000 _close
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:234    .text._lseek:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:241    .text._lseek:00000000 _lseek
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:271    .text._read:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:278    .text._read:00000000 _read
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:338    .text._read:0000002c $d
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:343    .text._fstat:00000000 $t
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:350    .text._fstat:00000000 _fstat
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:397    .bss.gHuart:00000000 gHuart
+C:\Users\Duy_Linh\AppData\Local\Temp\cc4dgxjj.s:393    .bss.gHuart:00000000 $d
 
 UNDEFINED SYMBOLS
 setvbuf

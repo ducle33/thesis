@@ -12,9 +12,9 @@
 #include "gpio.h"
 #include "stm32f1xx_hal_def.h"
 
-volatile double i_term;
-volatile double p_term;
-volatile double d_term;
+// volatile double i_term;
+// volatile double p_term;
+// volatile double d_term;
 
 
 #ifdef ENABLE_PID
@@ -65,11 +65,15 @@ void PID_ComputeError(MOTOR_TypeDef *motor)
 */
 void PID_ComputeOutput(MOTOR_TypeDef *motor)
 {   
+    double i_term;
+    double p_term;
+
     double output = 0.0f;
     double _OUTPUT_MAX = motor->pPID_params->OUTPUT_MAX;
     double _OUTPUT_MIN =motor->pPID_params->OUTPUT_MIN;
 
-    PID_TypeDef *PID = motor->pPID_params;
+    PID_TypeDef *PID ;
+    PID = motor->pPID_params;
 
     p_term = PID->Kp*(PID->error);
 
@@ -93,15 +97,15 @@ void PID_ComputeOutput(MOTOR_TypeDef *motor)
         i_term_min = 0.0f;
     }
 
-    i_term += PID->Ki * ( (PID->error) + (PID->previous_error) );
-    i_term = PID_Limit(i_term, i_term_max, i_term_min);
+    i_term = PID->last_i +  PID->Ki * ( (PID->error) + (PID->previous_error) );
+    // i_term = PID_Limit(i_term, i_term_max, i_term_min);
     
     output = p_term + i_term;
     output = PID_Limit(output, _OUTPUT_MAX, _OUTPUT_MIN);
     
     motor->pwm_output = (output < 0) ? -output : output;
     PID->previous_error = PID->error;
-
+    PID->last_i = i_term;
 }
 
 // Limit the signal in range (max,min)
@@ -126,7 +130,6 @@ double PID_Limit(double input, double max, double min)
 // PID_SetDuty(&(htimx->CCRx->CNT), MOTOR_TypeDef *motor)
 void PID_SetDuty(MOTOR_TypeDef *motor)
 {
-    *(motor->PWM_ADDR) = 0;
     if (motor->dir == 1)
     {
         HAL_GPIO_WritePin(motor->GPIO, motor->DIR1_PIN, 0);
@@ -143,8 +146,9 @@ void PID_SetDuty(MOTOR_TypeDef *motor)
     }
     else
     {
-        HAL_GPIO_WritePin(motor->GPIO, motor->DIR1_PIN, 0);
-        HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 0);
+        // HAL_GPIO_WritePin(motor->GPIO, motor->DIR1_PIN, 0);
+        // HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 0);
+        *(motor->PWM_ADDR) = 0;
     }
     
 }
