@@ -1,2 +1,5 @@
 ./base_control/.vscode
+./base_control/build
+./base_control_f103/.vscode
+./base_control_f103/build
 
