@@ -13,7 +13,11 @@
 #include <ros.h>
 #include <std_msgs/String.h>
 #include <geometry_msgs/Twist.h>
+#include <tf/transform_broadcaster.h>
+#include <tf/tf.h>
+#include <ros/time.h>
 
+//#define DEBUG/
 // FRAME CONFIGS ===============================
 byte data[16];
 
@@ -51,28 +55,43 @@ void cmd_velCallback(const geometry_msgs::Twist& CVel);
 ros::NodeHandle nh;
 
 // Make a chatter publisher
-std_msgs::String str_msg;
-
-ros::Publisher chatter("chatter", &str_msg);
-
 ros::Subscriber<geometry_msgs::Twist> Sub("/cmd_vel", &cmd_velCallback );
 
-// OTHER CONFIGS ===========================
-// Be polite and say hello
-char hello[13] = "hello world!";
+geometry_msgs::TransformStamped t;
+tf::TransformBroadcaster broadcaster;
+
+// OTHER CONFIGS ==========================
+double x = 1.0;
+double y = 0.0;
+double theta = 1.57;
+
+char base_link[] = "/base_link";
+char odom[] = "/odom";
+
 
 // Print byffer
 void print_data()
 {
   uint8_t i;
 
-  Serial.write(0x16);
+  #ifndef DEBUG
+    Serial.write(0x16);
   Serial.write(0x16);
   Serial.write(0x16);
   for (i =0 ; i<sizeof(data); i++)
   {
     Serial.write(data[i]);
   }
+  #else
+  Serial.print(0x16);
+  Serial.print(0x16);
+  Serial.print(0x16);
+  for (i =0 ; i<sizeof(data); i++)
+  {
+    Serial.print(data[i]);
+  }
+  Serial.println();
+  #endif 
 }
 
 // Aux fucntion
@@ -82,19 +101,17 @@ void float2byte(float *f, byte *d, byte s)
     tmp = (uint32_t*)f;
     uint8_t i = 0;
     for (i = 0; i<s; i++)
-    {
-        
+    {       
         d[i] = *tmp>>(24-8*i);
-        // printf("byte[%d] 0x%x\n", i, d[i]);
     }
 }
 
 // Calc checksum
-uint32_t checksum(byte *d)
+uint32_t checksum(byte *d, uint8_t from, uint8_t to)
 {
     uint32_t _crc = 0;
     uint8_t i = 0;
-    for (i = 2; i < 10; i++)
+    for (i = from; i < to; i++)
     {
         _crc+= d[i];
     }
@@ -112,7 +129,7 @@ void parseTxFrame(byte *d /* uint8_t *d */, float vel_linear, float vel_angular)
     float2byte(&vel_linear, &d[2], 4);
     float2byte(&vel_angular, &d[6], 4);
 
-    uint32_t crc = checksum(data);
+    uint32_t crc = checksum(data, 2, 10);
     
     #ifdef DEBUG
     Serial.print("CRC = ");
@@ -129,36 +146,27 @@ void parseTxFrame(byte *d /* uint8_t *d */, float vel_linear, float vel_angular)
     d[15] = '\n';
 }
 
-
-
-
-float * resolveRxFrame(byte * d)
+void resolveRxFrame(byte * d, double * x, double * y, double * th)
 {
-    float vel[2] = {};
     uint32_t tmp1 = 0;
     uint32_t tmp2 = 0;
+    uint32_t tmp3 = 0;
     uint32_t rx_crc, local_crc;
     
-    rx_crc = d[10] << 24 | d[11]<<16 | d[12]<<8 | d[13]; 
-    tmp1 = d[2] << 24 | d[3]<<16 | d[4]<<8 | d[5];
-    tmp2 = d[6] << 24 | d[7]<<16 | d[8]<<8 | d[9];
+    rx_crc = d[26] << 24 | d[27]<<16 | d[28]<<8 | d[29]; 
     
-    local_crc = checksum(d);
+    tmp1 = d[2] << 56 | d[3]<< 48 | d[4]<< 40 | d[5] << 32 | d[6] << 24 | d[7] << 16 | d[8] << 8 | d[9];
+    tmp2 = d[10] << 56 | d[11]<< 48 | d[12]<< 40 | d[13] << 32 | d[14] << 24 | d[15] << 16 | d[16] << 8 | d[17];
+    tmp3 = d[18] << 56 | d[19]<< 48 | d[20]<< 40 | d[21] << 32 | d[22] << 24 | d[23] << 16 | d[24] << 8 | d[25];;
+    
+    local_crc = checksum(d, 2, 26);
 
     if (local_crc == rx_crc)
     {
-        vel[0] = *(float *)&tmp1;
-        vel[1] = *(float *)&tmp2;
+        *x = *(double *)&tmp1;
+        *y = *(double *)&tmp2;
+        *th = *(double *)&tmp3;
     }
-    
-    #ifdef DEBUG
-    Serial.print("Linear vel = ");
-    Serial.println(vel[0]);
-    Serial.print("Angular vel = ");
-    Serial.println(vel[1]);
-    #endif
-
-    return vel;
 }
 
 
@@ -216,26 +224,74 @@ void setup()
   // Set the connection to rosserial socket server
   nh.getHardware()->setConnection(server, serverPort);
   nh.initNode();
-  // Start to be polite
-  nh.advertise(chatter);
   nh.subscribe(Sub);
   last_f_linear = 0.0f;
   last_f_angular = 0.0f;
   digitalWrite(2, 0);
+  broadcaster.init(nh);
 }
 
+char c, last_c;
+bool frame_get_ready = false;
+byte rx_frame[30];
+int i  = 0;
 void loop()
 {
-
+   while(Serial.available())
+  {
+    c = Serial.read();
+    rx_frame[i] = c;
+    i++;
+     if (c == '\n' && last_c == '\r')
+     {
+        double x,y,th;
+        resolveRxFrame((byte *)rx_frame, &x, &y, &th);
+//        Serial.print("RX -> ");
+//        Serial.println(rx_frame);
+        Serial.print("Rx -> X= ");
+        Serial.print(x, 5);
+        Serial.print(", Y=");
+        Serial.print(y, 5);
+        Serial.print(", THETA=");
+        Serial.println(th, 5);
+        i = 0;
+     }
+     last_c = c;
+  }
+  // When ros connected 
   if (nh.connected()) {
-      // Say hello
-      str_msg.data = hello;
-      chatter.publish( &str_msg );
-      if (ms>= 100)
+    
+      // Send cmd_vel data to base control
+      parseTxFrame(data, f_linear, f_angular);
+      print_data(); 
+      
+      // drive in a circle
+      double dx = 0.2;
+      double dtheta = 0.18;
+      x += cos(theta)*dx*0.1;
+      y += sin(theta)*dx*0.1;
+      theta += dtheta*0.1;
+      if(theta > 3.14)
+        theta=-3.14;
+        
+      // tf odom->base_link
+      t.header.frame_id = odom;
+      t.child_frame_id = base_link;
+      
+      t.transform.translation.x = x;
+      t.transform.translation.y = y;
+      
+      t.transform.rotation = tf::createQuaternionFromYaw(theta);
+      t.header.stamp = nh.now();
+      
+      broadcaster.sendTransform(t);
+
+      // Blink status led
+      if (ms>= 50)
       {
          ms = 0;
          digitalWrite(2, 0);
-      }
+      }      
       else 
       {
         digitalWrite(2, 1);
@@ -243,21 +299,16 @@ void loop()
   }
   else 
   {
-      if (ms>= 5)
+      if (ms>= 10)
       {
          ms = 0;
-         digitalWrite(2, 0);
-      }
-      else 
-      {
-        digitalWrite(2, 1);
+         state = !state;
+         digitalWrite(2, state);
       }
   }
-  parseTxFrame(data, f_linear, f_angular);
-  print_data(); 
   ms++;
+  delay(100);
   last_f_linear = f_linear;
   last_f_angular = f_angular;
-  delay(100);
   nh.spinOnce();
 }

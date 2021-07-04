@@ -12,7 +12,7 @@
 
 
 
-uint32_t checksum(uint8_t *d);
+uint32_t checksum(uint8_t *d, uint8_t from, uint8_t to);
 
 uint8_t parseChecksum(uint8_t *d, uint32_t crc);
 
@@ -22,5 +22,6 @@ void float2byte(float *f, uint8_t *d, uint8_t s);
 
 void resolveRxFrame(uint8_t * d, float * linear, float * angular);
 
+void parseTxStateFrame(uint8_t *d /*18bytes*/, double x, double y, double th);
 
 #endif
