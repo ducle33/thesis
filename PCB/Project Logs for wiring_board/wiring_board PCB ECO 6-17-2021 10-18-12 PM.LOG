@@ -1,0 +1,81 @@
+Removed Pin From Net: NetName=3V3 Pin=P1-5
+Removed Pin From Net: NetName=3V3 Pin=P1-6
+Removed Pin From Net: NetName=3V3 Pin=P1-7
+Removed Pin From Net: NetName=3V3 Pin=P1-8
+Removed Pin From Net: NetName=IN4 Pin=P1-30
+Change Component Designator: OldDesignator=M1IN NewDesignator=Driver to motor 1
+Change Component Designator: OldDesignator=M2_IN NewDesignator=Driver to motor 2
+Add component (AddParameter): Name = "Ex Price"; Value = "0.053"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://lcsc.com/product-detail/Pin-Header-Female-Header_MINTRON-MTP125-1205S1_C358694.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "MINTRON"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "MTP125-1205S1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "1700"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "https://www.thegioiic.com/products/hang-rao-duc-doi-2-54mm-80-chan-2-hang-cao-11-6mm-xuyen-lo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Added Component: Designator=P6(HEADER_5x2_MALE_2.54)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Ex Price"; Value = "0.053"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://lcsc.com/product-detail/Pin-Header-Female-Header_MINTRON-MTP125-1205S1_C358694.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "MINTRON"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "MTP125-1205S1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "1700"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "https://www.thegioiic.com/products/hang-rao-duc-doi-2-54mm-80-chan-2-hang-cao-11-6mm-xuyen-lo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Price"; Value = "0.053"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://lcsc.com/product-detail/Pin-Header-Female-Header_MINTRON-MTP125-1205S1_C358694.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "MINTRON"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "MTP125-1205S1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "1700"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "https://www.thegioiic.com/products/hang-rao-duc-doi-2-54mm-80-chan-2-hang-cao-11-6mm-xuyen-lo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Added Component: Designator=P7(HEADER_5x2_MALE_2.54)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Ex Price"; Value = "0.053"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://lcsc.com/product-detail/Pin-Header-Female-Header_MINTRON-MTP125-1205S1_C358694.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "MINTRON"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "MTP125-1205S1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "1700"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "https://www.thegioiic.com/products/hang-rao-duc-doi-2-54mm-80-chan-2-hang-cao-11-6mm-xuyen-lo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=IN3 Pin=P1-30
+Added Pin To Net: NetName=GND Pin=P6-1
+Added Pin To Net: NetName=GND Pin=P6-2
+Added Pin To Net: NetName=GND Pin=P6-3
+Added Pin To Net: NetName=GND Pin=P6-4
+Added Pin To Net: NetName=GND Pin=P6-5
+Added Pin To Net: NetName=GND Pin=P6-6
+Added Pin To Net: NetName=GND Pin=P6-7
+Added Pin To Net: NetName=GND Pin=P6-8
+Added Pin To Net: NetName=GND Pin=P6-9
+Added Pin To Net: NetName=GND Pin=P6-10
+Added Pin To Net: NetName=5V Pin=P7-1
+Added Pin To Net: NetName=5V Pin=P7-2
+Added Pin To Net: NetName=5V Pin=P7-3
+Added Pin To Net: NetName=5V Pin=P7-4
+Added Pin To Net: NetName=5V Pin=P7-5
+Added Pin To Net: NetName=5V Pin=P7-6
+Added Pin To Net: NetName=5V Pin=P7-7
+Added Pin To Net: NetName=5V Pin=P7-8
+Added Pin To Net: NetName=5V Pin=P7-9
+Added Pin To Net: NetName=5V Pin=P7-10
+Added Pin To Net: NetName=NetP1_5 Pin=P1-5
+Added Pin To Net: NetName=NetP1_5 Pin=P1-7
+Added Net: Name=NetP1_5
+Added Pin To Net: NetName=NetP1_6 Pin=P1-6
+Added Pin To Net: NetName=NetP1_6 Pin=P1-8
+Added Net: Name=NetP1_6
+Added Member To Class: ClassName=wiring_board Member=Component P6 GND
+Added Member To Class: ClassName=wiring_board Member=Component P7 5V
+Added Room: Name=wiring_board

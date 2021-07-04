@@ -1,0 +1,281 @@
+Add component (AddParameter): Name = "Value"; Value = "Connector 2"; VariantName = "[No Variations]"
+Added Component: Designator=Driver to motor 1(CON2)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Value"; Value = "Connector 2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "Connector 2"; VariantName = "[No Variations]"
+Added Component: Designator=Driver to motor 2(CON2)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Value"; Value = "Connector 2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Price"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=J1(XH 6PIN 2.54)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Ex Price"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Price"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=J2(XH 6PIN 2.54)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Ex Price"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=P1(HDR2X24)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=P2(HDR2X24)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Price"; Value = "0.34"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://www.mouser.vn/ProductDetail/Molex/22-28-8041?qs=%2Fha2pyFadui70NFvRAbn%252BC%2FfLTOVR6y0%2FPOCLhktbL8%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Molex"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "22-28-8041"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "Header 4"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "2500"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "http://tme.vn/Product.aspx?id=518"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Added Component: Designator=P3(HEADER_4_MALE)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Ex Price"; Value = "0.34"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://www.mouser.vn/ProductDetail/Molex/22-28-8041?qs=%2Fha2pyFadui70NFvRAbn%252BC%2FfLTOVR6y0%2FPOCLhktbL8%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Molex"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "22-28-8041"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "Header 4"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "2500"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "http://tme.vn/Product.aspx?id=518"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Price"; Value = "0.053"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://lcsc.com/product-detail/Pin-Header-Female-Header_MINTRON-MTP125-1205S1_C358694.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "MINTRON"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "MTP125-1205S1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "1700"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "https://www.thegioiic.com/products/hang-rao-duc-doi-2-54mm-80-chan-2-hang-cao-11-6mm-xuyen-lo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Added Component: Designator=P4(HEADER_5x2_MALE_2.54)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Ex Price"; Value = "0.053"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://lcsc.com/product-detail/Pin-Header-Female-Header_MINTRON-MTP125-1205S1_C358694.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "MINTRON"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "MTP125-1205S1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "1700"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "https://www.thegioiic.com/products/hang-rao-duc-doi-2-54mm-80-chan-2-hang-cao-11-6mm-xuyen-lo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Price"; Value = "0.096"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://www.mouser.vn/ProductDetail/Molex/22-28-5023?qs=sGAEpiMZZMs%252BGHln7q6pm0R%252BIqgWC%252BQx%252BZP1khnW%252BIc%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Molex"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "22-28-5023"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "Header 2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "200"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "http://www.tme.vn/Product.aspx?id=518#page=pro_info"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Added Component: Designator=P5(HEADER_2_MALE)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Ex Price"; Value = "0.096"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://www.mouser.vn/ProductDetail/Molex/22-28-5023?qs=sGAEpiMZZMs%252BGHln7q6pm0R%252BIqgWC%252BQx%252BZP1khnW%252BIc%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Molex"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "22-28-5023"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "Header 2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "200"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "http://www.tme.vn/Product.aspx?id=518#page=pro_info"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Price"; Value = "0.053"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://lcsc.com/product-detail/Pin-Header-Female-Header_MINTRON-MTP125-1205S1_C358694.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "MINTRON"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "MTP125-1205S1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "1700"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "https://www.thegioiic.com/products/hang-rao-duc-doi-2-54mm-80-chan-2-hang-cao-11-6mm-xuyen-lo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Added Component: Designator=P6(HEADER_5x2_MALE_2.54)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Ex Price"; Value = "0.053"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://lcsc.com/product-detail/Pin-Header-Female-Header_MINTRON-MTP125-1205S1_C358694.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "MINTRON"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "MTP125-1205S1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "1700"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "https://www.thegioiic.com/products/hang-rao-duc-doi-2-54mm-80-chan-2-hang-cao-11-6mm-xuyen-lo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Price"; Value = "0.053"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://lcsc.com/product-detail/Pin-Header-Female-Header_MINTRON-MTP125-1205S1_C358694.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "MINTRON"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "MTP125-1205S1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "1700"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "https://www.thegioiic.com/products/hang-rao-duc-doi-2-54mm-80-chan-2-hang-cao-11-6mm-xuyen-lo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Added Component: Designator=P7(HEADER_5x2_MALE_2.54)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Ex Price"; Value = "0.053"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ex Supplier"; Value = "https://lcsc.com/product-detail/Pin-Header-Female-Header_MINTRON-MTP125-1205S1_C358694.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "MINTRON"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Part Number"; Value = "MTP125-1205S1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Price"; Value = "1700"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VN Supplier"; Value = "https://www.thegioiic.com/products/hang-rao-duc-doi-2-54mm-80-chan-2-hang-cao-11-6mm-xuyen-lo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage/Wattage"; Value = "500V/4A"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=3V3 Pin=P1-5
+Added Pin To Net: NetName=3V3 Pin=P1-6
+Added Pin To Net: NetName=3V3 Pin=P1-7
+Added Pin To Net: NetName=3V3 Pin=P1-8
+Added Pin To Net: NetName=3V3 Pin=P2-1
+Added Pin To Net: NetName=3V3 Pin=P2-2
+Added Pin To Net: NetName=3V3 Pin=P2-3
+Added Pin To Net: NetName=3V3 Pin=P2-4
+Added Pin To Net: NetName=3V3 Pin=P4-9
+Added Pin To Net: NetName=3V3 Pin=P4-10
+Added Net: Name=3V3
+Added Pin To Net: NetName=5V Pin=J1-3
+Added Pin To Net: NetName=5V Pin=J2-3
+Added Pin To Net: NetName=5V Pin=P1-1
+Added Pin To Net: NetName=5V Pin=P1-2
+Added Pin To Net: NetName=5V Pin=P1-3
+Added Pin To Net: NetName=5V Pin=P1-4
+Added Pin To Net: NetName=5V Pin=P3-1
+Added Pin To Net: NetName=5V Pin=P5-1
+Added Pin To Net: NetName=5V Pin=P7-1
+Added Pin To Net: NetName=5V Pin=P7-2
+Added Pin To Net: NetName=5V Pin=P7-3
+Added Pin To Net: NetName=5V Pin=P7-4
+Added Pin To Net: NetName=5V Pin=P7-5
+Added Pin To Net: NetName=5V Pin=P7-6
+Added Pin To Net: NetName=5V Pin=P7-7
+Added Pin To Net: NetName=5V Pin=P7-8
+Added Pin To Net: NetName=5V Pin=P7-9
+Added Pin To Net: NetName=5V Pin=P7-10
+Added Net: Name=5V
+Added Pin To Net: NetName=ENB1 Pin=P2-14
+Added Pin To Net: NetName=ENB1 Pin=P4-8
+Added Net: Name=ENB1
+Added Pin To Net: NetName=ENB2 Pin=P2-13
+Added Pin To Net: NetName=ENB2 Pin=P4-7
+Added Net: Name=ENB2
+Added Pin To Net: NetName=ENC1A Pin=J1-1
+Added Pin To Net: NetName=ENC1A Pin=P2-39
+Added Net: Name=ENC1A
+Added Pin To Net: NetName=ENC1B Pin=J1-2
+Added Pin To Net: NetName=ENC1B Pin=P2-38
+Added Net: Name=ENC1B
+Added Pin To Net: NetName=ENC2A Pin=J2-1
+Added Pin To Net: NetName=ENC2A Pin=P1-23
+Added Net: Name=ENC2A
+Added Pin To Net: NetName=ENC2B Pin=J2-2
+Added Pin To Net: NetName=ENC2B Pin=P1-24
+Added Net: Name=ENC2B
+Added Pin To Net: NetName=GND Pin=J1-4
+Added Pin To Net: NetName=GND Pin=J2-4
+Added Pin To Net: NetName=GND Pin=P1-9
+Added Pin To Net: NetName=GND Pin=P1-10
+Added Pin To Net: NetName=GND Pin=P2-7
+Added Pin To Net: NetName=GND Pin=P2-8
+Added Pin To Net: NetName=GND Pin=P2-9
+Added Pin To Net: NetName=GND Pin=P2-10
+Added Pin To Net: NetName=GND Pin=P3-2
+Added Pin To Net: NetName=GND Pin=P4-1
+Added Pin To Net: NetName=GND Pin=P4-2
+Added Pin To Net: NetName=GND Pin=P5-2
+Added Pin To Net: NetName=GND Pin=P6-1
+Added Pin To Net: NetName=GND Pin=P6-2
+Added Pin To Net: NetName=GND Pin=P6-3
+Added Pin To Net: NetName=GND Pin=P6-4
+Added Pin To Net: NetName=GND Pin=P6-5
+Added Pin To Net: NetName=GND Pin=P6-6
+Added Pin To Net: NetName=GND Pin=P6-7
+Added Pin To Net: NetName=GND Pin=P6-8
+Added Pin To Net: NetName=GND Pin=P6-9
+Added Pin To Net: NetName=GND Pin=P6-10
+Added Net: Name=GND
+Added Pin To Net: NetName=IN1 Pin=P2-16
+Added Pin To Net: NetName=IN1 Pin=P4-6
+Added Net: Name=IN1
+Added Pin To Net: NetName=IN2 Pin=P2-15
+Added Pin To Net: NetName=IN2 Pin=P4-4
+Added Net: Name=IN2
+Added Pin To Net: NetName=IN3 Pin=P1-29
+Added Pin To Net: NetName=IN3 Pin=P4-5
+Added Net: Name=IN3
+Added Pin To Net: NetName=IN4 Pin=P1-30
+Added Pin To Net: NetName=IN4 Pin=P4-3
+Added Net: Name=IN4
+Added Pin To Net: NetName=M1N Pin=Driver to motor 2-2
+Added Pin To Net: NetName=M1N Pin=J1-5
+Added Net: Name=M1N
+Added Pin To Net: NetName=M1P Pin=Driver to motor 2-1
+Added Pin To Net: NetName=M1P Pin=J1-6
+Added Net: Name=M1P
+Added Pin To Net: NetName=M2N Pin=Driver to motor 1-2
+Added Pin To Net: NetName=M2N Pin=J2-5
+Added Net: Name=M2N
+Added Pin To Net: NetName=M2P Pin=Driver to motor 1-1
+Added Pin To Net: NetName=M2P Pin=J2-6
+Added Net: Name=M2P
+Added Pin To Net: NetName=RX Pin=P2-33
+Added Pin To Net: NetName=RX Pin=P3-4
+Added Net: Name=RX
+Added Pin To Net: NetName=TX Pin=P2-34
+Added Pin To Net: NetName=TX Pin=P3-3
+Added Net: Name=TX
+Added Class: Name=wiring_board
+Added Room: Name=wiring_board

@@ -150,7 +150,6 @@ void PID_SetDuty(MOTOR_TypeDef *motor)
         // HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 0);
         *(motor->PWM_ADDR) = 0;
     }
-    
 }
 
 

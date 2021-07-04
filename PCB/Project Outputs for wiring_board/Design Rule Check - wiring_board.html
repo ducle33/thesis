@@ -1,0 +1,581 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD17\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">6/17/2021</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">8:43:15 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc" class="file"><acronym title="C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc">C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">79</td></tr>
+</table>
+</td>
+</table><a name="IDHQCQLZ0HCVHCOKQ5XPI4BSI22LDFM4RCBOX1HYD1CVV0F1DWXIWJ"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHQ3D5GUNKDVZPPAEOEZU4CFHQBQX04RNJT2GI2IBQTTY521DCQNH">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDC4BERPL2I3PGMVR0QMQY225MPOXEE20GHFQOQSNBSQBCR2PDMUTJ">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCJJTXEHGZ3C0J3E2TVVBDLUBYVYRS4T41K42MJJIFWJILCFYQBG">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">63</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDUVIJPU3ECO21PXZBLP2DMBQ2IFO4OHA0AOZ2ASEDMG32UG50Q32G">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHG2BGGGYL0BGMSZT152VWBBJIZXQBZP0DP5XHDS0KHIBXE3THZN">Width Constraint (Min=0.254mm) (Max=0.254mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3N3ZDYCVUTDEIPOOTIJXAMFCIPDW44HFTGFPZCC1XHUTGY0IL4ZO">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0G3UWW254VOHGKZCPTJNUV0HYLZ3KFZTD2JWWJOL4JL43ZNFAKTC">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKOMMP5AH02R4DK0L5EOLWVIMNOOIR3H0HZG0WLG210Y2U0EATQB">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0ZRQV5ABJS5ACCVNOGZ2PVSJBCOVRHLOWHXZ04CLNK3EEADITUBL">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID4K3FMTJEDUD4IL4ZMKY1EBP1CJGLASW0TBLNHBOHUJHU5W5KCPUC">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">12</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDPJV11ZTJ20GQOBTT0T4VO04ONO0Q1TUSRNHO02KXOOV4RZF2NGNC">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYEHB0HTUVGHMCQ1DP4BWI1LN4IFH5VT134G4PGNKEEFCIAZV05ZP">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1PJUH1KPQAWNLWSQQNWSUPDWMJ50P3QRS3Z4KDKDS5EQ3BM1NAZB">Room wiring_board (Bounding Region = (178.943mm, 26.924mm, 287.02mm, 95.377mm) (InComponentClass('wiring_board'))</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXUFSKNURC0GBP30J1ZZAIVAIZFIAOT43RRP3PX21PZZG43AOMFC">Height Constraint (Min=0mm) (Max=50mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">79</td>
+</tr>
+</table><br><a name="IDCJJTXEHGZ3C0J3E2TVVBDLUBYVYRS4T41K42MJJIFWJILCFYQBG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=11096.5mil|Location1.Y=1901.473mil|Location2.Y=3531.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=11096.5mil|Location1.Y=1901.473mil|Location2.Y=3531.5mil|Absolute=True">Un-Routed Net Constraint: Net TX Between Pad P2-34(129.667mm,49.149mm) on Multi-Layer And Pad P3-3(280.797mm,88.773mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=11096.5mil|Location1.Y=1901.473mil|Location2.Y=3631.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=11096.5mil|Location1.Y=1901.473mil|Location2.Y=3631.5mil|Absolute=True">Un-Routed Net Constraint: Net RX Between Pad P2-33(127.127mm,49.149mm) on Multi-Layer And Pad P3-4(280.797mm,91.313mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7386.63mil|Location2.X=8849mil|Location1.Y=3403.5mil|Location2.Y=3598.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7386.63mil|Location2.X=8849mil|Location1.Y=3403.5mil|Location2.Y=3598.37mil|Absolute=True">Un-Routed Net Constraint: Net M2P Between Pad J2-6(188.722mm,90.297mm) on Multi-Layer And Pad Driver to motor 1-1(223.52mm,87.503mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7386.63mil|Location2.X=8849mil|Location1.Y=3411.63mil|Location2.Y=3586.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7386.63mil|Location2.X=8849mil|Location1.Y=3411.63mil|Location2.Y=3586.5mil|Absolute=True">Un-Routed Net Constraint: Net M2N Between Pad J2-5(188.722mm,87.757mm) on Multi-Layer And Pad Driver to motor 1-2(223.52mm,90.043mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7106.63mil|Location2.X=7809mil|Location1.Y=3403.5mil|Location2.Y=3598.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7106.63mil|Location2.X=7809mil|Location1.Y=3403.5mil|Location2.Y=3598.37mil|Absolute=True">Un-Routed Net Constraint: Net M1P Between Pad J1-6(181.61mm,90.297mm) on Multi-Layer And Pad Driver to motor 2-1(197.104mm,87.503mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7106.63mil|Location2.X=7809mil|Location1.Y=3411.63mil|Location2.Y=3586.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7106.63mil|Location2.X=7809mil|Location1.Y=3411.63mil|Location2.Y=3586.5mil|Absolute=True">Un-Routed Net Constraint: Net M1N Between Pad J1-5(181.61mm,87.757mm) on Multi-Layer And Pad Driver to motor 2-2(197.104mm,90.043mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=9876.5mil|Location1.Y=2096.472mil|Location2.Y=3326.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=9876.5mil|Location1.Y=2096.472mil|Location2.Y=3326.5mil|Absolute=True">Un-Routed Net Constraint: Net IN4 Between Pad P1-30(70.104mm,54.102mm) on Multi-Layer And Pad P4-3(249.809mm,83.566mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=9876.5mil|Location1.Y=2096.472mil|Location2.Y=3426.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=9876.5mil|Location1.Y=2096.472mil|Location2.Y=3426.5mil|Absolute=True">Un-Routed Net Constraint: Net IN3 Between Pad P1-29(67.564mm,54.102mm) on Multi-Layer And Pad P4-5(249.809mm,86.106mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=9776.5mil|Location1.Y=2801.472mil|Location2.Y=3326.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=9776.5mil|Location1.Y=2801.472mil|Location2.Y=3326.5mil|Absolute=True">Un-Routed Net Constraint: Net IN2 Between Pad P2-15(127.127mm,72.009mm) on Multi-Layer And Pad P4-4(247.269mm,83.566mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=9776.5mil|Location1.Y=2801.472mil|Location2.Y=3426.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=9776.5mil|Location1.Y=2801.472mil|Location2.Y=3426.5mil|Absolute=True">Un-Routed Net Constraint: Net IN1 Between Pad P2-16(129.667mm,72.009mm) on Multi-Layer And Pad P4-6(247.269mm,86.106mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10416.5mil|Location1.Y=3153.5mil|Location2.Y=3226.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10416.5mil|Location1.Y=3153.5mil|Location2.Y=3226.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-2(260.985mm,81.026mm) on Multi-Layer And Pad P6-1(263.525mm,81.026mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10316.5mil|Location1.Y=3353.5mil|Location2.Y=3526.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10316.5mil|Location1.Y=3353.5mil|Location2.Y=3526.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-6(260.985mm,86.106mm) on Multi-Layer And Pad P6-8(260.985mm,88.646mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10316.5mil|Location1.Y=3153.5mil|Location2.Y=3326.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10316.5mil|Location1.Y=3153.5mil|Location2.Y=3326.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-2(260.985mm,81.026mm) on Multi-Layer And Pad P6-4(260.985mm,83.566mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10416.5mil|Location1.Y=3453.5mil|Location2.Y=3526.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10416.5mil|Location1.Y=3453.5mil|Location2.Y=3526.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-8(260.985mm,88.646mm) on Multi-Layer And Pad P6-7(263.525mm,88.646mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10416.5mil|Location1.Y=3553.5mil|Location2.Y=3626.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10416.5mil|Location1.Y=3553.5mil|Location2.Y=3626.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-10(260.985mm,91.186mm) on Multi-Layer And Pad P6-9(263.525mm,91.186mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10416.5mil|Location1.Y=3253.5mil|Location2.Y=3326.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10233.5mil|Location2.X=10416.5mil|Location1.Y=3253.5mil|Location2.Y=3326.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-4(260.985mm,83.566mm) on Multi-Layer And Pad P6-3(263.525mm,83.566mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10333.5mil|Location2.X=10416.5mil|Location1.Y=3353.5mil|Location2.Y=3526.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10333.5mil|Location2.X=10416.5mil|Location1.Y=3353.5mil|Location2.Y=3526.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-5(263.525mm,86.106mm) on Multi-Layer And Pad P6-7(263.525mm,88.646mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=5138.528mil|Location1.Y=3101.472mil|Location2.Y=3168.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=5138.528mil|Location1.Y=3101.472mil|Location2.Y=3168.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P2-9(127.127mm,79.629mm) on Multi-Layer And Pad P2-10(129.667mm,79.629mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9693.5mil|Location2.X=9876.5mil|Location1.Y=3153.5mil|Location2.Y=3226.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9693.5mil|Location2.X=9876.5mil|Location1.Y=3153.5mil|Location2.Y=3226.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P4-2(247.269mm,81.026mm) on Multi-Layer And Pad P4-1(249.809mm,81.026mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2793.528mil|Location1.Y=3096.472mil|Location2.Y=3163.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2793.528mil|Location1.Y=3096.472mil|Location2.Y=3163.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P1-9(67.564mm,79.502mm) on Multi-Layer And Pad P1-10(70.104mm,79.502mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=5138.528mil|Location1.Y=3101.472mil|Location2.Y=3268.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=5138.528mil|Location1.Y=3101.472mil|Location2.Y=3268.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P2-10(129.667mm,79.629mm) on Multi-Layer And Pad P2-8(129.667mm,82.169mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=5138.528mil|Location1.Y=3201.472mil|Location2.Y=3268.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=5138.528mil|Location1.Y=3201.472mil|Location2.Y=3268.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P2-7(127.127mm,82.169mm) on Multi-Layer And Pad P2-8(129.667mm,82.169mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7106.63mil|Location2.X=7473.37mil|Location1.Y=3311.63mil|Location2.Y=3398.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7106.63mil|Location2.X=7473.37mil|Location1.Y=3311.63mil|Location2.Y=3398.37mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J1-4(181.61mm,85.217mm) on Multi-Layer And Pad J2-4(188.722mm,85.217mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11013.5mil|Location2.X=11266.5mil|Location1.Y=3358.5mil|Location2.Y=3631.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11013.5mil|Location2.X=11266.5mil|Location1.Y=3358.5mil|Location2.Y=3631.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P3-2(280.797mm,86.233mm) on Multi-Layer And Pad P5-2(285.115mm,91.313mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10333.5mil|Location2.X=10416.5mil|Location1.Y=3453.5mil|Location2.Y=3626.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10333.5mil|Location2.X=10416.5mil|Location1.Y=3453.5mil|Location2.Y=3626.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-7(263.525mm,88.646mm) on Multi-Layer And Pad P6-9(263.525mm,91.186mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10333.5mil|Location2.X=10416.5mil|Location1.Y=3253.5mil|Location2.Y=3426.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10333.5mil|Location2.X=10416.5mil|Location1.Y=3253.5mil|Location2.Y=3426.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-3(263.525mm,83.566mm) on Multi-Layer And Pad P6-5(263.525mm,86.106mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9793.5mil|Location2.X=10316.5mil|Location1.Y=3153.5mil|Location2.Y=3226.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9793.5mil|Location2.X=10316.5mil|Location1.Y=3153.5mil|Location2.Y=3226.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P4-1(249.809mm,81.026mm) on Multi-Layer And Pad P6-2(260.985mm,81.026mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10333.5mil|Location2.X=11096.5mil|Location1.Y=3353.5mil|Location2.Y=3431.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10333.5mil|Location2.X=11096.5mil|Location1.Y=3353.5mil|Location2.Y=3431.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-5(263.525mm,86.106mm) on Multi-Layer And Pad P3-2(280.797mm,86.233mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=7193.37mil|Location1.Y=3201.472mil|Location2.Y=3398.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=7193.37mil|Location1.Y=3201.472mil|Location2.Y=3398.37mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P2-8(129.667mm,82.169mm) on Multi-Layer And Pad J1-4(181.61mm,85.217mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=5038.528mil|Location1.Y=3096.472mil|Location2.Y=3168.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=5038.528mil|Location1.Y=3096.472mil|Location2.Y=3168.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P1-10(70.104mm,79.502mm) on Multi-Layer And Pad P2-9(127.127mm,79.629mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7386.63mil|Location2.X=9776.5mil|Location1.Y=3153.5mil|Location2.Y=3398.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7386.63mil|Location2.X=9776.5mil|Location1.Y=3153.5mil|Location2.Y=3398.37mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J2-4(188.722mm,85.217mm) on Multi-Layer And Pad P4-2(247.269mm,81.026mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=7473.37mil|Location1.Y=2396.472mil|Location2.Y=3198.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=7473.37mil|Location1.Y=2396.472mil|Location2.Y=3198.37mil|Absolute=True">Un-Routed Net Constraint: Net ENC2B Between Pad P1-24(70.104mm,61.722mm) on Multi-Layer And Pad J2-2(188.722mm,80.137mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=7473.37mil|Location1.Y=2396.472mil|Location2.Y=3098.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=7473.37mil|Location1.Y=2396.472mil|Location2.Y=3098.37mil|Absolute=True">Un-Routed Net Constraint: Net ENC2A Between Pad P1-23(67.564mm,61.722mm) on Multi-Layer And Pad J2-1(188.722mm,77.597mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=7193.37mil|Location1.Y=1701.473mil|Location2.Y=3198.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=7193.37mil|Location1.Y=1701.473mil|Location2.Y=3198.37mil|Absolute=True">Un-Routed Net Constraint: Net ENC1B Between Pad P2-38(129.667mm,44.069mm) on Multi-Layer And Pad J1-2(181.61mm,80.137mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=7193.37mil|Location1.Y=1601.473mil|Location2.Y=3098.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=7193.37mil|Location1.Y=1601.473mil|Location2.Y=3098.37mil|Absolute=True">Un-Routed Net Constraint: Net ENC1A Between Pad P2-39(127.127mm,41.529mm) on Multi-Layer And Pad J1-1(181.61mm,77.597mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=9876.5mil|Location1.Y=2901.472mil|Location2.Y=3526.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=9876.5mil|Location1.Y=2901.472mil|Location2.Y=3526.5mil|Absolute=True">Un-Routed Net Constraint: Net ENB2 Between Pad P2-13(127.127mm,74.549mm) on Multi-Layer And Pad P4-7(249.809mm,88.646mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=9776.5mil|Location1.Y=2901.472mil|Location2.Y=3526.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=9776.5mil|Location1.Y=2901.472mil|Location2.Y=3526.5mil|Absolute=True">Un-Routed Net Constraint: Net ENB1 Between Pad P2-14(129.667mm,74.549mm) on Multi-Layer And Pad P4-8(247.269mm,88.646mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10046.5mil|Location1.Y=3153.5mil|Location2.Y=3326.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10046.5mil|Location1.Y=3153.5mil|Location2.Y=3326.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-2(254.127mm,81.026mm) on Multi-Layer And Pad P7-4(254.127mm,83.566mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10146.5mil|Location1.Y=3253.5mil|Location2.Y=3326.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10146.5mil|Location1.Y=3253.5mil|Location2.Y=3326.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-4(254.127mm,83.566mm) on Multi-Layer And Pad P7-3(256.667mm,83.566mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10046.5mil|Location1.Y=3353.5mil|Location2.Y=3526.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10046.5mil|Location1.Y=3353.5mil|Location2.Y=3526.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-6(254.127mm,86.106mm) on Multi-Layer And Pad P7-8(254.127mm,88.646mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10063.5mil|Location2.X=10146.5mil|Location1.Y=3153.5mil|Location2.Y=3326.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10063.5mil|Location2.X=10146.5mil|Location1.Y=3153.5mil|Location2.Y=3326.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-1(256.667mm,81.026mm) on Multi-Layer And Pad P7-3(256.667mm,83.566mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10146.5mil|Location1.Y=3353.5mil|Location2.Y=3426.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10146.5mil|Location1.Y=3353.5mil|Location2.Y=3426.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-6(254.127mm,86.106mm) on Multi-Layer And Pad P7-5(256.667mm,86.106mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10063.5mil|Location2.X=10146.5mil|Location1.Y=3453.5mil|Location2.Y=3626.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10063.5mil|Location2.X=10146.5mil|Location1.Y=3453.5mil|Location2.Y=3626.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-7(256.667mm,88.646mm) on Multi-Layer And Pad P7-9(256.667mm,91.186mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10046.5mil|Location1.Y=3453.5mil|Location2.Y=3626.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10046.5mil|Location1.Y=3453.5mil|Location2.Y=3626.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-8(254.127mm,88.646mm) on Multi-Layer And Pad P7-10(254.127mm,91.186mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2693.528mil|Location1.Y=3396.472mil|Location2.Y=3563.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2693.528mil|Location1.Y=3396.472mil|Location2.Y=3563.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P1-3(67.564mm,87.122mm) on Multi-Layer And Pad P1-1(67.564mm,89.662mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2793.528mil|Location1.Y=3396.472mil|Location2.Y=3463.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2793.528mil|Location1.Y=3396.472mil|Location2.Y=3463.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P1-3(67.564mm,87.122mm) on Multi-Layer And Pad P1-4(70.104mm,87.122mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=2793.528mil|Location1.Y=3396.472mil|Location2.Y=3563.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=2793.528mil|Location1.Y=3396.472mil|Location2.Y=3563.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P1-4(70.104mm,87.122mm) on Multi-Layer And Pad P1-2(70.104mm,89.662mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7106.63mil|Location2.X=7473.37mil|Location1.Y=3211.63mil|Location2.Y=3298.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7106.63mil|Location2.X=7473.37mil|Location1.Y=3211.63mil|Location2.Y=3298.37mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad J1-3(181.61mm,82.677mm) on Multi-Layer And Pad J2-3(188.722mm,82.677mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11013.5mil|Location2.X=11266.5mil|Location1.Y=3258.5mil|Location2.Y=3531.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11013.5mil|Location2.X=11266.5mil|Location1.Y=3258.5mil|Location2.Y=3531.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P3-1(280.797mm,83.693mm) on Multi-Layer And Pad P5-1(285.115mm,88.773mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10063.5mil|Location2.X=10146.5mil|Location1.Y=3253.5mil|Location2.Y=3426.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10063.5mil|Location2.X=10146.5mil|Location1.Y=3253.5mil|Location2.Y=3426.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-3(256.667mm,83.566mm) on Multi-Layer And Pad P7-5(256.667mm,86.106mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10146.5mil|Location1.Y=3553.5mil|Location2.Y=3626.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9963.5mil|Location2.X=10146.5mil|Location1.Y=3553.5mil|Location2.Y=3626.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-10(254.127mm,91.186mm) on Multi-Layer And Pad P7-9(256.667mm,91.186mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10063.5mil|Location2.X=11096.5mil|Location1.Y=3253.5mil|Location2.Y=3331.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10063.5mil|Location2.X=11096.5mil|Location1.Y=3253.5mil|Location2.Y=3331.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-3(256.667mm,83.566mm) on Multi-Layer And Pad P3-1(280.797mm,83.693mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7386.63mil|Location2.X=10046.5mil|Location1.Y=3211.63mil|Location2.Y=3326.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7386.63mil|Location2.X=10046.5mil|Location1.Y=3211.63mil|Location2.Y=3326.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad J2-3(188.722mm,82.677mm) on Multi-Layer And Pad P7-4(254.127mm,83.566mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=7193.37mil|Location1.Y=3211.63mil|Location2.Y=3463.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=7193.37mil|Location1.Y=3211.63mil|Location2.Y=3463.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P1-4(70.104mm,87.122mm) on Multi-Layer And Pad J1-3(181.61mm,82.677mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=5138.528mil|Location1.Y=3401.472mil|Location2.Y=3468.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=5138.528mil|Location1.Y=3401.472mil|Location2.Y=3468.528mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad P2-3(127.127mm,87.249mm) on Multi-Layer And Pad P2-4(129.667mm,87.249mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=5038.528mil|Location1.Y=3401.472mil|Location2.Y=3568.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=5038.528mil|Location1.Y=3401.472mil|Location2.Y=3568.528mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad P2-3(127.127mm,87.249mm) on Multi-Layer And Pad P2-1(127.127mm,89.789mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=5138.528mil|Location1.Y=3501.472mil|Location2.Y=3568.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4971.472mil|Location2.X=5138.528mil|Location1.Y=3501.472mil|Location2.Y=3568.528mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad P2-1(127.127mm,89.789mm) on Multi-Layer And Pad P2-2(129.667mm,89.789mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9693.5mil|Location2.X=9876.5mil|Location1.Y=3553.5mil|Location2.Y=3626.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9693.5mil|Location2.X=9876.5mil|Location1.Y=3553.5mil|Location2.Y=3626.5mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad P4-10(247.269mm,91.186mm) on Multi-Layer And Pad P4-9(249.809mm,91.186mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2793.528mil|Location1.Y=3196.472mil|Location2.Y=3263.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2793.528mil|Location1.Y=3196.472mil|Location2.Y=3263.528mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad P1-7(67.564mm,82.042mm) on Multi-Layer And Pad P1-8(70.104mm,82.042mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2693.528mil|Location1.Y=3196.472mil|Location2.Y=3363.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2693.528mil|Location1.Y=3196.472mil|Location2.Y=3363.528mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad P1-7(67.564mm,82.042mm) on Multi-Layer And Pad P1-5(67.564mm,84.582mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2793.528mil|Location1.Y=3296.472mil|Location2.Y=3363.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2626.472mil|Location2.X=2793.528mil|Location1.Y=3296.472mil|Location2.Y=3363.528mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad P1-5(67.564mm,84.582mm) on Multi-Layer And Pad P1-6(70.104mm,84.582mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=5038.528mil|Location1.Y=3296.472mil|Location2.Y=3468.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2726.472mil|Location2.X=5038.528mil|Location1.Y=3296.472mil|Location2.Y=3468.528mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad P1-6(70.104mm,84.582mm) on Multi-Layer And Pad P2-3(127.127mm,87.249mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=9776.5mil|Location1.Y=3501.472mil|Location2.Y=3626.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5071.472mil|Location2.X=9776.5mil|Location1.Y=3501.472mil|Location2.Y=3626.5mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad P2-2(129.667mm,89.789mm) on Multi-Layer And Pad P4-10(247.269mm,91.186mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID4K3FMTJEDUD4IL4ZMKY1EBP1CJGLASW0TBLNHBOHUJHU5W5KCPUC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11177.375mil|Location2.X=11188.625mil|Location1.Y=3480.37mil|Location2.Y=3491.62mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11177.375mil|Location2.X=11188.625mil|Location1.Y=3480.37mil|Location2.Y=3491.62mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.229mm &lt; 0.254mm) Between Track (283.845mm,87.503mm)(283.845mm,92.583mm) on Top Overlay And Pad P5-1(285.115mm,88.773mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.229mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11261.375mil|Location2.X=11272.625mil|Location1.Y=3456.875mil|Location2.Y=3468.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11261.375mil|Location2.X=11272.625mil|Location1.Y=3456.875mil|Location2.Y=3468.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.229mm &lt; 0.254mm) Between Track (286.385mm,87.503mm)(286.385mm,92.583mm) on Top Overlay And Pad P5-1(285.115mm,88.773mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.229mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11177.368mil|Location2.X=11188.618mil|Location1.Y=3589.375mil|Location2.Y=3600.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11177.368mil|Location2.X=11188.618mil|Location1.Y=3589.375mil|Location2.Y=3600.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.228mm &lt; 0.254mm) Between Track (283.845mm,87.503mm)(283.845mm,92.583mm) on Top Overlay And Pad P5-2(285.115mm,91.313mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11261.382mil|Location2.X=11272.632mil|Location1.Y=3589.375mil|Location2.Y=3600.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11261.382mil|Location2.X=11272.632mil|Location1.Y=3589.375mil|Location2.Y=3600.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.228mm &lt; 0.254mm) Between Track (286.385mm,87.503mm)(286.385mm,92.583mm) on Top Overlay And Pad P5-2(285.115mm,91.313mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11007.375mil|Location2.X=11018.625mil|Location1.Y=3280.37mil|Location2.Y=3291.62mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11007.375mil|Location2.X=11018.625mil|Location1.Y=3280.37mil|Location2.Y=3291.62mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.229mm &lt; 0.254mm) Between Track (279.527mm,82.423mm)(279.527mm,92.583mm) on Top Overlay And Pad P3-1(280.797mm,83.693mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.229mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11091.375mil|Location2.X=11102.625mil|Location1.Y=3256.875mil|Location2.Y=3268.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11091.375mil|Location2.X=11102.625mil|Location1.Y=3256.875mil|Location2.Y=3268.125mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.229mm &lt; 0.254mm) Between Track (282.067mm,82.423mm)(282.067mm,92.583mm) on Top Overlay And Pad P3-1(280.797mm,83.693mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.229mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11007.368mil|Location2.X=11018.618mil|Location1.Y=3389.375mil|Location2.Y=3400.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11007.368mil|Location2.X=11018.618mil|Location1.Y=3389.375mil|Location2.Y=3400.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.228mm &lt; 0.254mm) Between Track (279.527mm,82.423mm)(279.527mm,92.583mm) on Top Overlay And Pad P3-2(280.797mm,86.233mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11091.382mil|Location2.X=11102.632mil|Location1.Y=3389.375mil|Location2.Y=3400.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11091.382mil|Location2.X=11102.632mil|Location1.Y=3389.375mil|Location2.Y=3400.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.228mm &lt; 0.254mm) Between Track (282.067mm,82.423mm)(282.067mm,92.583mm) on Top Overlay And Pad P3-2(280.797mm,86.233mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11007.368mil|Location2.X=11018.618mil|Location1.Y=3489.375mil|Location2.Y=3500.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11007.368mil|Location2.X=11018.618mil|Location1.Y=3489.375mil|Location2.Y=3500.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.228mm &lt; 0.254mm) Between Track (279.527mm,82.423mm)(279.527mm,92.583mm) on Top Overlay And Pad P3-3(280.797mm,88.773mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11091.382mil|Location2.X=11102.632mil|Location1.Y=3489.375mil|Location2.Y=3500.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11091.382mil|Location2.X=11102.632mil|Location1.Y=3489.375mil|Location2.Y=3500.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.228mm &lt; 0.254mm) Between Track (282.067mm,82.423mm)(282.067mm,92.583mm) on Top Overlay And Pad P3-3(280.797mm,88.773mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11007.368mil|Location2.X=11018.618mil|Location1.Y=3589.375mil|Location2.Y=3600.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11007.368mil|Location2.X=11018.618mil|Location1.Y=3589.375mil|Location2.Y=3600.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.228mm &lt; 0.254mm) Between Track (279.527mm,82.423mm)(279.527mm,92.583mm) on Top Overlay And Pad P3-4(280.797mm,91.313mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.228mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11091.382mil|Location2.X=11102.632mil|Location1.Y=3589.375mil|Location2.Y=3600.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11091.382mil|Location2.X=11102.632mil|Location1.Y=3589.375mil|Location2.Y=3600.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.228mm &lt; 0.254mm) Between Track (282.067mm,82.423mm)(282.067mm,92.583mm) on Top Overlay And Pad P3-4(280.797mm,91.313mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.228mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDPJV11ZTJ20GQOBTT0T4VO04ONO0Q1TUSRNHO02KXOOV4RZF2NGNC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5079.375mil|Location2.X=5090.625mil|Location1.Y=3587.682mil|Location2.Y=3598.932mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5079.375mil|Location2.X=5090.625mil|Location1.Y=3587.682mil|Location2.Y=3598.932mil|Absolute=True">Silk To Silk Clearance Constraint: (0.222mm &lt; 0.254mm) Between Text "2" (129.159mm,92.329mm) on Top Overlay And Track (125.857mm,91.059mm)(130.937mm,91.059mm) on Top Overlay Silk Text to Silk Clearance [0.222mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2734.375mil|Location2.X=2745.625mil|Location1.Y=3582.682mil|Location2.Y=3593.932mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2734.375mil|Location2.X=2745.625mil|Location1.Y=3582.682mil|Location2.Y=3593.932mil|Absolute=True">Silk To Silk Clearance Constraint: (0.222mm &lt; 0.254mm) Between Text "2" (69.596mm,92.202mm) on Top Overlay And Track (66.294mm,90.932mm)(71.374mm,90.932mm) on Top Overlay Silk Text to Silk Clearance [0.222mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID1PJUH1KPQAWNLWSQQNWSUPDWMJ50P3QRS3Z4KDKDS5EQ3BM1NAZB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room wiring_board (Bounding Region = (178.943mm, 26.924mm, 287.02mm, 95.377mm) (InComponentClass('wiring_board'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4951.063mil|Location2.X=11300mil|Location1.Y=1060mil|Location2.Y=3755mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4951.063mil|Location2.X=11300mil|Location1.Y=1060mil|Location2.Y=3755mil|Absolute=True">Room Definition: Between DIP Component P2-Header 24X2 (127.127mm,89.789mm) on Top Layer And Room wiring_board (Bounding Region = (178.943mm, 26.924mm, 287.02mm, 95.377mm) (InComponentClass('wiring_board')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2606.063mil|Location2.X=11300mil|Location1.Y=1058.694mil|Location2.Y=3755mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Duy_Linh\Desktop\Thesis\PCB\wiring_board.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2606.063mil|Location2.X=11300mil|Location1.Y=1058.694mil|Location2.Y=3755mil|Absolute=True">Room Definition: Between DIP Component P1-Header 24X2 (67.564mm,89.662mm) on Top Layer And Room wiring_board (Bounding Region = (178.943mm, 26.924mm, 287.02mm, 95.377mm) (InComponentClass('wiring_board')) </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
