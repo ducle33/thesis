@@ -35,6 +35,7 @@
 #include "config.h"
 #include "frame_resolve.h"
 #include "retarget.h"
+#include "math.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -67,6 +68,7 @@ uint8_t angular_a[100] = "\n";
 uint8_t rx_buffer[RX_BUFFER_SIZE];
 uint8_t tx_buffer[TX_BUFFER_SIZE];
 uint8_t data[8];
+uint8_t tx_state_frame[32];
 uint8_t prev_rx, last_rx;
 // Cross processes values 
 
@@ -100,7 +102,7 @@ volatile uint8_t    vel_update_flag = FALSE;
 float linear_vel;
 float angular_vel;
 float last_l_vel, last_a_vel;
-
+uint32_t tick, last_tick;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -191,7 +193,8 @@ int main(void)
   #endif
 
   // Last update time in tick
-  uint32_t last_update = 0;
+  tick = HAL_GetTick();
+  last_tick = HAL_GetTick();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -201,51 +204,63 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    #ifdef ENABLE_PID
-    if (vel_update_flag)
-    {    
-        resolveRxFrame(rx_buffer, &linear_vel, &angular_vel);
-        
-        // Convert from M/S to RPM
-        if (linear_vel != last_l_vel || angular_vel != last_a_vel)
-        {
-          left_set_speed = ( linear_vel - angular_vel*ROBOT_WHEEL_BASE/2 ) * 60/ ( PI * ROBOT_WHEEL_DIAMETER ); 
-          right_set_speed = ( linear_vel + angular_vel*ROBOT_WHEEL_BASE/2) * 60/ ( PI * ROBOT_WHEEL_DIAMETER );
-        }
+      #ifdef ENABLE_PID
+      if (vel_update_flag)
+      {    
+          resolveRxFrame(rx_buffer, &linear_vel, &angular_vel);
+          
+          // Convert from M/S to RPM
+          if (linear_vel != last_l_vel || angular_vel != last_a_vel)
+          {
+            // Formular calculated base on ICC.   
+            left_set_speed = ( linear_vel - angular_vel*ROBOT_WHEEL_BASE/2 ) * 60/ ( PI * ROBOT_WHEEL_DIAMETER ); 
+            right_set_speed = ( linear_vel + angular_vel*ROBOT_WHEEL_BASE/2) * 60/ ( PI * ROBOT_WHEEL_DIAMETER );
+          }
 
-        #ifdef DEBUG
-        if (linear_vel != last_l_vel || angular_vel != last_a_vel)
-        {
-            sprintf((char *)MSG, "R: %.5f | L: %.5f \n", right_set_speed, left_set_speed);
-            HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
-        }
-        // HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_6);
-        #endif
+          #ifdef DEBUG
+          if (linear_vel != last_l_vel || angular_vel != last_a_vel)
+          {
+              sprintf((char *)MSG, "R: %.5f | L: %.5f \n", right_set_speed, left_set_speed);
+              HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
+          }
+          // HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_6);
+          #endif
 
-        last_a_vel = angular_vel;
-        last_l_vel = linear_vel;
-        vel_update_flag = FALSE;
-        last_update = HAL_GetTick();
+          last_a_vel = angular_vel;
+          last_l_vel = linear_vel;
+          vel_update_flag = FALSE;
+      }
+      #endif
+      // Send 
+      tick = HAL_GetTick();
+      uint32_t dtick = tick - last_tick;
+      if (dtick > 200)
+      {
+          // Publish odometry data
+          // double vx = (str_right_motor.speed + str_left_motor.speed) * ( PI * ROBOT_WHEEL_DIAMETER ) / (2 * 60) ; // M/s
+          // double th = (str_right_motor.speed - str_left_motor.speed) * ( PI * ROBOT_WHEEL_DIAMETER ) / (ROBOT_WHEEL_BASE * 60); // Rad/s
+          // double dt = dtick / 1000.0f;
+
+          double vx = 0.2f; // M/s
+          double th = 0.18f; // Rad/s
+          double dt = dtick / 1000.0f;
+
+          double delta_x = (vx * cos(th)) * dt;
+          double delta_y = (vx * sin(th)) * dt;
+          double delta_th = th * dt;
+
+          parseTxStateFrame(tx_state_frame, delta_x, delta_y, delta_th);
+
+          #ifdef DEBUG
+          sprintf((char *)MSG, "X: %.5f | Y: %.5f | Theta: %.5f \n", delta_x, delta_y, delta_th);
+          HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
+          #endif
+
+          HAL_UART_Transmit_DMA(&huart1 ,tx_state_frame, 32);
+
+          last_tick = tick;
+      }
     }
-    #endif
-
-    // else 
-    // {
-    //     // If update timeout: 2 seconds
-    //     // Reset speed to avoid overcontrol
-    //     if ( (HAL_GetTick() - last_update > COMMAND_TIMEOUT_MS) && (angular_vel != 0 || linear_vel !=0) )
-    //     {
-    //         angular_vel = 0;
-    //         linear_vel = 0;
-    //         #ifdef DEBUG
-    //         // printf("Vel : %.5f  | %.5f \n", linear_vel, angular_vel);
-    //         // sprintf((char *)MSG, "L: %.5f | A: %.5f \n", linear_vel, angular_vel);
-    //         // HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
-    //         #endif
-    //     }
-    // }
-    // HAL_Delay(100);
-  }
   /* USER CODE END 3 */
 }
 

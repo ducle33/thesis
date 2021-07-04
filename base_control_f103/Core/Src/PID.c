@@ -98,7 +98,7 @@ void PID_ComputeOutput(MOTOR_TypeDef *motor)
     }
 
     i_term = PID->last_i +  PID->Ki * ( (PID->error) + (PID->previous_error) );
-    // i_term = PID_Limit(i_term, i_term_max, i_term_min);
+    i_term = PID_Limit(i_term, i_term_max, i_term_min);
     
     output = p_term + i_term;
     output = PID_Limit(output, _OUTPUT_MAX, _OUTPUT_MIN);
