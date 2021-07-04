@@ -254,8 +254,14 @@ int main(void)
           #ifdef DEBUG
           sprintf((char *)MSG, "X: %.5f | Y: %.5f | Theta: %.5f \n", delta_x, delta_y, delta_th);
           HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
+          for (uint8_t i = 0; i <32; i++)
+          {
+              
+              printf("%x", tx_state_frame[i]);
+          }
+          printf("\n");
           #endif
-
+          
           HAL_UART_Transmit_DMA(&huart1 ,tx_state_frame, 32);
 
           last_tick = tick;

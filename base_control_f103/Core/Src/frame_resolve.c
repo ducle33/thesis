@@ -24,15 +24,17 @@ void float2byte(float *f, uint8_t *d, uint8_t s)
     }
 }
 
-void double2byte(double *f, uint8_t *d, uint8_t s)
+void double2byte(double *d, uint8_t *buffer, uint8_t s)
 {
-    uint32_t * tmp;
-    tmp = (uint32_t*)f;
-    uint8_t i = 0;
-    for (i = 0; i<s; i++)
-    {      
-        d[i] = *tmp>>(56-8*i);
-    }
+    union {
+        double _d;
+        uint8_t bytes[8];
+    } container;
+    container._d = *d;
+    uint8_t ii;
+    for (ii=0; ii<8; ii++) 
+        buffer[ii] = container.bytes[7-ii];
+
 }
 
 // Calc checksum
