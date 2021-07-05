@@ -236,20 +236,19 @@ int main(void)
       uint32_t dtick = tick - last_tick;
       if (dtick > 200)
       {
-          // Publish odometry data
-          // double vx = (str_right_motor.speed + str_left_motor.speed) * ( PI * ROBOT_WHEEL_DIAMETER ) / (2 * 60) ; // M/s
-          // double th = (str_right_motor.speed - str_left_motor.speed) * ( PI * ROBOT_WHEEL_DIAMETER ) / (ROBOT_WHEEL_BASE * 60); // Rad/s
-          // double dt = dtick / 1000.0f;
-
-          double vx = 0.2f; // M/s
-          double th = 0.18f; // Rad/s
+          
           double dt = dtick / 1000.0f;
+          // double vx = 0.1f; // M
+          // double vth = 0.1f; // Rad
 
-          double delta_x = (vx * cos(th)) * dt;
-          double delta_y = (vx * sin(th)) * dt;
-          double delta_th = th * dt;
+          // Publish odometry data
+          double left_speed =  (str_left_motor.dir == 0) ? str_left_motor.speed : (- str_left_motor.speed);
+          double right_speed =  (str_right_motor.dir == 0) ? str_right_motor.speed : (- str_right_motor.speed);
+          double vx = (right_speed + left_speed) * ( PI * ROBOT_WHEEL_DIAMETER ) / (2 * 60) ; // M/s
+          double vth = (right_speed - left_speed) * ( PI * ROBOT_WHEEL_DIAMETER ) / (ROBOT_WHEEL_BASE * 60); // Rad/s
 
-          parseTxStateFrame(tx_state_frame, delta_x, delta_y, delta_th);
+          parseTxStateFrame(tx_state_frame, vx, vth, dt);         
+          HAL_UART_Transmit_DMA(&huart1 ,tx_state_frame, 32);
 
           #ifdef DEBUG
           sprintf((char *)MSG, "X: %.5f | Y: %.5f | Theta: %.5f \n", delta_x, delta_y, delta_th);
@@ -261,8 +260,8 @@ int main(void)
           }
           printf("\n");
           #endif
-          
-          HAL_UART_Transmit_DMA(&huart1 ,tx_state_frame, 32);
+          // sprintf((char *)MSG, "vth = %f \n",vth);
+          // HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
 
           last_tick = tick;
       }

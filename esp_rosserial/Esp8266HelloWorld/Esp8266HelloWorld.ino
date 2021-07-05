@@ -57,17 +57,19 @@ ros::NodeHandle nh;
 // Make a chatter publisher
 ros::Subscriber<geometry_msgs::Twist> Sub("/cmd_vel", &cmd_velCallback );
 
-geometry_msgs::TransformStamped t;
 tf::TransformBroadcaster broadcaster;
 
 // OTHER CONFIGS ==========================
-double x = 1.0;
+double x = 0.0;
 double y = 0.0;
-double theta = 1.57;
+double theta = 0;
 
 char base_link[] = "/base_link";
 char odom[] = "/odom";
 
+uint32_t cnt = 0;
+
+bool new_cmd_vel = false;
 
 // Print byffer
 void print_data()
@@ -75,7 +77,7 @@ void print_data()
   uint8_t i;
 
   #ifndef DEBUG
-    Serial.write(0x16);
+  Serial.write(0x16);
   Serial.write(0x16);
   Serial.write(0x16);
   for (i =0 ; i<sizeof(data); i++)
@@ -146,27 +148,31 @@ void parseTxFrame(byte *d /* uint8_t *d */, float vel_linear, float vel_angular)
     d[15] = '\n';
 }
 
-void resolveRxFrame(byte * d, double * x, double * y, double * th)
+void resolveRxFrame(unsigned char * d, double * x, double * y, double * th)
 {
-    uint32_t tmp1 = 0;
-    uint32_t tmp2 = 0;
-    uint32_t tmp3 = 0;
-    uint32_t rx_crc, local_crc;
-    
-    rx_crc = d[26] << 24 | d[27]<<16 | d[28]<<8 | d[29]; 
-    
-    tmp1 = d[2] << 56 | d[3]<< 48 | d[4]<< 40 | d[5] << 32 | d[6] << 24 | d[7] << 16 | d[8] << 8 | d[9];
-    tmp2 = d[10] << 56 | d[11]<< 48 | d[12]<< 40 | d[13] << 32 | d[14] << 24 | d[15] << 16 | d[16] << 8 | d[17];
-    tmp3 = d[18] << 56 | d[19]<< 48 | d[20]<< 40 | d[21] << 32 | d[22] << 24 | d[23] << 16 | d[24] << 8 | d[25];;
-    
-    local_crc = checksum(d, 2, 26);
-
+    uint32_t rx_crc = d[26] << 24 | d[27]<<16 | d[28]<<8 | d[29]; 
+    uint32_t local_crc = checksum(d, 2, 26);
     if (local_crc == rx_crc)
     {
-        *x = *(double *)&tmp1;
-        *y = *(double *)&tmp2;
-        *th = *(double *)&tmp3;
-    }
+        double tmp[3];
+        uint8_t i;
+        for (i=0; i<3; i++)
+        {
+            union {
+              double r;
+              uint8_t rbytes[8];
+            } rcv_double;
+            uint8_t ii;
+            for (ii=0; ii<8; ii++) 
+            {
+                rcv_double.rbytes[7-ii] = d[8*i+ii+2];
+            }
+            tmp[i] = rcv_double.r;
+        }
+        *x = tmp[0];
+        *y = tmp[1];
+        *th = tmp[2];
+    } 
 }
 
 
@@ -178,6 +184,7 @@ void cmd_velCallback( const geometry_msgs::Twist& CVel){
 
     f_linear = (float) d_linear;
     f_angular = (float) d_angular;
+    new_cmd_vel = true;
 
     #ifdef DEBUG
     Serial.print("cmd_vel: ");
@@ -192,19 +199,19 @@ void setup_wifi()
 {
     // Use ESP8266 serial to monitor the process
   Serial.begin(115200);
-  Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
+//  Serial.println();
+//  Serial.print("Connecting to ");
+//  Serial.println(ssid);
 
   // Connect the ESP8266 the the wifi AP
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(100);
   }
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+//  Serial.println("");
+//  Serial.println("WiFi connected");
+//  Serial.println("IP address: ");
+//  Serial.println(WiFi.localIP());
 
   // Broadcast ready state
   memset(data, 0, sizeof(data));
@@ -232,70 +239,103 @@ void setup()
 }
 
 char c, last_c;
-bool frame_get_ready = false;
-byte rx_frame[30];
+unsigned char rx_frame[32];
 int i  = 0;
+bool tx_ready = false;
 void loop()
 {
-   double x,y,th;
-   while(Serial.available())
-  {
-    c = Serial.read();
-    rx_frame[i] = c;
-    i++;
-     if (c == '\n' && last_c == '\r')
-     {
-        resolveRxFrame((byte *)rx_frame, &x, &y, &th);
-//        Serial.print("RX -> ");
-//        Serial.println(rx_frame);
-        Serial.print("Rx -> X= ");
-        Serial.print(x, 5);
-        Serial.print(", Y=");
-        Serial.print(y, 5);
-        Serial.print(", THETA=");
-        Serial.println(th, 5);
-        i = 0;
-     }
-     last_c = c;
-  }
-  // When ros connected 
+
+  double vx, vth, dt;
+    // When ros connected 
   if (nh.connected()) {
     
       // Send cmd_vel data to base control
-      parseTxFrame(data, f_linear, f_angular);
-      print_data(); 
-      
-      // drive in a circle
-      double dx = 0.2;
-      double dtheta = 0.18;
-      x += cos(theta)*dx*0.1;
-      y += sin(theta)*dx*0.1;
-      theta += dtheta*0.1;
-      if(theta > 3.14)
-        theta=-3.14;
-        
-      // tf odom->base_link
-      t.header.frame_id = odom;
-      t.child_frame_id = base_link;
-      
-      t.transform.translation.x = x;
-      t.transform.translation.y = y;
-      
-      t.transform.rotation = tf::createQuaternionFromYaw(theta);
-      t.header.stamp = nh.now();
-      
-      broadcaster.sendTransform(t);
-
-      // Blink status led
-      if (ms>= 50)
+      if (new_cmd_vel) 
+      { 
+        parseTxFrame(data, f_linear, f_angular);
+        print_data(); 
+        digitalWrite(2, 0);
+        new_cmd_vel = false ;
+      }
+      else if (!new_cmd_vel && cnt > 500) 
       {
-         ms = 0;
-         digitalWrite(2, 0);
-      }      
+          f_linear = 0;
+          f_angular = 0;
+          cnt = 0;
+      }
       else 
       {
-        digitalWrite(2, 1);
+          digitalWrite(2, 1);
       }
+
+
+      while(Serial.available())
+          {
+            c = Serial.read();
+            if (i == 0 && c == 2)
+            {
+                i++;      
+            }
+            rx_frame[i] = c;
+            i++;
+             if (c == '\n' && last_c == '\r' && rx_frame[1] == 2)
+             {
+                resolveRxFrame(rx_frame, &vx, &vth, &dt);
+        //        Serial.print("RX -> ");
+        //        for (int j = 0; j < 32; j++)
+        //        {
+        //          Serial.print(rx_frame[j], HEX);
+        //          Serial.print(" ");
+        //        }
+        //        Serial.println();
+        //        Serial.print("Rx -> Vx= ");
+        //        Serial.print(vx, 5);
+        //        Serial.print(", V_theta=");
+        //        Serial.print(vth, 5);
+        //        Serial.print(", Delta_theta=");
+        //        Serial.println(dt, 5);
+                i = 0;
+                memset(rx_frame , 0, 32);
+                tx_ready = true;
+             }
+             last_c = c;
+          }
+      
+      if(tx_ready)
+      {          
+          x += cos(theta)*vx*dt;
+          y += sin(theta)*vx*dt;
+          theta += vth * dt;
+          if (theta > 3.14) theta = - 3.14;
+          if (theta < -3.14) theta = 3.14;
+//          Serial.println(theta);
+          // tf odom->base_link
+          
+          geometry_msgs::TransformStamped t;
+          t.header.frame_id = odom;
+          t.child_frame_id = base_link;
+          
+          t.transform.translation.x = x;
+          t.transform.translation.y = y;
+          
+          t.transform.rotation = tf::createQuaternionFromYaw(theta);
+          t.header.stamp = nh.now();
+          
+          broadcaster.sendTransform(t);
+          tx_ready = false;
+      }
+
+      cnt++;
+//      // Blink status led
+//      if (ms>= 250)
+//      {
+//         ms = 0;
+//         digitalWrite(2, 0);
+//      }      
+//      else 
+//      {
+//        digitalWrite(2, 1);
+//      }
   }
   else 
   {
@@ -305,9 +345,11 @@ void loop()
          state = !state;
          digitalWrite(2, state);
       }
+      f_linear = 0;
+      f_angular = 0; 
   }
   ms++;
-  delay(100);
+  delay(20);
   last_f_linear = f_linear;
   last_f_angular = f_angular;
   nh.spinOnce();
