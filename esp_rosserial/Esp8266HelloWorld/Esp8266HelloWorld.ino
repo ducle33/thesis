@@ -237,6 +237,7 @@ byte rx_frame[30];
 int i  = 0;
 void loop()
 {
+   double x,y,th;
    while(Serial.available())
   {
     c = Serial.read();
@@ -244,7 +245,6 @@ void loop()
     i++;
      if (c == '\n' && last_c == '\r')
      {
-        double x,y,th;
         resolveRxFrame((byte *)rx_frame, &x, &y, &th);
 //        Serial.print("RX -> ");
 //        Serial.println(rx_frame);
