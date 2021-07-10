@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccz4PHCf.s 			page 1
+ARM GAS  /tmp/cc9QEZ4P.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
   24:Core/Src/PID.c **** 
   25:Core/Src/PID.c **** 
   26:Core/Src/PID.c **** 
-ARM GAS  /tmp/ccz4PHCf.s 			page 2
+ARM GAS  /tmp/cc9QEZ4P.s 			page 2
 
 
   27:Core/Src/PID.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
   81              	.L3:
   82 0038 00000000 		.word	0
   83 003c 004CED40 		.word	1089293312
-ARM GAS  /tmp/ccz4PHCf.s 			page 3
+ARM GAS  /tmp/cc9QEZ4P.s 			page 3
 
 
   84 0040 00004844 		.word	1145569280
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  133              		.loc 1 39 26 is_stmt 0 view .LVU21
  134 001c C6E90245 		strd	r4, [r6, #8]
  135              	.L5:
-ARM GAS  /tmp/ccz4PHCf.s 			page 4
+ARM GAS  /tmp/cc9QEZ4P.s 			page 4
 
 
   40:Core/Src/PID.c ****     } 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  176              		.cfi_offset 14, -4
  177 0002 0446     		mov	r4, r0
   51:Core/Src/PID.c ****     double speed_rps = _set_speed_mps / (PI * ROBOT_WHEEL_DIAMETER);
-ARM GAS  /tmp/ccz4PHCf.s 			page 5
+ARM GAS  /tmp/cc9QEZ4P.s 			page 5
 
 
  178              		.loc 1 51 5 is_stmt 1 view .LVU31
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  225              		@ args = 0, pretend = 0, frame = 0
  226              		@ frame_needed = 0, uses_anonymous_args = 0
  227              		.loc 1 59 1 is_stmt 0 view .LVU41
-ARM GAS  /tmp/ccz4PHCf.s 			page 6
+ARM GAS  /tmp/cc9QEZ4P.s 			page 6
 
 
  228 0000 10B5     		push	{r4, lr}
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
   79:Core/Src/PID.c **** 
   80:Core/Src/PID.c ****     // Compute upper limit of Integration Term 
   81:Core/Src/PID.c ****     float i_term_max, i_term_min;
-ARM GAS  /tmp/ccz4PHCf.s 			page 7
+ARM GAS  /tmp/cc9QEZ4P.s 			page 7
 
 
   82:Core/Src/PID.c ****     if (PID->OUTPUT_MAX > p_term)
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  286              	.LVL23:
  287              		.loc 1 114 8 view .LVU52
  288 000e 48B9     		cbnz	r0, .L21
-ARM GAS  /tmp/ccz4PHCf.s 			page 8
+ARM GAS  /tmp/cc9QEZ4P.s 			page 8
 
 
  115:Core/Src/PID.c ****     {
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  330              		.cfi_startproc
  331              		@ args = 0, pretend = 0, frame = 24
  332              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccz4PHCf.s 			page 9
+ARM GAS  /tmp/cc9QEZ4P.s 			page 9
 
 
   67:Core/Src/PID.c ****     double i_term;
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  373 001e FFF7FEFF 		bl	__aeabi_dmul
  374              	.LVL31:
  375 0022 8246     		mov	r10, r0
-ARM GAS  /tmp/ccz4PHCf.s 			page 10
+ARM GAS  /tmp/cc9QEZ4P.s 			page 10
 
 
  376 0024 8B46     		mov	fp, r1
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  420              	.LVL38:
   93:Core/Src/PID.c ****     } 
  421              		.loc 1 93 20 view .LVU84
-ARM GAS  /tmp/ccz4PHCf.s 			page 11
+ARM GAS  /tmp/cc9QEZ4P.s 			page 11
 
 
  422 0064 FFF7FEFF 		bl	__aeabi_d2f
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  467 00b6 3046     		mov	r0, r6
  468 00b8 3946     		mov	r1, r7
  469 00ba FFF7FEFF 		bl	PID_Limit
-ARM GAS  /tmp/ccz4PHCf.s 			page 12
+ARM GAS  /tmp/cc9QEZ4P.s 			page 12
 
 
  470              	.LVL48:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  107:Core/Src/PID.c ****     PID->last_i = i_term;
  512              		.loc 1 107 5 is_stmt 1 discriminator 4 view .LVU106
  107:Core/Src/PID.c ****     PID->last_i = i_term;
-ARM GAS  /tmp/ccz4PHCf.s 			page 13
+ARM GAS  /tmp/cc9QEZ4P.s 			page 13
 
 
  513              		.loc 1 107 30 is_stmt 0 discriminator 4 view .LVU107
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  561              	PID_SetDuty:
  562              	.LVL60:
  563              	.LFB71:
-ARM GAS  /tmp/ccz4PHCf.s 			page 14
+ARM GAS  /tmp/cc9QEZ4P.s 			page 14
 
 
  127:Core/Src/PID.c **** 
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  601 0028 FFF7FEFF 		bl	__aeabi_dcmpeq
  602              	.LVL64:
  603 002c 98B9     		cbnz	r0, .L49
-ARM GAS  /tmp/ccz4PHCf.s 			page 15
+ARM GAS  /tmp/cc9QEZ4P.s 			page 15
 
 
  144:Core/Src/PID.c ****     {
@@ -863,9 +863,8 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  150:Core/Src/PID.c ****         // HAL_GPIO_WritePin(motor->GPIO, motor->DIR2_PIN, 0);
  151:Core/Src/PID.c ****         *(motor->PWM_ADDR) = 0;
  152:Core/Src/PID.c ****     }
- 153:Core/Src/PID.c ****     
- 154:Core/Src/PID.c **** }
- 617              		.loc 1 154 1 view .LVU130
+ 153:Core/Src/PID.c **** }
+ 617              		.loc 1 153 1 view .LVU130
  618 003e 10BD     		pop	{r4, pc}
  619              	.LVL68:
  620              	.L51:
@@ -897,11 +896,11 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  640              		.loc 1 151 28 view .LVU136
  641 0058 0022     		movs	r2, #0
  642 005a 1A60     		str	r2, [r3]
- 643              		.loc 1 154 1 view .LVU137
-ARM GAS  /tmp/ccz4PHCf.s 			page 16
-
-
+ 643              		.loc 1 153 1 view .LVU137
  644 005c EFE7     		b	.L42
+ARM GAS  /tmp/cc9QEZ4P.s 			page 16
+
+
  645              		.cfi_endproc
  646              	.LFE71:
  648              		.section	.text.PID_SetTunings,"ax",%progbits
@@ -914,33 +913,33 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  656              	PID_SetTunings:
  657              	.LVL72:
  658              	.LFB72:
+ 154:Core/Src/PID.c **** 
  155:Core/Src/PID.c **** 
- 156:Core/Src/PID.c **** 
- 157:Core/Src/PID.c **** void PID_SetTunings(PID_TypeDef *pPID_Params, double setKp, double setKi, double setKd)
- 158:Core/Src/PID.c **** {
- 659              		.loc 1 158 1 is_stmt 1 view -0
+ 156:Core/Src/PID.c **** void PID_SetTunings(PID_TypeDef *pPID_Params, double setKp, double setKi, double setKd)
+ 157:Core/Src/PID.c **** {
+ 659              		.loc 1 157 1 is_stmt 1 view -0
  660              		.cfi_startproc
  661              		@ args = 16, pretend = 0, frame = 0
  662              		@ frame_needed = 0, uses_anonymous_args = 0
  663              		@ link register save eliminated.
- 159:Core/Src/PID.c ****     pPID_Params->Kp = setKp;
- 664              		.loc 1 159 5 view .LVU139
- 665              		.loc 1 159 21 is_stmt 0 view .LVU140
+ 158:Core/Src/PID.c ****     pPID_Params->Kp = setKp;
+ 664              		.loc 1 158 5 view .LVU139
+ 665              		.loc 1 158 21 is_stmt 0 view .LVU140
  666 0000 C0E90023 		strd	r2, [r0]
- 160:Core/Src/PID.c ****     pPID_Params->Ki = setKi;
- 667              		.loc 1 160 5 is_stmt 1 view .LVU141
- 668              		.loc 1 160 21 is_stmt 0 view .LVU142
+ 159:Core/Src/PID.c ****     pPID_Params->Ki = setKi;
+ 667              		.loc 1 159 5 is_stmt 1 view .LVU141
+ 668              		.loc 1 159 21 is_stmt 0 view .LVU142
  669 0004 DDE90023 		ldrd	r2, [sp]
  670              	.LVL73:
- 671              		.loc 1 160 21 view .LVU143
+ 671              		.loc 1 159 21 view .LVU143
  672 0008 C0E90423 		strd	r2, [r0, #16]
- 161:Core/Src/PID.c ****     pPID_Params->Kd = setKd;
- 673              		.loc 1 161 5 is_stmt 1 view .LVU144
- 674              		.loc 1 161 21 is_stmt 0 view .LVU145
+ 160:Core/Src/PID.c ****     pPID_Params->Kd = setKd;
+ 673              		.loc 1 160 5 is_stmt 1 view .LVU144
+ 674              		.loc 1 160 21 is_stmt 0 view .LVU145
  675 000c DDE90223 		ldrd	r2, [sp, #8]
  676 0010 C0E90223 		strd	r2, [r0, #8]
- 162:Core/Src/PID.c **** }
- 677              		.loc 1 162 1 view .LVU146
+ 161:Core/Src/PID.c **** }
+ 677              		.loc 1 161 1 view .LVU146
  678 0014 7047     		bx	lr
  679              		.cfi_endproc
  680              	.LFE72:
@@ -954,28 +953,28 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  690              	PID_MotorInit:
  691              	.LVL74:
  692              	.LFB73:
+ 162:Core/Src/PID.c **** 
  163:Core/Src/PID.c **** 
- 164:Core/Src/PID.c **** 
- 165:Core/Src/PID.c **** // Init GPIOs and PID params that relevant to motor.
- 166:Core/Src/PID.c **** void PID_MotorInit( MOTOR_TypeDef *motor,               // Motor str address
-ARM GAS  /tmp/ccz4PHCf.s 			page 17
+ 164:Core/Src/PID.c **** // Init GPIOs and PID params that relevant to motor.
+ 165:Core/Src/PID.c **** void PID_MotorInit( MOTOR_TypeDef *motor,               // Motor str address
+ 166:Core/Src/PID.c ****                     PID_TypeDef *pPID_Params,           // PID str address
+ARM GAS  /tmp/cc9QEZ4P.s 			page 17
 
 
- 167:Core/Src/PID.c ****                     PID_TypeDef *pPID_Params,           // PID str address
- 168:Core/Src/PID.c ****                     GPIO_TypeDef* PORT,                 // GPIO PORT for direction control
- 169:Core/Src/PID.c ****                     uint16_t PIN1,                      // GPIO PINS for direction control
- 170:Core/Src/PID.c ****                     uint16_t PIN2,                      // GPIO PINS for direction control
- 171:Core/Src/PID.c ****                     double max_output,                  // Max Output of PWM
- 172:Core/Src/PID.c ****                     double min_output,                  // Min Input of PWM
- 173:Core/Src/PID.c ****                     volatile uint32_t * TIM_ENC_ADDR,   // TIMER interfacing encoder's counter regi
- 174:Core/Src/PID.c ****                     volatile uint32_t * TIM_PWM_ADDR,   // TIMER Capture and Compare Register addre
- 175:Core/Src/PID.c ****                     double* pSet_Params)                // Set PID parameters array
- 176:Core/Src/PID.c **** {
- 693              		.loc 1 176 1 is_stmt 1 view -0
+ 167:Core/Src/PID.c ****                     GPIO_TypeDef* PORT,                 // GPIO PORT for direction control
+ 168:Core/Src/PID.c ****                     uint16_t PIN1,                      // GPIO PINS for direction control
+ 169:Core/Src/PID.c ****                     uint16_t PIN2,                      // GPIO PINS for direction control
+ 170:Core/Src/PID.c ****                     double max_output,                  // Max Output of PWM
+ 171:Core/Src/PID.c ****                     double min_output,                  // Min Input of PWM
+ 172:Core/Src/PID.c ****                     volatile uint32_t * TIM_ENC_ADDR,   // TIMER interfacing encoder's counter regi
+ 173:Core/Src/PID.c ****                     volatile uint32_t * TIM_PWM_ADDR,   // TIMER Capture and Compare Register addre
+ 174:Core/Src/PID.c ****                     double* pSet_Params)                // Set PID parameters array
+ 175:Core/Src/PID.c **** {
+ 693              		.loc 1 175 1 is_stmt 1 view -0
  694              		.cfi_startproc
  695              		@ args = 36, pretend = 0, frame = 0
  696              		@ frame_needed = 0, uses_anonymous_args = 0
- 697              		.loc 1 176 1 is_stmt 0 view .LVU148
+ 697              		.loc 1 175 1 is_stmt 0 view .LVU148
  698 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
  699              	.LCFI10:
  700              		.cfi_def_cfa_offset 24
@@ -993,82 +992,82 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  712 000a 9046     		mov	r8, r2
  713 000c 1F46     		mov	r7, r3
  714 000e 129E     		ldr	r6, [sp, #72]
- 177:Core/Src/PID.c **** 
- 178:Core/Src/PID.c ****     #ifndef __GPIO_H__
- 179:Core/Src/PID.c ****     GPIO_InitTypeDef GPIO_InitStruct = {0};
- 180:Core/Src/PID.c **** 
- 181:Core/Src/PID.c ****     GPIO_InitStruct.Pin = PIN1 | PIN2;
- 182:Core/Src/PID.c ****     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- 183:Core/Src/PID.c ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
- 184:Core/Src/PID.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
- 185:Core/Src/PID.c ****     HAL_GPIO_Init(PORT, &GPIO_InitStruct);
- 186:Core/Src/PID.c ****     #endif
- 187:Core/Src/PID.c **** 
- 188:Core/Src/PID.c ****     memset(pPID_Params , 0, sizeof(PID_TypeDef) );
- 715              		.loc 1 188 5 is_stmt 1 view .LVU149
+ 176:Core/Src/PID.c **** 
+ 177:Core/Src/PID.c ****     #ifndef __GPIO_H__
+ 178:Core/Src/PID.c ****     GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 179:Core/Src/PID.c **** 
+ 180:Core/Src/PID.c ****     GPIO_InitStruct.Pin = PIN1 | PIN2;
+ 181:Core/Src/PID.c ****     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 182:Core/Src/PID.c ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 183:Core/Src/PID.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 184:Core/Src/PID.c ****     HAL_GPIO_Init(PORT, &GPIO_InitStruct);
+ 185:Core/Src/PID.c ****     #endif
+ 186:Core/Src/PID.c **** 
+ 187:Core/Src/PID.c ****     memset(pPID_Params , 0, sizeof(PID_TypeDef) );
+ 715              		.loc 1 187 5 is_stmt 1 view .LVU149
  716 0010 5022     		movs	r2, #80
  717              	.LVL75:
- 718              		.loc 1 188 5 is_stmt 0 view .LVU150
+ 718              		.loc 1 187 5 is_stmt 0 view .LVU150
  719 0012 0021     		movs	r1, #0
  720              	.LVL76:
- 721              		.loc 1 188 5 view .LVU151
+ 721              		.loc 1 187 5 view .LVU151
  722 0014 2846     		mov	r0, r5
  723              	.LVL77:
- 724              		.loc 1 188 5 view .LVU152
+ 724              		.loc 1 187 5 view .LVU152
  725 0016 FFF7FEFF 		bl	memset
  726              	.LVL78:
- 189:Core/Src/PID.c **** 
-ARM GAS  /tmp/ccz4PHCf.s 			page 18
+ 188:Core/Src/PID.c **** 
+ 189:Core/Src/PID.c ****     motor->pPID_params = pPID_Params;
+ARM GAS  /tmp/cc9QEZ4P.s 			page 18
 
 
- 190:Core/Src/PID.c ****     motor->pPID_params = pPID_Params;
- 727              		.loc 1 190 5 is_stmt 1 view .LVU153
- 728              		.loc 1 190 24 is_stmt 0 view .LVU154
+ 727              		.loc 1 189 5 is_stmt 1 view .LVU153
+ 728              		.loc 1 189 24 is_stmt 0 view .LVU154
  729 001a 2563     		str	r5, [r4, #48]
- 191:Core/Src/PID.c ****     motor->GPIO = PORT;
- 730              		.loc 1 191 5 is_stmt 1 view .LVU155
- 731              		.loc 1 191 17 is_stmt 0 view .LVU156
+ 190:Core/Src/PID.c ****     motor->GPIO = PORT;
+ 730              		.loc 1 190 5 is_stmt 1 view .LVU155
+ 731              		.loc 1 190 17 is_stmt 0 view .LVU156
  732 001c C4F83480 		str	r8, [r4, #52]
- 192:Core/Src/PID.c ****     motor->DIR1_PIN = PIN1;
- 733              		.loc 1 192 5 is_stmt 1 view .LVU157
- 734              		.loc 1 192 21 is_stmt 0 view .LVU158
+ 191:Core/Src/PID.c ****     motor->DIR1_PIN = PIN1;
+ 733              		.loc 1 191 5 is_stmt 1 view .LVU157
+ 734              		.loc 1 191 21 is_stmt 0 view .LVU158
  735 0020 6785     		strh	r7, [r4, #42]	@ movhi
- 193:Core/Src/PID.c ****     motor->DIR2_PIN = PIN2;
- 736              		.loc 1 193 5 is_stmt 1 view .LVU159
- 737              		.loc 1 193 21 is_stmt 0 view .LVU160
+ 192:Core/Src/PID.c ****     motor->DIR2_PIN = PIN2;
+ 736              		.loc 1 192 5 is_stmt 1 view .LVU159
+ 737              		.loc 1 192 21 is_stmt 0 view .LVU160
  738 0022 BDF82830 		ldrh	r3, [sp, #40]
  739 0026 A385     		strh	r3, [r4, #44]	@ movhi
- 194:Core/Src/PID.c **** 
- 195:Core/Src/PID.c ****     motor->dir = 1;
- 740              		.loc 1 195 5 is_stmt 1 view .LVU161
- 741              		.loc 1 195 16 is_stmt 0 view .LVU162
+ 193:Core/Src/PID.c **** 
+ 194:Core/Src/PID.c ****     motor->dir = 1;
+ 740              		.loc 1 194 5 is_stmt 1 view .LVU161
+ 741              		.loc 1 194 16 is_stmt 0 view .LVU162
  742 0028 0123     		movs	r3, #1
  743 002a 84F82830 		strb	r3, [r4, #40]
- 196:Core/Src/PID.c **** 
- 197:Core/Src/PID.c ****     motor->ENC_ADDR = TIM_ENC_ADDR;
- 744              		.loc 1 197 5 is_stmt 1 view .LVU163
- 745              		.loc 1 197 21 is_stmt 0 view .LVU164
+ 195:Core/Src/PID.c **** 
+ 196:Core/Src/PID.c ****     motor->ENC_ADDR = TIM_ENC_ADDR;
+ 744              		.loc 1 196 5 is_stmt 1 view .LVU163
+ 745              		.loc 1 196 21 is_stmt 0 view .LVU164
  746 002e 109B     		ldr	r3, [sp, #64]
  747 0030 E363     		str	r3, [r4, #60]
- 198:Core/Src/PID.c ****     motor->PWM_ADDR = TIM_PWM_ADDR;
- 748              		.loc 1 198 5 is_stmt 1 view .LVU165
- 749              		.loc 1 198 21 is_stmt 0 view .LVU166
+ 197:Core/Src/PID.c ****     motor->PWM_ADDR = TIM_PWM_ADDR;
+ 748              		.loc 1 197 5 is_stmt 1 view .LVU165
+ 749              		.loc 1 197 21 is_stmt 0 view .LVU166
  750 0032 119B     		ldr	r3, [sp, #68]
  751 0034 A363     		str	r3, [r4, #56]
- 199:Core/Src/PID.c **** 
- 200:Core/Src/PID.c ****     pPID_Params->OUTPUT_MAX = max_output;
- 752              		.loc 1 200 5 is_stmt 1 view .LVU167
- 753              		.loc 1 200 29 is_stmt 0 view .LVU168
+ 198:Core/Src/PID.c **** 
+ 199:Core/Src/PID.c ****     pPID_Params->OUTPUT_MAX = max_output;
+ 752              		.loc 1 199 5 is_stmt 1 view .LVU167
+ 753              		.loc 1 199 29 is_stmt 0 view .LVU168
  754 0036 DDE90C23 		ldrd	r2, [sp, #48]
  755 003a C5E91023 		strd	r2, [r5, #64]
- 201:Core/Src/PID.c ****     pPID_Params->OUTPUT_MIN = min_output;
- 756              		.loc 1 201 5 is_stmt 1 view .LVU169
- 757              		.loc 1 201 29 is_stmt 0 view .LVU170
+ 200:Core/Src/PID.c ****     pPID_Params->OUTPUT_MIN = min_output;
+ 756              		.loc 1 200 5 is_stmt 1 view .LVU169
+ 757              		.loc 1 200 29 is_stmt 0 view .LVU170
  758 003e DDE90E23 		ldrd	r2, [sp, #56]
  759 0042 C5E91223 		strd	r2, [r5, #72]
- 202:Core/Src/PID.c **** 
- 203:Core/Src/PID.c ****     PID_SetTunings(pPID_Params, pSet_Params[0] , pSet_Params[1], pSet_Params[2]);
- 760              		.loc 1 203 5 is_stmt 1 view .LVU171
+ 201:Core/Src/PID.c **** 
+ 202:Core/Src/PID.c ****     PID_SetTunings(pPID_Params, pSet_Params[0] , pSet_Params[1], pSet_Params[2]);
+ 760              		.loc 1 202 5 is_stmt 1 view .LVU171
  761 0046 D6E90423 		ldrd	r2, [r6, #16]
  762 004a CDE90223 		strd	r2, [sp, #8]
  763 004e D6E90223 		ldrd	r2, [r6, #8]
@@ -1077,17 +1076,17 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  766 005a 2846     		mov	r0, r5
  767 005c FFF7FEFF 		bl	PID_SetTunings
  768              	.LVL79:
- 204:Core/Src/PID.c **** }
-ARM GAS  /tmp/ccz4PHCf.s 			page 19
+ 203:Core/Src/PID.c **** }
+ 769              		.loc 1 203 1 is_stmt 0 view .LVU172
+ARM GAS  /tmp/cc9QEZ4P.s 			page 19
 
 
- 769              		.loc 1 204 1 is_stmt 0 view .LVU172
  770 0060 04B0     		add	sp, sp, #16
  771              	.LCFI12:
  772              		.cfi_def_cfa_offset 24
  773              		@ sp needed
  774 0062 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 775              		.loc 1 204 1 view .LVU173
+ 775              		.loc 1 203 1 view .LVU173
  776              		.cfi_endproc
  777              	.LFE73:
  779              		.section	.text.PID_FirstOrderFilter,"ax",%progbits
@@ -1100,16 +1099,16 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  787              	PID_FirstOrderFilter:
  788              	.LVL80:
  789              	.LFB74:
+ 204:Core/Src/PID.c **** 
  205:Core/Src/PID.c **** 
- 206:Core/Src/PID.c **** 
- 207:Core/Src/PID.c **** // Note: Nothing
- 208:Core/Src/PID.c **** double PID_FirstOrderFilter(double raw_sig, double last_filtered_sig, double a)
- 209:Core/Src/PID.c **** {
- 790              		.loc 1 209 1 is_stmt 1 view -0
+ 206:Core/Src/PID.c **** // Note: Nothing
+ 207:Core/Src/PID.c **** double PID_FirstOrderFilter(double raw_sig, double last_filtered_sig, double a)
+ 208:Core/Src/PID.c **** {
+ 790              		.loc 1 208 1 is_stmt 1 view -0
  791              		.cfi_startproc
  792              		@ args = 8, pretend = 0, frame = 0
  793              		@ frame_needed = 0, uses_anonymous_args = 0
- 794              		.loc 1 209 1 is_stmt 0 view .LVU175
+ 794              		.loc 1 208 1 is_stmt 0 view .LVU175
  795 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
  796              	.LCFI13:
  797              		.cfi_def_cfa_offset 32
@@ -1124,46 +1123,46 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  806 0004 0646     		mov	r6, r0
  807 0006 0F46     		mov	r7, r1
  808 0008 DDE90889 		ldrd	r8, [sp, #32]
- 210:Core/Src/PID.c ****     return  (a * last_filtered_sig +  (1-a) * raw_sig);
- 809              		.loc 1 210 5 is_stmt 1 view .LVU176
- 810              		.loc 1 210 16 is_stmt 0 view .LVU177
+ 209:Core/Src/PID.c ****     return  (a * last_filtered_sig +  (1-a) * raw_sig);
+ 809              		.loc 1 209 5 is_stmt 1 view .LVU176
+ 810              		.loc 1 209 16 is_stmt 0 view .LVU177
  811 000c 4046     		mov	r0, r8
  812              	.LVL81:
- 813              		.loc 1 210 16 view .LVU178
+ 813              		.loc 1 209 16 view .LVU178
  814 000e 4946     		mov	r1, r9
  815 0010 FFF7FEFF 		bl	__aeabi_dmul
  816              	.LVL82:
- 817              		.loc 1 210 16 view .LVU179
+ 817              		.loc 1 209 16 view .LVU179
  818 0014 0446     		mov	r4, r0
  819 0016 0D46     		mov	r5, r1
- 820              		.loc 1 210 41 view .LVU180
+ 820              		.loc 1 209 41 view .LVU180
  821 0018 4246     		mov	r2, r8
-ARM GAS  /tmp/ccz4PHCf.s 			page 20
-
-
  822 001a 4B46     		mov	r3, r9
+ARM GAS  /tmp/cc9QEZ4P.s 			page 20
+
+
  823 001c 0020     		movs	r0, #0
  824 001e 0749     		ldr	r1, .L57
  825 0020 FFF7FEFF 		bl	__aeabi_dsub
  826              	.LVL83:
- 827              		.loc 1 210 45 view .LVU181
+ 827              		.loc 1 209 45 view .LVU181
  828 0024 3246     		mov	r2, r6
  829 0026 3B46     		mov	r3, r7
  830 0028 FFF7FEFF 		bl	__aeabi_dmul
  831              	.LVL84:
  832 002c 0246     		mov	r2, r0
  833 002e 0B46     		mov	r3, r1
- 834              		.loc 1 210 36 view .LVU182
+ 834              		.loc 1 209 36 view .LVU182
  835 0030 2046     		mov	r0, r4
  836 0032 2946     		mov	r1, r5
  837 0034 FFF7FEFF 		bl	__aeabi_dadd
  838              	.LVL85:
- 211:Core/Src/PID.c **** }
- 839              		.loc 1 211 1 view .LVU183
+ 210:Core/Src/PID.c **** }
+ 839              		.loc 1 210 1 view .LVU183
  840 0038 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
  841              	.LVL86:
  842              	.L58:
- 843              		.loc 1 211 1 view .LVU184
+ 843              		.loc 1 210 1 view .LVU184
  844              		.align	2
  845              	.L57:
  846 003c 0000F03F 		.word	1072693248
@@ -1180,16 +1179,16 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  859              	PID_PreProcess:
  860              	.LVL87:
  861              	.LFB75:
+ 211:Core/Src/PID.c **** 
  212:Core/Src/PID.c **** 
- 213:Core/Src/PID.c **** 
- 214:Core/Src/PID.c **** // Do sampling and computing speed in RPM and PID Error
- 215:Core/Src/PID.c **** void PID_PreProcess(MOTOR_TypeDef *motor, double _set_speed)
- 216:Core/Src/PID.c **** {
- 862              		.loc 1 216 1 is_stmt 1 view -0
+ 213:Core/Src/PID.c **** // Do sampling and computing speed in RPM and PID Error
+ 214:Core/Src/PID.c **** void PID_PreProcess(MOTOR_TypeDef *motor, double _set_speed)
+ 215:Core/Src/PID.c **** {
+ 862              		.loc 1 215 1 is_stmt 1 view -0
  863              		.cfi_startproc
  864              		@ args = 0, pretend = 0, frame = 0
  865              		@ frame_needed = 0, uses_anonymous_args = 0
- 866              		.loc 1 216 1 is_stmt 0 view .LVU186
+ 866              		.loc 1 215 1 is_stmt 0 view .LVU186
  867 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
  868              	.LCFI14:
  869              		.cfi_def_cfa_offset 36
@@ -1198,10 +1197,10 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  872              		.cfi_offset 6, -28
  873              		.cfi_offset 7, -24
  874              		.cfi_offset 8, -20
-ARM GAS  /tmp/ccz4PHCf.s 			page 21
-
-
  875              		.cfi_offset 9, -16
+ARM GAS  /tmp/cc9QEZ4P.s 			page 21
+
+
  876              		.cfi_offset 10, -12
  877              		.cfi_offset 11, -8
  878              		.cfi_offset 14, -4
@@ -1211,71 +1210,71 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  882 0006 0446     		mov	r4, r0
  883 0008 9046     		mov	r8, r2
  884 000a 9946     		mov	r9, r3
- 217:Core/Src/PID.c **** 
- 218:Core/Src/PID.c ****     // Sampling: get ticks at the same time with getting encoder pos
- 219:Core/Src/PID.c ****     uint32_t enc_cnt = *(motor->ENC_ADDR); // Similar to enc_cnt = TIMx->CNT
- 885              		.loc 1 219 5 is_stmt 1 view .LVU187
- 886              		.loc 1 219 31 is_stmt 0 view .LVU188
+ 216:Core/Src/PID.c **** 
+ 217:Core/Src/PID.c ****     // Sampling: get ticks at the same time with getting encoder pos
+ 218:Core/Src/PID.c ****     uint32_t enc_cnt = *(motor->ENC_ADDR); // Similar to enc_cnt = TIMx->CNT
+ 885              		.loc 1 218 5 is_stmt 1 view .LVU187
+ 886              		.loc 1 218 31 is_stmt 0 view .LVU188
  887 000c C36B     		ldr	r3, [r0, #60]
- 888              		.loc 1 219 14 view .LVU189
+ 888              		.loc 1 218 14 view .LVU189
  889 000e D3F800B0 		ldr	fp, [r3]
  890              	.LVL88:
- 220:Core/Src/PID.c ****     uint32_t tick = HAL_GetTick();
- 891              		.loc 1 220 5 is_stmt 1 view .LVU190
- 892              		.loc 1 220 21 is_stmt 0 view .LVU191
+ 219:Core/Src/PID.c ****     uint32_t tick = HAL_GetTick();
+ 891              		.loc 1 219 5 is_stmt 1 view .LVU190
+ 892              		.loc 1 219 21 is_stmt 0 view .LVU191
  893 0012 FFF7FEFF 		bl	HAL_GetTick
  894              	.LVL89:
- 895              		.loc 1 220 21 view .LVU192
+ 895              		.loc 1 219 21 view .LVU192
  896 0016 0546     		mov	r5, r0
  897              	.LVL90:
- 221:Core/Src/PID.c ****     // End of sampling
- 222:Core/Src/PID.c **** 
- 223:Core/Src/PID.c ****     uint32_t d_tick = tick - motor->last_tick; // Calc the derivative of time
- 898              		.loc 1 223 5 is_stmt 1 view .LVU193
- 899              		.loc 1 223 35 is_stmt 0 view .LVU194
+ 220:Core/Src/PID.c ****     // End of sampling
+ 221:Core/Src/PID.c **** 
+ 222:Core/Src/PID.c ****     uint32_t d_tick = tick - motor->last_tick; // Calc the derivative of time
+ 898              		.loc 1 222 5 is_stmt 1 view .LVU193
+ 899              		.loc 1 222 35 is_stmt 0 view .LVU194
  900 0018 A369     		ldr	r3, [r4, #24]
  901              	.LVL91:
- 224:Core/Src/PID.c ****     if (d_tick <= 0) d_tick = 10;
- 902              		.loc 1 224 5 is_stmt 1 view .LVU195
- 903              		.loc 1 224 8 is_stmt 0 view .LVU196
+ 223:Core/Src/PID.c ****     if (d_tick <= 0) d_tick = 10;
+ 902              		.loc 1 223 5 is_stmt 1 view .LVU195
+ 903              		.loc 1 223 8 is_stmt 0 view .LVU196
  904 001a B0EB030A 		subs	r10, r0, r3
  905              	.LVL92:
- 906              		.loc 1 224 8 view .LVU197
+ 906              		.loc 1 223 8 view .LVU197
  907 001e 01D1     		bne	.L60
- 908              		.loc 1 224 29 view .LVU198
+ 908              		.loc 1 223 29 view .LVU198
  909 0020 4FF00A0A 		mov	r10, #10
  910              	.LVL93:
  911              	.L60:
- 225:Core/Src/PID.c **** 
- 226:Core/Src/PID.c ****     uint32_t last_enc_cnt = motor->last_enc_cnt;
- 912              		.loc 1 226 5 is_stmt 1 view .LVU199
- 913              		.loc 1 226 14 is_stmt 0 view .LVU200
+ 224:Core/Src/PID.c **** 
+ 225:Core/Src/PID.c ****     uint32_t last_enc_cnt = motor->last_enc_cnt;
+ 912              		.loc 1 225 5 is_stmt 1 view .LVU199
+ 913              		.loc 1 225 14 is_stmt 0 view .LVU200
  914 0024 E069     		ldr	r0, [r4, #28]
  915              	.LVL94:
- 227:Core/Src/PID.c **** 
- 228:Core/Src/PID.c ****     double d_measure = (enc_cnt>last_enc_cnt) ? (enc_cnt-last_enc_cnt) : (last_enc_cnt-enc_cnt);
- 916              		.loc 1 228 5 is_stmt 1 view .LVU201
- 917              		.loc 1 228 12 is_stmt 0 view .LVU202
+ 226:Core/Src/PID.c **** 
+ 227:Core/Src/PID.c ****     double d_measure = (enc_cnt>last_enc_cnt) ? (enc_cnt-last_enc_cnt) : (last_enc_cnt-enc_cnt);
+ 916              		.loc 1 227 5 is_stmt 1 view .LVU201
+ 917              		.loc 1 227 12 is_stmt 0 view .LVU202
  918 0026 8345     		cmp	fp, r0
  919 0028 2CD9     		bls	.L61
-ARM GAS  /tmp/ccz4PHCf.s 			page 22
+ 920              		.loc 1 227 12 discriminator 1 view .LVU203
+ARM GAS  /tmp/cc9QEZ4P.s 			page 22
 
 
- 920              		.loc 1 228 12 discriminator 1 view .LVU203
  921 002a ABEB0000 		sub	r0, fp, r0
  922              	.LVL95:
- 923              		.loc 1 228 12 discriminator 1 view .LVU204
+ 923              		.loc 1 227 12 discriminator 1 view .LVU204
  924 002e FFF7FEFF 		bl	__aeabi_ui2d
  925              	.LVL96:
- 926              		.loc 1 228 12 discriminator 1 view .LVU205
+ 926              		.loc 1 227 12 discriminator 1 view .LVU205
  927 0032 0646     		mov	r6, r0
  928 0034 0F46     		mov	r7, r1
  929              	.L62:
  930              	.LVL97:
- 229:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
- 230:Core/Src/PID.c ****     if (d_measure > 50) d_measure = motor->measure;
- 931              		.loc 1 230 5 is_stmt 1 discriminator 4 view .LVU206
- 932              		.loc 1 230 8 is_stmt 0 discriminator 4 view .LVU207
+ 228:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
+ 229:Core/Src/PID.c ****     if (d_measure > 50) d_measure = motor->measure;
+ 931              		.loc 1 229 5 is_stmt 1 discriminator 4 view .LVU206
+ 932              		.loc 1 229 8 is_stmt 0 discriminator 4 view .LVU207
  933 0036 0022     		movs	r2, #0
  934 0038 164B     		ldr	r3, .L68
  935 003a 3046     		mov	r0, r6
@@ -1283,15 +1282,15 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  937 003e FFF7FEFF 		bl	__aeabi_dcmpgt
  938              	.LVL98:
  939 0042 08B1     		cbz	r0, .L63
- 940              		.loc 1 230 25 is_stmt 1 discriminator 1 view .LVU208
- 941              		.loc 1 230 35 is_stmt 0 discriminator 1 view .LVU209
+ 940              		.loc 1 229 25 is_stmt 1 discriminator 1 view .LVU208
+ 941              		.loc 1 229 35 is_stmt 0 discriminator 1 view .LVU209
  942 0044 D4E90467 		ldrd	r6, [r4, #16]
  943              	.LVL99:
  944              	.L63:
- 231:Core/Src/PID.c ****     // Filter the measurement
- 232:Core/Src/PID.c ****     d_measure  = PID_FirstOrderFilter(d_measure, motor->measure, _1ST_FILTER_ALPHA);
- 945              		.loc 1 232 5 is_stmt 1 view .LVU210
- 946              		.loc 1 232 18 is_stmt 0 view .LVU211
+ 230:Core/Src/PID.c ****     // Filter the measurement
+ 231:Core/Src/PID.c ****     d_measure  = PID_FirstOrderFilter(d_measure, motor->measure, _1ST_FILTER_ALPHA);
+ 945              		.loc 1 231 5 is_stmt 1 view .LVU210
+ 946              		.loc 1 231 18 is_stmt 0 view .LVU211
  947 0048 0022     		movs	r2, #0
  948 004a 134B     		ldr	r3, .L68+4
  949 004c CDE90023 		strd	r2, [sp]
@@ -1300,47 +1299,47 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  952 0056 3946     		mov	r1, r7
  953 0058 FFF7FEFF 		bl	PID_FirstOrderFilter
  954              	.LVL100:
- 233:Core/Src/PID.c **** 
- 234:Core/Src/PID.c ****     motor->measure = d_measure;
- 955              		.loc 1 234 5 is_stmt 1 view .LVU212
- 956              		.loc 1 234 20 is_stmt 0 view .LVU213
+ 232:Core/Src/PID.c **** 
+ 233:Core/Src/PID.c ****     motor->measure = d_measure;
+ 955              		.loc 1 233 5 is_stmt 1 view .LVU212
+ 956              		.loc 1 233 20 is_stmt 0 view .LVU213
  957 005c C4E90401 		strd	r0, [r4, #16]
- 235:Core/Src/PID.c **** 
- 236:Core/Src/PID.c ****     PID_ComputeSpeedRPM( motor, d_tick );
- 958              		.loc 1 236 5 is_stmt 1 view .LVU214
+ 234:Core/Src/PID.c **** 
+ 235:Core/Src/PID.c ****     PID_ComputeSpeedRPM( motor, d_tick );
+ 958              		.loc 1 235 5 is_stmt 1 view .LVU214
  959 0060 5146     		mov	r1, r10
  960 0062 2046     		mov	r0, r4
  961              	.LVL101:
- 962              		.loc 1 236 5 is_stmt 0 view .LVU215
+ 962              		.loc 1 235 5 is_stmt 0 view .LVU215
  963 0064 FFF7FEFF 		bl	PID_ComputeSpeedRPM
  964              	.LVL102:
- 237:Core/Src/PID.c ****     PID_SetSpeedRPM( motor , _set_speed );
- 965              		.loc 1 237 5 is_stmt 1 view .LVU216
+ 236:Core/Src/PID.c ****     PID_SetSpeedRPM( motor , _set_speed );
+ 965              		.loc 1 236 5 is_stmt 1 view .LVU216
  966 0068 4246     		mov	r2, r8
  967 006a 4B46     		mov	r3, r9
-ARM GAS  /tmp/ccz4PHCf.s 			page 23
-
-
  968 006c 2046     		mov	r0, r4
+ARM GAS  /tmp/cc9QEZ4P.s 			page 23
+
+
  969 006e FFF7FEFF 		bl	PID_SetSpeedRPM
  970              	.LVL103:
- 238:Core/Src/PID.c ****     PID_ComputeError( motor );
- 971              		.loc 1 238 5 view .LVU217
+ 237:Core/Src/PID.c ****     PID_ComputeError( motor );
+ 971              		.loc 1 237 5 view .LVU217
  972 0072 2046     		mov	r0, r4
  973 0074 FFF7FEFF 		bl	PID_ComputeError
  974              	.LVL104:
- 239:Core/Src/PID.c ****  
- 240:Core/Src/PID.c ****     motor->last_tick = tick;
- 975              		.loc 1 240 5 view .LVU218
- 976              		.loc 1 240 22 is_stmt 0 view .LVU219
+ 238:Core/Src/PID.c ****  
+ 239:Core/Src/PID.c ****     motor->last_tick = tick;
+ 975              		.loc 1 239 5 view .LVU218
+ 976              		.loc 1 239 22 is_stmt 0 view .LVU219
  977 0078 A561     		str	r5, [r4, #24]
- 241:Core/Src/PID.c ****     motor->last_enc_cnt = enc_cnt;
- 978              		.loc 1 241 5 is_stmt 1 view .LVU220
- 979              		.loc 1 241 25 is_stmt 0 view .LVU221
+ 240:Core/Src/PID.c ****     motor->last_enc_cnt = enc_cnt;
+ 978              		.loc 1 240 5 is_stmt 1 view .LVU220
+ 979              		.loc 1 240 25 is_stmt 0 view .LVU221
  980 007a C4F81CB0 		str	fp, [r4, #28]
- 242:Core/Src/PID.c **** 
- 243:Core/Src/PID.c **** }
- 981              		.loc 1 243 1 view .LVU222
+ 241:Core/Src/PID.c **** 
+ 242:Core/Src/PID.c **** }
+ 981              		.loc 1 242 1 view .LVU222
  982 007e 03B0     		add	sp, sp, #12
  983              	.LCFI16:
  984              		.cfi_remember_state
@@ -1351,16 +1350,16 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  989              	.L61:
  990              	.LCFI17:
  991              		.cfi_restore_state
- 228:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
- 992              		.loc 1 228 12 discriminator 2 view .LVU223
+ 227:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
+ 992              		.loc 1 227 12 discriminator 2 view .LVU223
  993 0084 A0EB0B00 		sub	r0, r0, fp
  994              	.LVL106:
- 228:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
- 995              		.loc 1 228 12 discriminator 2 view .LVU224
+ 227:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
+ 995              		.loc 1 227 12 discriminator 2 view .LVU224
  996 0088 FFF7FEFF 		bl	__aeabi_ui2d
  997              	.LVL107:
- 228:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
- 998              		.loc 1 228 12 discriminator 2 view .LVU225
+ 227:Core/Src/PID.c ****     // Handle overflow or underflow of encoder interfacing timer
+ 998              		.loc 1 227 12 discriminator 2 view .LVU225
  999 008c 0646     		mov	r6, r0
  1000 008e 0F46     		mov	r7, r1
  1001 0090 D1E7     		b	.L62
@@ -1378,10 +1377,10 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  1014              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
  1015              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
  1016              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-ARM GAS  /tmp/ccz4PHCf.s 			page 24
-
-
  1017              		.file 7 "Core/Inc/PID.h"
+ARM GAS  /tmp/cc9QEZ4P.s 			page 24
+
+
  1018              		.file 8 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
  1019              		.file 9 "/usr/include/newlib/sys/_types.h"
  1020              		.file 10 "/usr/include/newlib/sys/reent.h"
@@ -1389,37 +1388,37 @@ ARM GAS  /tmp/ccz4PHCf.s 			page 1
  1022              		.file 12 "/usr/include/newlib/math.h"
  1023              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
  1024              		.file 14 "<built-in>"
-ARM GAS  /tmp/ccz4PHCf.s 			page 25
+ARM GAS  /tmp/cc9QEZ4P.s 			page 25
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 PID.c
-     /tmp/ccz4PHCf.s:21     .text.PID_ComputeSpeedRPM:0000000000000000 $t
-     /tmp/ccz4PHCf.s:29     .text.PID_ComputeSpeedRPM:0000000000000000 PID_ComputeSpeedRPM
-     /tmp/ccz4PHCf.s:82     .text.PID_ComputeSpeedRPM:0000000000000038 $d
-     /tmp/ccz4PHCf.s:90     .text.PID_SetSpeedRPM:0000000000000000 $t
-     /tmp/ccz4PHCf.s:97     .text.PID_SetSpeedRPM:0000000000000000 PID_SetSpeedRPM
-     /tmp/ccz4PHCf.s:157    .text.PID_SetSpeedMPS:0000000000000000 $t
-     /tmp/ccz4PHCf.s:164    .text.PID_SetSpeedMPS:0000000000000000 PID_SetSpeedMPS
-     /tmp/ccz4PHCf.s:205    .text.PID_SetSpeedMPS:0000000000000028 $d
-     /tmp/ccz4PHCf.s:213    .text.PID_ComputeError:0000000000000000 $t
-     /tmp/ccz4PHCf.s:220    .text.PID_ComputeError:0000000000000000 PID_ComputeError
-     /tmp/ccz4PHCf.s:255    .text.PID_Limit:0000000000000000 $t
-     /tmp/ccz4PHCf.s:262    .text.PID_Limit:0000000000000000 PID_Limit
-     /tmp/ccz4PHCf.s:319    .text.PID_ComputeOutput:0000000000000000 $t
-     /tmp/ccz4PHCf.s:326    .text.PID_ComputeOutput:0000000000000000 PID_ComputeOutput
-     /tmp/ccz4PHCf.s:554    .text.PID_SetDuty:0000000000000000 $t
-     /tmp/ccz4PHCf.s:561    .text.PID_SetDuty:0000000000000000 PID_SetDuty
-     /tmp/ccz4PHCf.s:649    .text.PID_SetTunings:0000000000000000 $t
-     /tmp/ccz4PHCf.s:656    .text.PID_SetTunings:0000000000000000 PID_SetTunings
-     /tmp/ccz4PHCf.s:683    .text.PID_MotorInit:0000000000000000 $t
-     /tmp/ccz4PHCf.s:690    .text.PID_MotorInit:0000000000000000 PID_MotorInit
-     /tmp/ccz4PHCf.s:780    .text.PID_FirstOrderFilter:0000000000000000 $t
-     /tmp/ccz4PHCf.s:787    .text.PID_FirstOrderFilter:0000000000000000 PID_FirstOrderFilter
-     /tmp/ccz4PHCf.s:846    .text.PID_FirstOrderFilter:000000000000003c $d
-     /tmp/ccz4PHCf.s:852    .text.PID_PreProcess:0000000000000000 $t
-     /tmp/ccz4PHCf.s:859    .text.PID_PreProcess:0000000000000000 PID_PreProcess
-     /tmp/ccz4PHCf.s:1005   .text.PID_PreProcess:0000000000000094 $d
+     /tmp/cc9QEZ4P.s:21     .text.PID_ComputeSpeedRPM:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:29     .text.PID_ComputeSpeedRPM:0000000000000000 PID_ComputeSpeedRPM
+     /tmp/cc9QEZ4P.s:82     .text.PID_ComputeSpeedRPM:0000000000000038 $d
+     /tmp/cc9QEZ4P.s:90     .text.PID_SetSpeedRPM:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:97     .text.PID_SetSpeedRPM:0000000000000000 PID_SetSpeedRPM
+     /tmp/cc9QEZ4P.s:157    .text.PID_SetSpeedMPS:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:164    .text.PID_SetSpeedMPS:0000000000000000 PID_SetSpeedMPS
+     /tmp/cc9QEZ4P.s:205    .text.PID_SetSpeedMPS:0000000000000028 $d
+     /tmp/cc9QEZ4P.s:213    .text.PID_ComputeError:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:220    .text.PID_ComputeError:0000000000000000 PID_ComputeError
+     /tmp/cc9QEZ4P.s:255    .text.PID_Limit:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:262    .text.PID_Limit:0000000000000000 PID_Limit
+     /tmp/cc9QEZ4P.s:319    .text.PID_ComputeOutput:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:326    .text.PID_ComputeOutput:0000000000000000 PID_ComputeOutput
+     /tmp/cc9QEZ4P.s:554    .text.PID_SetDuty:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:561    .text.PID_SetDuty:0000000000000000 PID_SetDuty
+     /tmp/cc9QEZ4P.s:649    .text.PID_SetTunings:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:656    .text.PID_SetTunings:0000000000000000 PID_SetTunings
+     /tmp/cc9QEZ4P.s:683    .text.PID_MotorInit:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:690    .text.PID_MotorInit:0000000000000000 PID_MotorInit
+     /tmp/cc9QEZ4P.s:780    .text.PID_FirstOrderFilter:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:787    .text.PID_FirstOrderFilter:0000000000000000 PID_FirstOrderFilter
+     /tmp/cc9QEZ4P.s:846    .text.PID_FirstOrderFilter:000000000000003c $d
+     /tmp/cc9QEZ4P.s:852    .text.PID_PreProcess:0000000000000000 $t
+     /tmp/cc9QEZ4P.s:859    .text.PID_PreProcess:0000000000000000 PID_PreProcess
+     /tmp/cc9QEZ4P.s:1005   .text.PID_PreProcess:0000000000000094 $d
 
 UNDEFINED SYMBOLS
 __aeabi_ui2f

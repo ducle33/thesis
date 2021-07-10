@@ -13,7 +13,7 @@
             "servertype": "openocd",
             "device": "STM32F103C8T6",
             // Linux 
-            // "gdbPath": "/bin/gdb-multiarch",
+            "gdbPath": "/bin/gdb-multiarch",
             "configFiles": [
                 "interface/stlink-v2.cfg",
                 "target/stm32f1x.cfg"
