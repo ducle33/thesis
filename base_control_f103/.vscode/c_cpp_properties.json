@@ -15,7 +15,7 @@
             // Windows 
             // "compilerPath": "${env:ARMGCC_DIR}/arm-none-eabi-gcc.exe",
             // Linux
-            "compilerPath": "usr/bin/arm-none-eabi-gcc",
+            "compilerPath": "/bin/arm-none-eabi-gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-arm",

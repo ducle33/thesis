@@ -209,23 +209,23 @@ void setup_wifi()
     delay(100);
   }
 //  Serial.println("");
-//  Serial.println("WiFi connected");
-//  Serial.println("IP address: ");
-//  Serial.println(WiFi.localIP());
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
 
   // Broadcast ready state
   memset(data, 0, sizeof(data));
-  data[0] = 0xF0;
-  data[1] = 0xF0;
-  data[2] = 0xF0;
-  print_data(); 
-  memset(data, 0, sizeof(data));
+  // Send a RESET signal
+  
 }
 
+char reset_stm32 =false;
 void setup()
 {
   // Set up connection
   pinMode(2, OUTPUT); 
+  pinMode(16, OUTPUT);
+  digitalWrite(16,1);
   digitalWrite(2, 1);
   setup_wifi();
   // Set the connection to rosserial socket server
@@ -236,6 +236,7 @@ void setup()
   last_f_angular = 0.0f;
   digitalWrite(2, 0);
   broadcaster.init(nh);
+  Serial.print("Reset STM32 ...");
 }
 
 char c, last_c;
@@ -244,11 +245,16 @@ int i  = 0;
 bool tx_ready = false;
 void loop()
 {
-
   double vx, vth, dt;
     // When ros connected 
   if (nh.connected()) {
-    
+      if (reset_stm32 == false)
+      {
+          digitalWrite(16,0);
+          delay(100);
+          digitalWrite(16,1);
+          reset_stm32 = true;
+      }
       // Send cmd_vel data to base control
       if (new_cmd_vel) 
       { 
