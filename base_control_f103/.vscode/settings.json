@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "frame_resolve.h": "c"
+        "frame_resolve.h": "c",
+        "stm32f1xx_hal.h": "c"
     }
 }
