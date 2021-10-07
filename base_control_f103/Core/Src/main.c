@@ -49,7 +49,9 @@
 #define FALSE   0
 #define TRUE    1
 
-// #define DEBUG
+// #define UART_DEBUG  // Enable UART debugging lines
+#define TF_UPDATE // Enable update TF packages through UART
+#define DEBUG_TF_UPDATE 
 
 /* USER CODE END PD */
 
@@ -218,10 +220,10 @@ int main(void)
             right_set_speed = ( linear_vel + angular_vel*ROBOT_WHEEL_BASE/2) * 60/ ( PI * ROBOT_WHEEL_DIAMETER );
           }
 
-          #ifdef DEBUG
+          #ifdef UART_DEBUG
           if (linear_vel != last_l_vel || angular_vel != last_a_vel)
           {
-              sprintf((char *)MSG, "R: %.5f | L: %.5f \n", right_set_speed, left_set_speed);
+              sprintf((char *)MSG, "R: %.5f | L: %.5f \n", linear_vel, angular_vel);
               HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
           }
           // HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_6);
@@ -233,14 +235,15 @@ int main(void)
       }
       #endif
       // Send 
+      #ifdef TF_UPDATE
       tick = HAL_GetTick();
       uint32_t dtick = tick - last_tick;
       if (dtick > 200)
       {
           
           double dt = dtick / 1000.0f;
-          // double vx = 0.1f; // M
-          // double vth = 0.1f; // Rad
+          // double vx = 0.83278327; // M
+          // double vth = 0.2312331; // Rad
 
           // Publish odometry data
           double left_speed =  (str_left_motor.dir == 0) ? str_left_motor.speed : (- str_left_motor.speed);
@@ -251,21 +254,20 @@ int main(void)
           parseTxStateFrame(tx_state_frame, vx, vth, dt);         
           HAL_UART_Transmit_DMA(&huart1 ,tx_state_frame, 32);
 
-          #ifdef DEBUG
-          sprintf((char *)MSG, "X: %.5f | Y: %.5f | Theta: %.5f \n", delta_x, delta_y, delta_th);
-          HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
-          for (uint8_t i = 0; i <32; i++)
-          {
-              
-              printf("%x", tx_state_frame[i]);
-          }
-          printf("\n");
+          #ifdef DEBUG_TF_UPDATE
+          // sprintf((char *)MSG, "X: %.5f | Y: %.5f | Theta: %.5f \n", vx, vth, dt);
+          // HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
+
+          // sprintf((char *)MSG, tx_state_frame);
+          // HAL_UART_Transmit_DMA(&huart1 ,MSG, 32);
+
           #endif
           // sprintf((char *)MSG, "vth = %f \n",vth);
           // HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
 
           last_tick = tick;
       }
+      #endif
     }
   /* USER CODE END 3 */
 }

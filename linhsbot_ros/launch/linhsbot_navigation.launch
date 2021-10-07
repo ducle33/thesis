@@ -1,0 +1,40 @@
+<launch>
+
+  <!-- Arguments -->
+  <arg name="depth_registration"              default="true"/>
+  <arg if="$(arg depth_registration)" name="depth" value="depth_registered" />
+  <arg unless="$(arg depth_registration)" name="depth" value="depth" />
+
+  <arg name="scan_processing"              default="true"/>
+  <arg name="camera"      default="camera"/>
+
+
+  <arg name="open_rviz" default="true"/>
+  <arg name="rtabmapviz" default="false"/>
+  <arg name="hardware_ready" default="false"/>
+  <arg name="man_teleop" default="true"/>
+
+  <arg name="with_camera" default="true"/>
+  <arg name="localization" default="false"/>
+  <arg name="database_path" default="~/.ros/rtabmap.db"/>
+  <arg     if="$(arg localization)" name="rtabmap_args" default="  --delete_db_on_start"/>
+  <arg unless="$(arg localization)" name="rtabmap_args" default="-d  --delete_db_on_start"/>
+
+  <!-- robot model, state publisher -->
+  <include file="$(find linhsbot)/launch/linhsbot_init.launch">
+  </include>
+
+  <!-- kinect driver -->
+  <include file="$(find linhsbot)/launch/linhsbot_kinect.launch">
+  </include>
+
+
+
+
+  <!-- rviz -->
+  <group if="$(arg open_rviz)"> 
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+          args="-d $(find linhsbot)/rviz/preconfig_linhsbot.rviz"/>
+  </group>
+
+</launch>

@@ -35,12 +35,12 @@ void PID_SetSpeedRPM(MOTOR_TypeDef *motor, double _set_speed)
 {
     if (_set_speed >= 0) 
     {
-        motor->dir = 1;
+        motor->dir = 0;
         motor->set_speed = _set_speed;
     } 
     else 
     {
-        motor->dir = 0;
+        motor->dir = 1;
         motor->set_speed = - (_set_speed);
     }    
 }

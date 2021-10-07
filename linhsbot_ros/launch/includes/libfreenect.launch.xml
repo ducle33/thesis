@@ -1,0 +1,11 @@
+<!-- This file for launching freenect driver -->
+
+<launch>
+
+  <!-- Factory-calibrated depth registration -->
+  <arg name="depth_registration"              default="true"/>
+
+  <include file="$(find freenect_launch)/launch/freenect.launch">
+    <arg name="depth_registration"              value="$(arg depth_registration)"/>
+  </include>
+</launch>
