@@ -7,26 +7,31 @@
 
 import threading
 import serial
+import math
 import struct
 import signal
 import sys
 import time
+
 import rospy
 from geometry_msgs.msg import Twist
+from rospy import Time 
 import tf
 
 connected = False
 exit_event = threading.Event()
-port = '/dev/ttyUSB1'
+port = '/dev/ttyUSB0'
 baud = 115200
 
 serial_port = serial.Serial(port, baud, timeout=0)
 
-vel_x = 0.5
-vel_z = 0.1
+vel_x = 0
+vel_z = 0
 x = 0
 y = 0
 theta = 0
+br = tf.TransformBroadcaster()
+tf_ready = 0
 
 def parse_tx(vel_x, vel_z):
     # convert to byte arrays
@@ -48,8 +53,17 @@ def parse_tx(vel_x, vel_z):
     return dframe
 
 
+def tf_publish():
+    br = tf.TransformBroadcaster()
+    br.sendTransform((x, y, 0),
+                 tf.transformations.quaternion_from_euler(0, 0, theta),
+                 rospy.Time.now(),
+                 "base_link",
+                 "odom")
+
+
 def handle_data(data):
-    global x, y, theta
+    global x, y, theta, tf_ready
     # Get checksum and resolve frame 
     checksum = sum(data[2:26])
     # test = struct.unpack('>i', data[26:28])[0]
@@ -59,17 +73,18 @@ def handle_data(data):
         vth = struct.unpack('>d', data[10:18])[0]
         dt = struct.unpack('>d', data[18:26])[0]
 
-        x += cos(theta)*vx*dt;
-        y += sin(theta)*vx*dt;
+        x += math.cos(theta)*vx*dt;
+        y += math.sin(theta)*vx*dt;
         theta += vth * dt;
+        # print(f"TF update : x = {x}, y = {y}, theta = {theta}")
         # print(vx, vth, dt, checksum)
+        if tf_ready:
+            br.sendTransform((x, y, 0),
+                 tf.transformations.quaternion_from_euler(0, 0, theta),
+                 rospy.Time.now(),
+                 "base_link",
+                 "odom")
 
-        br = tf.TransformBroadcaster()
-        br.sendTransform((x, y, 0),
-                     tf.transformations.quaternion_from_euler(0, 0, theta),
-                     rospy.Time.now(),
-                     "base_link",
-                     "odom")
 
 
 def read_from_port(ser):
@@ -87,10 +102,13 @@ def read_from_port(ser):
                         temp_data = reading
                     elif dlen==32:
                         handle_data(reading)
+                        
                 else:
-                    if dlen<32 and temp_data!=0:
+                    if dlen<32 and temp_data!=0 and len(temp_data+reading)==32:
                         handle_data(temp_data+reading)
                         temp_data = 0
+                    else:
+                        pass
 
             time.sleep(0.02)
             if exit_event.is_set():
@@ -105,11 +123,14 @@ def cmd_vel_callback(msg):
     serial_port.write(data)
     
 def ros_worker():
-    rospy.init_node('linhsbot_tf_broadcaster')
+    global br
+
     rospy.init_node('base_control_listener', anonymous=True)
     print("Init node success ...")
     rospy.Subscriber("cmd_vel", Twist, cmd_vel_callback)
     print("Subscribe /cmd_vel success ...")
+    tf_ready = 1
+    print("TF publishing ready ...")
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
 
@@ -123,6 +144,7 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, signal_handler)
     thread = threading.Thread(target=read_from_port, args=(serial_port,))
     thread.start()
+    
     try:
         ros_worker()
     except KeyboardInterrupt:

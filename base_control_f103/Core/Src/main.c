@@ -241,9 +241,9 @@ int main(void)
       if (dtick > 200)
       {
           
-          double dt = dtick / 1000.0f;
-          // double vx = 0.83278327; // M
-          // double vth = 0.2312331; // Rad
+          double dt = 0.2000f;
+          // double vx = 0.1; // M
+          // double vth = 0.5; // Rad
 
           // Publish odometry data
           double left_speed =  (str_left_motor.dir == 0) ? str_left_motor.speed : (- str_left_motor.speed);
