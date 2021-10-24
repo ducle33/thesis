@@ -16,7 +16,7 @@
 #include <tf/tf.h>
 #include <ros/time.h>
 
-#define DEBUG/
+//#define DEBUG/
 // FRAME CONFIGS ===============================
 byte data[16];
 

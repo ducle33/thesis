@@ -6,11 +6,11 @@
   <group> 
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
     <!-- init teleop in new terminal -->
-    <node if="$(arg man_teleop)" name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" args="_speed:=0.1 _turn:=0.2"
+    <node name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" args="_speed:=0.1 _turn:=0.2"
            launch-prefix="gnome-terminal --window -e" >
     </node>
     <!-- init rosserial in new tab -->
-    <node if="$(arg hardware_ready)" name="base_control" pkg="rosserial_python" type="serial_node.py" output="screen" args="tcp"
+    <node name="base_control" pkg="linhsbot" type="control.py" output="screen" 
            launch-prefix="gnome-terminal --tab -e" >
     </node>
   </group>

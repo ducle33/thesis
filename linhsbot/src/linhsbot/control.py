@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+
 # ## BASE_CONTROL 
 # Author: Linh Nguyen (dlinhvn@gmail.com)
 # Created: 3/10/2021
@@ -7,7 +10,7 @@
 
 import threading
 import serial
-import math
+from math import cos, sin
 import struct
 import signal
 import sys
@@ -17,13 +20,15 @@ import rospy
 from geometry_msgs.msg import Twist
 from rospy import Time 
 import tf
+from nav_msgs.msg import Odometry
+from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
 
 connected = False
-exit_event = threading.Event()
+#exit_event = threading.Event()
 port = '/dev/ttyUSB0'
 baud = 115200
 
-serial_port = serial.Serial(port, baud, timeout=0)
+#serial_port = serial.Serial(port, baud, timeout=0)
 
 vel_x = 0
 vel_z = 0
@@ -73,9 +78,11 @@ def handle_data(data):
         vth = struct.unpack('>d', data[10:18])[0]
         dt = struct.unpack('>d', data[18:26])[0]
 
-        x += math.cos(theta)*vx*dt;
-        y += math.sin(theta)*vx*dt;
-        theta += vth * dt;
+        x += 0
+        y += 0
+        theta += vth * dt
+        tf_ready = 1
+        
         # print(f"TF update : x = {x}, y = {y}, theta = {theta}")
         # print(vx, vth, dt, checksum)
         if tf_ready:
@@ -119,18 +126,48 @@ def read_from_port(ser):
 def cmd_vel_callback(msg):
     data = parse_tx(msg.linear.x, msg.angular.z)
     sync = bytearray([0x16, 0x16, 0x16])
-    serial_port.write(sync)
-    serial_port.write(data)
+    #serial_port.write(sync)
+    #serial_port.write(data)
     
 def ros_worker():
     global br
 
     rospy.init_node('base_control_listener', anonymous=True)
     print("Init node success ...")
-    rospy.Subscriber("cmd_vel", Twist, cmd_vel_callback)
+    cmd_vel_sub = rospy.Subscriber("cmd_vel", Twist, cmd_vel_callback)
+    odom_pub = rospy.Publisher("odom", Odometry, queue_size=50)
     print("Subscribe /cmd_vel success ...")
     tf_ready = 1
     print("TF publishing ready ...")
+    x = 0
+    y = 0
+    theta = 0.5
+    vx = 0
+    vy = 0
+    vth = 0
+    while True:
+        current_time = rospy.Time.now()
+        odom_quat = tf.transformations.quaternion_from_euler(0, 0, theta)
+
+        br.sendTransform((x, y, 0), odom_quat, current_time,"base_link","odom")
+        
+        # next, we'll publish the odometry message over ROS
+        odom = Odometry()
+        odom.header.stamp = current_time
+        odom.header.frame_id = "odom"
+
+        # set the position
+        odom.pose.pose = Pose(Point(x, y, 0.), Quaternion(*odom_quat))
+
+        # set the velocity
+        odom.child_frame_id = "base_link"
+        odom.twist.twist = Twist(Vector3(vx, vy, 0), Vector3(0, 0, vth))
+
+        # publish the message
+        odom_pub.publish(odom)
+
+
+        time.sleep(0.1)
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
 
@@ -141,15 +178,15 @@ def signal_handler(signum, frame):
 
 if __name__ == '__main__':
 
-    signal.signal(signal.SIGINT, signal_handler)
-    thread = threading.Thread(target=read_from_port, args=(serial_port,))
-    thread.start()
+    #signal.signal(signal.SIGINT, signal_handler)
+    #thread = threading.Thread(target=read_from_port, args=(serial_port,))
+    #thread.start()
     
     try:
         ros_worker()
     except KeyboardInterrupt:
-        thread.join()
-        sys.exit()
+        #thread.join()
+        sys.exit(0)
         
 
 
