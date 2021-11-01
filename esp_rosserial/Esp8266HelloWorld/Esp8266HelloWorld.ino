@@ -1,4 +1,3 @@
-
 /*
  * rosserial Publisher Example
  * Prints "hello world!"
@@ -45,7 +44,7 @@ unsigned long ms;
 const char* ssid     = "Phuong";
 const char* password = "0985587344";
 // Set the rosserial socket server IP address
-IPAddress server(192,168,1,7);
+IPAddress server(192,168,1,25);
 // Set the rosserial socket server port
 const uint16_t serverPort = 11411;
 void cmd_velCallback(const geometry_msgs::Twist& CVel);

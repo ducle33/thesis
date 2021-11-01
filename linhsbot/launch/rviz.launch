@@ -1,0 +1,12 @@
+<launch>
+  <arg name="open_rviz" default="true"/>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find linhsbot)/urdf/linhsbot.xacro'"/>
+
+  <!-- Combine joint values -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    
+
+</launch>
+
+
+

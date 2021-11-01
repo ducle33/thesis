@@ -1,0 +1,173 @@
+<?xml version="1.0"?>  
+ <robot name="linhsbot">
+    <link name="base_link">
+    	<pose> 0 0 0.0 0 0 0</pose>
+      	<visual>
+        	<geometry>
+          		<box size="0.20 0.20 0.05"/>
+        	</geometry>
+        	<origin rpy="0 0 0" xyz="-0.07 0 0.09"/>
+        	<material name="white">
+          		<color rgba="1 1 1 1"/>
+        	</material>
+		</visual>	
+    </link>
+
+    <!--  left wheel description -->
+    <link name="wheel_left">
+      <visual>
+        <geometry>
+          <cylinder length="0.025" radius="0.0325"/>
+        </geometry>
+        <origin rpy="1.57 0 0" xyz="0 0.1025 0.0325"/>
+        <material name="black">
+          <color rgba="0 0 0 1"/>
+        </material>
+      </visual>
+    </link>
+
+
+
+    <link name="motor_left">
+      <visual>
+        <geometry>
+          <cylinder length="0.07" radius="0.015"/>
+        </geometry>
+        <origin rpy="1.57 0 0" xyz="0 0.05 0.0325"/>
+        <material name="white">
+        </material>
+      </visual>
+    </link>
+
+    <!--  right wheel description -->
+    <link name="wheel_right">
+      <visual>
+        <geometry>
+          <cylinder length="0.025" radius="0.0325"/>
+        </geometry>
+        <origin rpy="1.57 0 0" xyz="0 -0.1025 0.0325"/>
+          <material name="black"/>
+      </visual>
+    </link>
+
+	<link name="motor_right">
+      <visual>
+        <geometry>
+          <cylinder length="0.07" radius="0.015"/>
+        </geometry>
+        <origin rpy="1.57 0 0" xyz="0 -0.05 0.0325"/>
+        <material name="white">
+        </material>
+      </visual>
+    </link>
+
+    <!-- wheel track description -->
+    <link name="bottom_plate">
+      <visual>
+        <geometry>
+          <box size="0.26 0.23 0.005"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="-0.07 0 0.065"/>
+        <material name="white"/>
+      </visual>
+    </link>
+
+    <!-- wheel track description -->
+    <link name="top_plate">
+      <visual>
+        <geometry>
+          <box size="0.26 0.23 0.005"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="-0.07 0 0.12"/>
+        <material name="white"/>
+      </visual>
+    </link>
+
+    <!-- camera_link description -->
+    <link name="camera_link">
+      <visual>
+        <geometry>
+          <box size="0.06 0.28 0.04"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0.23"/>
+        <material name="black"/>
+      </visual>
+    </link>
+
+	<link name="camera_link_join">
+       <visual>
+         <geometry>
+           <box size="0.04 0.23 0.06"/>
+         </geometry>
+         <origin rpy="0 0 0" xyz="0 0 0.145"/>
+         <material name="white">
+          <color rgba="1 1 1 1"/>
+         </material>
+       </visual>
+     </link>
+	
+	<link name="camera_link_join1">
+       <visual>
+         <geometry>
+           <box size="0.06 0.08 0.04"/>
+         </geometry>
+         <origin rpy="0 0 0" xyz="0 0 0.19"/>
+         <material name="black"/>
+       </visual>
+     </link>
+
+    <!-- JOIN ALL  -->
+    <joint name="left_wheel_join" type="fixed">
+      <parent link="base_link"/>
+      <child link="wheel_left"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+
+    <joint name="right_wheel_join" type="fixed">
+      <parent link="base_link"/>
+      <child link="wheel_right"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+
+	<joint name="base_to_motor_left" type="fixed">
+      <parent link="base_link"/>
+      <child link="motor_left"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+
+    <joint name="base_to_motor_right" type="fixed">
+      <parent link="base_link"/>
+      <child link="motor_right"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+
+    <joint name="base_to_top_plate" type="fixed">
+      <parent link="base_link"/>
+      <child link="top_plate"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+
+    <joint name="base_to_bottom_plate" type="fixed">
+      <parent link="base_link"/>
+      <child link="bottom_plate"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+
+    <joint name="base_to_camera_link" type="fixed">
+      <parent link="base_link"/>
+      <child link="camera_link"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+
+	<joint name="base_to_camera_link_att" type="fixed">
+      <parent link="base_link"/>
+      <child link="camera_link_join"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+	<joint name="base_to_camera_link_att1" type="fixed">
+      <parent link="base_link"/>
+      <child link="camera_link_join1"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+  </robot>
+

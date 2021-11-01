@@ -1,0 +1,30 @@
+<!-- This file contains launch operations of KINECT 3D sensor. 
+    Libfreenect driver is used.
+-->
+
+<launch>
+
+  <arg name="depth_registration"              default="true"/>
+  <arg if="$(arg depth_registration)" name="depth" value="depth_registered" />
+  <arg unless="$(arg depth_registration)" name="depth" value="depth" />
+
+
+  <include file="$(find linhsbot)/launch/includes/libfreenect.launch.xml">
+    <arg name="depth_registration"              value="$(arg depth_registration)"/>
+  </include>
+
+  
+  <!-- Convert to laserscan for working of DWA Planner -->
+  <group>
+    <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" args="">
+      <param name="scan_height" value="5"/>
+      <param name="output_frame_id" value="camera_link"/>
+      <param name="range_min" value="0.45"/>
+      <param name="range_max" value="4.5"/>
+      <remap from="camera_info" to="/camera/depth_registered/camera_info" />
+      <remap from="image" to="/camera/depth_registered/image_raw"/>
+    </node>
+  </group>
+
+
+</launch>
