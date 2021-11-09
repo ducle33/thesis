@@ -1,0 +1,3 @@
+Sensor readings with offsets:   7       -4      16391   0       1       0
+
+Your offsets:   -947    156     1068    89      38      -11
