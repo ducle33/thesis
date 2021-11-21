@@ -27,7 +27,6 @@
     </link>
 
 
-
     <link name="motor_left">
       <visual>
         <geometry>
@@ -80,6 +79,17 @@
         </geometry>
         <origin rpy="0 0 0" xyz="-0.07 0 0.12"/>
         <material name="white"/>
+      </visual>
+    </link>
+
+	<!--IMU-->
+	<link name="imu_link">
+      <visual>
+        <geometry>
+          <box size="0.01 0.02 0.005"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="-0.08 0 0.066"/>
+        <material name="black"/>
       </visual>
     </link>
 
@@ -159,7 +169,13 @@
       <origin xyz="0 0 0"/>
     </joint>
 
-	<joint name="base_to_camera_link_att" type="fixed">
+	<joint name="base_to_imu" type="fixed">
+      <parent link="base_link"/>
+      <child link="imu_link"/>
+      <origin xyz="0 0 0"/>
+    </joint>
+
+    <joint name="base_to_camera_link_att" type="fixed">
       <parent link="base_link"/>
       <child link="camera_link_join"/>
       <origin xyz="0 0 0"/>

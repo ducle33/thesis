@@ -1,18 +1,27 @@
+
 <launch>
   <arg name="open_rviz" default="true"/>
   <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find linhsbot)/urdf/linhsbot.xacro'"/>
-
+  
+  
   <!-- INIT -->
   <group> 
+  
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
-    <!-- init teleop in new terminal -->
-    <node name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" args="_speed:=0.1 _turn:=0.2"
-           launch-prefix="gnome-terminal --window -e" >
-    </node>
     <!-- init rosserial in new tab -->
-    <node name="base_control" pkg="linhsbot" type="control.py" output="screen" 
-           launch-prefix="gnome-terminal --tab -e" >
-    </node>
+    <node name="imu" pkg="linhsbot" type="imu.py" output="screen" ></node>
+    
+  	<node name="imu_filter_node_for_orientation" pkg="imu_complementary_filter" type="complementary_filter_node" />
+  	
+  	<node name="rpy_tf" pkg="linhsbot" type="tf_broadcaster_imu.py" ></node>
+  	
+    <node name="base_control" pkg="linhsbot" type="base_control.py" output="screen" ></node>
+    
   </group>
-
+  
+  <!-- Fusion IMU and encoder driver -->
+  <include file="$(find linhsbot)/launch/sensor_fusion.launch"> </include>
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find linhsbot)/rviz/sensor_fusion.rviz"/> 
+  
 </launch>

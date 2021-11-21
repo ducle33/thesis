@@ -98,9 +98,10 @@ PID_TypeDef str_left_pid;
 
 #endif
 /* Other definitions*/
-uint8_t ready_flag = FALSE;
+uint8_t cmd_vel_ready_flag = FALSE;
+uint8_t tf_publish_ready_flag = TRUE;
 uint8_t pid_flag = FALSE;
-volatile uint8_t    vel_update_flag = FALSE;
+volatile uint8_t  vel_update_flag = FALSE;
 float linear_vel;
 float angular_vel;
 float last_l_vel, last_a_vel;
@@ -187,8 +188,7 @@ int main(void)
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
   __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_3, 30);
   __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, 30);
-
-  //Test control loop
+  //Test PI control motor loop
   // Start Timer1 for sampling loop interrupt
   HAL_TIM_Base_Start_IT(&htim1);
   
@@ -236,37 +236,38 @@ int main(void)
       #endif
       // Send 
       #ifdef TF_UPDATE
-      tick = HAL_GetTick();
-      uint32_t dtick = tick - last_tick;
-      if (dtick > 200)
+      if (tf_publish_ready_flag == TRUE)
       {
-          
-          double dt = 0.2000f;
-          // double vx = 0.1; // M
-          // double vth = 0.5; // Rad
+        tick = HAL_GetTick();
+        uint32_t dtick = tick - last_tick;
+        if (dtick > 20)
+        {
+            
+            double dt = (double)dtick;
+            // double vx = 0.1; // M
+            // double vth = 0.5; // Rad
 
-          // Publish odometry data
-          double left_speed =  (str_left_motor.dir == 0) ? str_left_motor.speed : (- str_left_motor.speed);
-          double right_speed =  (str_right_motor.dir == 0) ? str_right_motor.speed : (- str_right_motor.speed);
-          double vx = (right_speed + left_speed) * ( PI * ROBOT_WHEEL_DIAMETER ) / (2 * 60) ; // M/s
-          double vth = (right_speed - left_speed) * ( PI * ROBOT_WHEEL_DIAMETER ) / (ROBOT_WHEEL_BASE * 60); // Rad/s
+            // Publish odometry data
+            double left_speed =  (str_left_motor.dir == 0) ? str_left_motor.speed : (- str_left_motor.speed);
+            double right_speed =  (str_right_motor.dir == 0) ? str_right_motor.speed : (- str_right_motor.speed);
+            //double vx = (right_speed + left_speed) * ( PI * ROBOT_WHEEL_DIAMETER ) / (2 * 60) ; // M/s
+            //double vth = (right_speed - left_speed) * ( PI * ROBOT_WHEEL_DIAMETER ) / (ROBOT_WHEEL_BASE * 60); // Rad/s
 
-          parseTxStateFrame(tx_state_frame, vx, vth, dt);         
-          HAL_UART_Transmit_DMA(&huart1 ,tx_state_frame, 32);
+            parseTxStateFrame(tx_state_frame, left_speed, right_speed, dt);         
+            HAL_UART_Transmit_DMA(&huart1 ,tx_state_frame, 32);
 
-          #ifdef DEBUG_TF_UPDATE
-          // sprintf((char *)MSG, "X: %.5f | Y: %.5f | Theta: %.5f \n", vx, vth, dt);
-          // HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
+            #ifdef DEBUG_TF_UPDATE
+            // sprintf((char *)MSG, "X: %.5f | Y: %.5f | Theta: %.5f \n", vx, vth, dt);
+            // HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
 
-          // sprintf((char *)MSG, tx_state_frame);
-          // HAL_UART_Transmit_DMA(&huart1 ,MSG, 32);
+            // sprintf((char *)MSG, tx_state_frame);
+            // HAL_UART_Transmit_DMA(&huart1 ,MSG, 32);
+            #endif
 
-          #endif
-          // sprintf((char *)MSG, "vth = %f \n",vth);
-          // HAL_UART_Transmit_DMA(&huart1 ,MSG, sizeof(MSG));
-
-          last_tick = tick;
+            last_tick = tick;
+        }
       }
+      
       #endif
     }
   /* USER CODE END 3 */
@@ -317,7 +318,7 @@ void map_speed(float a_vel, float l_vel, double *r_set_rpm, double *r_set_lpm)
     __NOP();
 }
 
-
+/* Timer Interrupt for PID control*/
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if (htim == &htim1)
@@ -336,8 +337,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
           HAL_UART_Transmit_DMA(&huart1, period, sizeof(period));
         }
         cnt = 0;
-        last_enc_cnt = enc_cnt;
-        
+        last_enc_cnt = enc_cnt;        
     }
     #endif
 
@@ -345,7 +345,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     /* =================
     * MAIN PID CLOSE-LOOP SAMPLING AND COMPUTE
     *  =================== */
-    // RIGHT MOTOR PI CONTROL 
     PID_PreProcess(&str_right_motor, right_set_speed);
     PID_PreProcess(&str_left_motor, left_set_speed);
     PID_ComputeOutput(&str_right_motor);
@@ -353,6 +352,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     PID_SetDuty(&str_right_motor );
     PID_SetDuty(&str_left_motor );
     #else 
+    // Test encoder, blink LED every 100 pulses
     static uint32_t counter = 0;
     if (counter >= 100)
     {
@@ -364,21 +364,20 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
 }
 
-
+// UART RX callback for cmd_vel receive
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    
-    if (ready_flag == TRUE)
+    if (cmd_vel_ready_flag == TRUE)
     {
         vel_update_flag = TRUE;
-        ready_flag = FALSE;
+        cmd_vel_ready_flag = FALSE;
         HAL_UART_Receive_DMA(&huart1, rx_buffer, 1);
     }
     else
     {
         if (rx_buffer[0] == 0x16 && prev_rx == 0x16 && last_rx == 0x16) // SYN
         {
-            ready_flag = TRUE;
+            cmd_vel_ready_flag = TRUE;
             memset(rx_buffer, 0, RX_BUFFER_SIZE);
             HAL_UART_Receive_DMA(&huart1, rx_buffer, RX_BUFFER_SIZE);   
         }
@@ -387,11 +386,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
             HAL_UART_Receive_DMA(&huart1, rx_buffer, 1);
         }
     } 
+    // This session for enabling TX Velocity after receive signal from PI
+    // Note: Without snippet, PI gonna be spamed on TX pin and wont boot
+    // if (tf_publish_ready_flag == FALSE)
+    // {
+    //     if (rx_buffer[0] == 0x16 && prev_rx == 0x02 && last_rx == 0x16)
+    //     {
+    //         tf_publish_ready_flag = TRUE;
+    //     }
+    // }
     last_rx = prev_rx;
     prev_rx = rx_buffer[0];
 }
-
-
 /* USER CODE END 4 */
 
 /**

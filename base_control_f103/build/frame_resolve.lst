@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 1
+ARM GAS  /tmp/ccjtPk73.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -48,649 +48,667 @@ ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 1
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
   18:Core/Src/frame_resolve.c ****     uint32_t * tmp;
-  32              		.loc 1 18 5 view .LVU1
+  33              		.loc 1 18 5 view .LVU1
   19:Core/Src/frame_resolve.c ****     tmp = (uint32_t*)f;
-  33              		.loc 1 19 5 view .LVU2
+  34              		.loc 1 19 5 view .LVU2
   20:Core/Src/frame_resolve.c ****     uint8_t i = 0;
-  34              		.loc 1 20 5 view .LVU3
+  35              		.loc 1 20 5 view .LVU3
   21:Core/Src/frame_resolve.c ****     for (i = 0; i<s; i++)
-  35              		.loc 1 21 5 view .LVU4
-  36              		.loc 1 21 12 is_stmt 0 view .LVU5
-  37 0000 0023     		movs	r3, #0
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 2
+  36              		.loc 1 21 5 view .LVU4
+  37              		.loc 1 21 12 is_stmt 0 view .LVU5
+ARM GAS  /tmp/ccjtPk73.s 			page 2
 
 
-  38              	.LVL1:
-  39              		.loc 1 21 17 is_stmt 1 view .LVU6
-  40              		.loc 1 21 5 is_stmt 0 view .LVU7
-  41 0002 9342     		cmp	r3, r2
-  42 0004 10D2     		bcs	.L7
+  38 0000 0023     		movs	r3, #0
+  39              	.LVL1:
+  40              		.loc 1 21 17 is_stmt 1 view .LVU6
+  41              		.loc 1 21 5 is_stmt 0 view .LVU7
+  42 0002 9342     		cmp	r3, r2
+  43 0004 0CD2     		bcs	.L7
   17:Core/Src/frame_resolve.c ****     uint32_t * tmp;
-  43              		.loc 1 17 1 view .LVU8
-  44 0006 00B5     		push	{lr}
-  45              	.LCFI0:
-  46              		.cfi_def_cfa_offset 4
-  47              		.cfi_offset 14, -4
-  48              	.L3:
+  44              		.loc 1 17 1 view .LVU8
+  45 0006 30B4     		push	{r4, r5}
+  46              	.LCFI0:
+  47              		.cfi_def_cfa_offset 8
+  48              		.cfi_offset 4, -8
+  49              		.cfi_offset 5, -4
+  50              	.L3:
   22:Core/Src/frame_resolve.c ****     {      
   23:Core/Src/frame_resolve.c ****         d[i] = *tmp>>(24-8*i);
-  49              		.loc 1 23 9 is_stmt 1 discriminator 3 view .LVU9
-  50              		.loc 1 23 25 is_stmt 0 discriminator 3 view .LVU10
-  51 0008 C3F1030C 		rsb	ip, r3, #3
-  52 000c 4FEACC0C 		lsl	ip, ip, #3
-  53              		.loc 1 23 20 discriminator 3 view .LVU11
-  54 0010 D0F800E0 		ldr	lr, [r0]
-  55 0014 2EFA0CFC 		lsr	ip, lr, ip
-  56              		.loc 1 23 14 discriminator 3 view .LVU12
-  57 0018 01F803C0 		strb	ip, [r1, r3]
+  51              		.loc 1 23 9 is_stmt 1 discriminator 3 view .LVU9
+  52              		.loc 1 23 16 is_stmt 0 discriminator 3 view .LVU10
+  53 0008 0468     		ldr	r4, [r0]
+  54              		.loc 1 23 25 discriminator 3 view .LVU11
+  55 000a C3F10305 		rsb	r5, r3, #3
+  56 000e ED00     		lsls	r5, r5, #3
+  57              		.loc 1 23 20 discriminator 3 view .LVU12
+  58 0010 EC40     		lsrs	r4, r4, r5
+  59              		.loc 1 23 14 discriminator 3 view .LVU13
+  60 0012 CC54     		strb	r4, [r1, r3]
   21:Core/Src/frame_resolve.c ****     {      
-  58              		.loc 1 21 22 is_stmt 1 discriminator 3 view .LVU13
+  61              		.loc 1 21 22 is_stmt 1 discriminator 3 view .LVU14
   21:Core/Src/frame_resolve.c ****     {      
-  59              		.loc 1 21 23 is_stmt 0 discriminator 3 view .LVU14
-  60 001c 0133     		adds	r3, r3, #1
-  61              	.LVL2:
+  62              		.loc 1 21 23 is_stmt 0 discriminator 3 view .LVU15
+  63 0014 0133     		adds	r3, r3, #1
+  64              	.LVL2:
   21:Core/Src/frame_resolve.c ****     {      
-  62              		.loc 1 21 23 discriminator 3 view .LVU15
-  63 001e DBB2     		uxtb	r3, r3
-  64              	.LVL3:
+  65              		.loc 1 21 23 discriminator 3 view .LVU16
+  66 0016 DBB2     		uxtb	r3, r3
+  67              	.LVL3:
   21:Core/Src/frame_resolve.c ****     {      
-  65              		.loc 1 21 17 is_stmt 1 discriminator 3 view .LVU16
+  68              		.loc 1 21 17 is_stmt 1 discriminator 3 view .LVU17
   21:Core/Src/frame_resolve.c ****     {      
-  66              		.loc 1 21 5 is_stmt 0 discriminator 3 view .LVU17
-  67 0020 9342     		cmp	r3, r2
-  68 0022 F1D3     		bcc	.L3
+  69              		.loc 1 21 5 is_stmt 0 discriminator 3 view .LVU18
+  70 0018 9342     		cmp	r3, r2
+  71 001a F5D3     		bcc	.L3
   24:Core/Src/frame_resolve.c ****     }
   25:Core/Src/frame_resolve.c **** }
-  69              		.loc 1 25 1 view .LVU18
-  70 0024 5DF804FB 		ldr	pc, [sp], #4
-  71              	.L7:
-  72              	.LCFI1:
-  73              		.cfi_def_cfa_offset 0
-  74              		.cfi_restore 14
-  75              		.loc 1 25 1 view .LVU19
-  76 0028 7047     		bx	lr
-  77              		.cfi_endproc
-  78              	.LFE68:
-  80              		.section	.text.double2byte,"ax",%progbits
-  81              		.align	1
-  82              		.global	double2byte
-  83              		.syntax unified
-  84              		.thumb
-  85              		.thumb_func
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 3
+  72              		.loc 1 25 1 view .LVU19
+  73 001c 30BC     		pop	{r4, r5}
+  74              	.LCFI1:
+  75              		.cfi_restore 5
+  76              		.cfi_restore 4
+  77              		.cfi_def_cfa_offset 0
+  78 001e 7047     		bx	lr
+  79              	.L7:
+  80              		.loc 1 25 1 view .LVU20
+  81 0020 7047     		bx	lr
+  82              		.cfi_endproc
+  83              	.LFE68:
+  85              		.section	.text.double2byte,"ax",%progbits
+ARM GAS  /tmp/ccjtPk73.s 			page 3
 
 
-  86              		.fpu softvfp
-  88              	double2byte:
-  89              	.LVL4:
-  90              	.LFB69:
+  86              		.align	1
+  87              		.global	double2byte
+  88              		.syntax unified
+  89              		.thumb
+  90              		.thumb_func
+  91              		.fpu softvfp
+  93              	double2byte:
+  94              	.LVL4:
+  95              	.LFB69:
   26:Core/Src/frame_resolve.c **** 
   27:Core/Src/frame_resolve.c **** void double2byte(double *d, uint8_t *buffer, uint8_t s)
   28:Core/Src/frame_resolve.c **** {
-  91              		.loc 1 28 1 is_stmt 1 view -0
-  92              		.cfi_startproc
-  93              		@ args = 0, pretend = 0, frame = 8
-  94              		@ frame_needed = 0, uses_anonymous_args = 0
-  95              		@ link register save eliminated.
-  96              		.loc 1 28 1 is_stmt 0 view .LVU21
-  97 0000 82B0     		sub	sp, sp, #8
-  98              	.LCFI2:
-  99              		.cfi_def_cfa_offset 8
+  96              		.loc 1 28 1 is_stmt 1 view -0
+  97              		.cfi_startproc
+  98              		@ args = 0, pretend = 0, frame = 8
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+ 101              		.loc 1 28 1 is_stmt 0 view .LVU22
+ 102 0000 82B0     		sub	sp, sp, #8
+ 103              	.LCFI2:
+ 104              		.cfi_def_cfa_offset 8
   29:Core/Src/frame_resolve.c ****     union {
- 100              		.loc 1 29 5 is_stmt 1 view .LVU22
+ 105              		.loc 1 29 5 is_stmt 1 view .LVU23
   30:Core/Src/frame_resolve.c ****         double _d;
   31:Core/Src/frame_resolve.c ****         uint8_t bytes[8];
   32:Core/Src/frame_resolve.c ****     } container;
   33:Core/Src/frame_resolve.c ****     container._d = *d;
- 101              		.loc 1 33 5 view .LVU23
- 102              		.loc 1 33 20 is_stmt 0 view .LVU24
- 103 0002 D0E90023 		ldrd	r2, [r0]
- 104              	.LVL5:
- 105              		.loc 1 33 18 view .LVU25
- 106 0006 CDE90023 		strd	r2, [sp]
+ 106              		.loc 1 33 5 view .LVU24
+ 107              		.loc 1 33 20 is_stmt 0 view .LVU25
+ 108 0002 D0E90023 		ldrd	r2, [r0]
+ 109              	.LVL5:
+ 110              		.loc 1 33 18 view .LVU26
+ 111 0006 CDE90023 		strd	r2, [sp]
   34:Core/Src/frame_resolve.c ****     uint8_t ii;
- 107              		.loc 1 34 5 is_stmt 1 view .LVU26
+ 112              		.loc 1 34 5 is_stmt 1 view .LVU27
   35:Core/Src/frame_resolve.c ****     for (ii=0; ii<8; ii++) 
- 108              		.loc 1 35 5 view .LVU27
- 109              	.LVL6:
- 110              		.loc 1 35 12 is_stmt 0 view .LVU28
- 111 000a 0023     		movs	r3, #0
- 112              		.loc 1 35 5 view .LVU29
- 113 000c 08E0     		b	.L9
- 114              	.LVL7:
- 115              	.L10:
+ 113              		.loc 1 35 5 view .LVU28
+ 114              	.LVL6:
+ 115              		.loc 1 35 12 is_stmt 0 view .LVU29
+ 116 000a 0023     		movs	r3, #0
+ 117              		.loc 1 35 5 view .LVU30
+ 118 000c 08E0     		b	.L9
+ 119              	.LVL7:
+ 120              	.L10:
   36:Core/Src/frame_resolve.c ****         buffer[ii] = container.bytes[7-ii];
- 116              		.loc 1 36 9 is_stmt 1 discriminator 3 view .LVU30
- 117              		.loc 1 36 39 is_stmt 0 discriminator 3 view .LVU31
- 118 000e C3F10702 		rsb	r2, r3, #7
- 119              		.loc 1 36 37 discriminator 3 view .LVU32
- 120 0012 02A8     		add	r0, sp, #8
- 121 0014 0244     		add	r2, r2, r0
- 122 0016 12F8082C 		ldrb	r2, [r2, #-8]	@ zero_extendqisi2
- 123              		.loc 1 36 20 discriminator 3 view .LVU33
- 124 001a CA54     		strb	r2, [r1, r3]
+ 121              		.loc 1 36 9 is_stmt 1 discriminator 3 view .LVU31
+ 122              		.loc 1 36 39 is_stmt 0 discriminator 3 view .LVU32
+ 123 000e C3F10702 		rsb	r2, r3, #7
+ 124              		.loc 1 36 37 discriminator 3 view .LVU33
+ 125 0012 02A8     		add	r0, sp, #8
+ 126 0014 0244     		add	r2, r2, r0
+ 127 0016 12F8082C 		ldrb	r2, [r2, #-8]	@ zero_extendqisi2
+ 128              		.loc 1 36 20 discriminator 3 view .LVU34
+ 129 001a CA54     		strb	r2, [r1, r3]
   35:Core/Src/frame_resolve.c ****     for (ii=0; ii<8; ii++) 
- 125              		.loc 1 35 22 is_stmt 1 discriminator 3 view .LVU34
+ 130              		.loc 1 35 22 is_stmt 1 discriminator 3 view .LVU35
   35:Core/Src/frame_resolve.c ****     for (ii=0; ii<8; ii++) 
- 126              		.loc 1 35 24 is_stmt 0 discriminator 3 view .LVU35
- 127 001c 0133     		adds	r3, r3, #1
- 128              	.LVL8:
-  35:Core/Src/frame_resolve.c ****     for (ii=0; ii<8; ii++) 
- 129              		.loc 1 35 24 discriminator 3 view .LVU36
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 4
+ARM GAS  /tmp/ccjtPk73.s 			page 4
 
 
- 130 001e DBB2     		uxtb	r3, r3
- 131              	.LVL9:
- 132              	.L9:
+ 131              		.loc 1 35 24 is_stmt 0 discriminator 3 view .LVU36
+ 132 001c 0133     		adds	r3, r3, #1
+ 133              	.LVL8:
   35:Core/Src/frame_resolve.c ****     for (ii=0; ii<8; ii++) 
- 133              		.loc 1 35 16 is_stmt 1 discriminator 1 view .LVU37
+ 134              		.loc 1 35 24 discriminator 3 view .LVU37
+ 135 001e DBB2     		uxtb	r3, r3
+ 136              	.LVL9:
+ 137              	.L9:
   35:Core/Src/frame_resolve.c ****     for (ii=0; ii<8; ii++) 
- 134              		.loc 1 35 5 is_stmt 0 discriminator 1 view .LVU38
- 135 0020 072B     		cmp	r3, #7
- 136 0022 F4D9     		bls	.L10
+ 138              		.loc 1 35 16 is_stmt 1 discriminator 1 view .LVU38
+  35:Core/Src/frame_resolve.c ****     for (ii=0; ii<8; ii++) 
+ 139              		.loc 1 35 5 is_stmt 0 discriminator 1 view .LVU39
+ 140 0020 072B     		cmp	r3, #7
+ 141 0022 F4D9     		bls	.L10
   37:Core/Src/frame_resolve.c **** 
   38:Core/Src/frame_resolve.c **** }
- 137              		.loc 1 38 1 view .LVU39
- 138 0024 02B0     		add	sp, sp, #8
- 139              	.LCFI3:
- 140              		.cfi_def_cfa_offset 0
- 141              		@ sp needed
- 142 0026 7047     		bx	lr
- 143              		.cfi_endproc
- 144              	.LFE69:
- 146              		.section	.text.checksum,"ax",%progbits
- 147              		.align	1
- 148              		.global	checksum
- 149              		.syntax unified
- 150              		.thumb
- 151              		.thumb_func
- 152              		.fpu softvfp
- 154              	checksum:
- 155              	.LVL10:
- 156              	.LFB70:
+ 142              		.loc 1 38 1 view .LVU40
+ 143 0024 02B0     		add	sp, sp, #8
+ 144              	.LCFI3:
+ 145              		.cfi_def_cfa_offset 0
+ 146              		@ sp needed
+ 147 0026 7047     		bx	lr
+ 148              		.cfi_endproc
+ 149              	.LFE69:
+ 151              		.section	.text.checksum,"ax",%progbits
+ 152              		.align	1
+ 153              		.global	checksum
+ 154              		.syntax unified
+ 155              		.thumb
+ 156              		.thumb_func
+ 157              		.fpu softvfp
+ 159              	checksum:
+ 160              	.LVL10:
+ 161              	.LFB70:
   39:Core/Src/frame_resolve.c **** 
   40:Core/Src/frame_resolve.c **** // Calc checksum
   41:Core/Src/frame_resolve.c **** uint32_t checksum(uint8_t *d, uint8_t from, uint8_t to)
   42:Core/Src/frame_resolve.c **** {
- 157              		.loc 1 42 1 is_stmt 1 view -0
- 158              		.cfi_startproc
- 159              		@ args = 0, pretend = 0, frame = 0
- 160              		@ frame_needed = 0, uses_anonymous_args = 0
- 161              		@ link register save eliminated.
- 162              		.loc 1 42 1 is_stmt 0 view .LVU41
- 163 0000 8446     		mov	ip, r0
+ 162              		.loc 1 42 1 is_stmt 1 view -0
+ 163              		.cfi_startproc
+ 164              		@ args = 0, pretend = 0, frame = 0
+ 165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 166              		@ link register save eliminated.
+ 167              		.loc 1 42 1 is_stmt 0 view .LVU42
+ 168 0000 10B4     		push	{r4}
+ 169              	.LCFI4:
+ 170              		.cfi_def_cfa_offset 4
+ 171              		.cfi_offset 4, -4
+ 172 0002 0446     		mov	r4, r0
   43:Core/Src/frame_resolve.c ****     uint32_t _crc = 0;
- 164              		.loc 1 43 5 is_stmt 1 view .LVU42
- 165              	.LVL11:
+ 173              		.loc 1 43 5 is_stmt 1 view .LVU43
+ 174              	.LVL11:
   44:Core/Src/frame_resolve.c ****     uint8_t i = 0;
- 166              		.loc 1 44 5 view .LVU43
+ 175              		.loc 1 44 5 view .LVU44
   45:Core/Src/frame_resolve.c ****     for (i = from; i < to; i++)
- 167              		.loc 1 45 5 view .LVU44
+ 176              		.loc 1 45 5 view .LVU45
   43:Core/Src/frame_resolve.c ****     uint32_t _crc = 0;
- 168              		.loc 1 43 14 is_stmt 0 view .LVU45
- 169 0002 0020     		movs	r0, #0
- 170              	.LVL12:
- 171              		.loc 1 45 5 view .LVU46
- 172 0004 04E0     		b	.L13
- 173              	.LVL13:
- 174              	.L14:
+ARM GAS  /tmp/ccjtPk73.s 			page 5
+
+
+ 177              		.loc 1 43 14 is_stmt 0 view .LVU46
+ 178 0004 0020     		movs	r0, #0
+ 179              	.LVL12:
+ 180              	.L13:
+ 181              		.loc 1 45 20 is_stmt 1 discriminator 1 view .LVU47
+ 182              		.loc 1 45 5 is_stmt 0 discriminator 1 view .LVU48
+ 183 0006 9142     		cmp	r1, r2
+ 184 0008 04D2     		bcs	.L16
   46:Core/Src/frame_resolve.c ****     {
   47:Core/Src/frame_resolve.c ****         _crc+= d[i];
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 5
-
-
- 175              		.loc 1 47 9 is_stmt 1 discriminator 3 view .LVU47
- 176              		.loc 1 47 17 is_stmt 0 discriminator 3 view .LVU48
- 177 0006 1CF80130 		ldrb	r3, [ip, r1]	@ zero_extendqisi2
- 178              		.loc 1 47 13 discriminator 3 view .LVU49
- 179 000a 1844     		add	r0, r0, r3
- 180              	.LVL14:
+ 185              		.loc 1 47 9 is_stmt 1 discriminator 3 view .LVU49
+ 186              		.loc 1 47 17 is_stmt 0 discriminator 3 view .LVU50
+ 187 000a 635C     		ldrb	r3, [r4, r1]	@ zero_extendqisi2
+ 188              		.loc 1 47 13 discriminator 3 view .LVU51
+ 189 000c 1844     		add	r0, r0, r3
+ 190              	.LVL13:
   45:Core/Src/frame_resolve.c ****     for (i = from; i < to; i++)
- 181              		.loc 1 45 28 is_stmt 1 discriminator 3 view .LVU50
+ 191              		.loc 1 45 28 is_stmt 1 discriminator 3 view .LVU52
   45:Core/Src/frame_resolve.c ****     for (i = from; i < to; i++)
- 182              		.loc 1 45 29 is_stmt 0 discriminator 3 view .LVU51
- 183 000c 0131     		adds	r1, r1, #1
- 184              	.LVL15:
+ 192              		.loc 1 45 29 is_stmt 0 discriminator 3 view .LVU53
+ 193 000e 0131     		adds	r1, r1, #1
+ 194              	.LVL14:
   45:Core/Src/frame_resolve.c ****     for (i = from; i < to; i++)
- 185              		.loc 1 45 29 discriminator 3 view .LVU52
- 186 000e C9B2     		uxtb	r1, r1
- 187              	.LVL16:
- 188              	.L13:
+ 195              		.loc 1 45 29 discriminator 3 view .LVU54
+ 196 0010 C9B2     		uxtb	r1, r1
+ 197              	.LVL15:
   45:Core/Src/frame_resolve.c ****     for (i = from; i < to; i++)
- 189              		.loc 1 45 20 is_stmt 1 discriminator 1 view .LVU53
-  45:Core/Src/frame_resolve.c ****     for (i = from; i < to; i++)
- 190              		.loc 1 45 5 is_stmt 0 discriminator 1 view .LVU54
- 191 0010 9142     		cmp	r1, r2
- 192 0012 F8D3     		bcc	.L14
+ 198              		.loc 1 45 29 discriminator 3 view .LVU55
+ 199 0012 F8E7     		b	.L13
+ 200              	.L16:
   48:Core/Src/frame_resolve.c ****     }
   49:Core/Src/frame_resolve.c ****     return _crc;
- 193              		.loc 1 49 5 is_stmt 1 view .LVU55
   50:Core/Src/frame_resolve.c **** }
- 194              		.loc 1 50 1 is_stmt 0 view .LVU56
- 195 0014 7047     		bx	lr
- 196              		.cfi_endproc
- 197              	.LFE70:
- 199              		.section	.text.parseTxFrame,"ax",%progbits
- 200              		.align	1
- 201              		.global	parseTxFrame
- 202              		.syntax unified
- 203              		.thumb
- 204              		.thumb_func
- 205              		.fpu softvfp
- 207              	parseTxFrame:
- 208              	.LVL17:
- 209              	.LFB71:
+ 201              		.loc 1 50 1 view .LVU56
+ 202 0014 10BC     		pop	{r4}
+ 203              	.LCFI5:
+ 204              		.cfi_restore 4
+ 205              		.cfi_def_cfa_offset 0
+ 206              	.LVL16:
+ 207              		.loc 1 50 1 view .LVU57
+ 208 0016 7047     		bx	lr
+ 209              		.cfi_endproc
+ 210              	.LFE70:
+ 212              		.section	.text.parseTxFrame,"ax",%progbits
+ 213              		.align	1
+ 214              		.global	parseTxFrame
+ 215              		.syntax unified
+ 216              		.thumb
+ 217              		.thumb_func
+ 218              		.fpu softvfp
+ 220              	parseTxFrame:
+ 221              	.LVL17:
+ 222              	.LFB71:
   51:Core/Src/frame_resolve.c **** 
   52:Core/Src/frame_resolve.c **** // Parse frames for transmition
   53:Core/Src/frame_resolve.c **** void parseTxFrame(uint8_t *d /* uint8_t *d */, float vel_linear, float vel_angular)
   54:Core/Src/frame_resolve.c **** {
- 210              		.loc 1 54 1 is_stmt 1 view -0
- 211              		.cfi_startproc
- 212              		@ args = 0, pretend = 0, frame = 8
- 213              		@ frame_needed = 0, uses_anonymous_args = 0
- 214              		.loc 1 54 1 is_stmt 0 view .LVU58
- 215 0000 30B5     		push	{r4, r5, lr}
- 216              	.LCFI4:
- 217              		.cfi_def_cfa_offset 12
- 218              		.cfi_offset 4, -12
- 219              		.cfi_offset 5, -8
- 220              		.cfi_offset 14, -4
- 221 0002 83B0     		sub	sp, sp, #12
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 6
+ARM GAS  /tmp/ccjtPk73.s 			page 6
 
 
- 222              	.LCFI5:
- 223              		.cfi_def_cfa_offset 24
- 224 0004 0446     		mov	r4, r0
- 225 0006 0191     		str	r1, [sp, #4]	@ float
- 226 0008 0092     		str	r2, [sp]	@ float
+ 223              		.loc 1 54 1 is_stmt 1 view -0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 8
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              		.loc 1 54 1 is_stmt 0 view .LVU59
+ 228 0000 30B5     		push	{r4, r5, lr}
+ 229              	.LCFI6:
+ 230              		.cfi_def_cfa_offset 12
+ 231              		.cfi_offset 4, -12
+ 232              		.cfi_offset 5, -8
+ 233              		.cfi_offset 14, -4
+ 234 0002 83B0     		sub	sp, sp, #12
+ 235              	.LCFI7:
+ 236              		.cfi_def_cfa_offset 24
+ 237 0004 0446     		mov	r4, r0
+ 238 0006 0191     		str	r1, [sp, #4]	@ float
+ 239 0008 0092     		str	r2, [sp]	@ float
   55:Core/Src/frame_resolve.c ****     // Header
   56:Core/Src/frame_resolve.c ****     d[0] = 1;
- 227              		.loc 1 56 5 is_stmt 1 view .LVU59
- 228              		.loc 1 56 10 is_stmt 0 view .LVU60
- 229 000a 0123     		movs	r3, #1
- 230 000c 0370     		strb	r3, [r0]
+ 240              		.loc 1 56 5 is_stmt 1 view .LVU60
+ 241              		.loc 1 56 10 is_stmt 0 view .LVU61
+ 242 000a 0123     		movs	r3, #1
+ 243 000c 0370     		strb	r3, [r0]
   57:Core/Src/frame_resolve.c ****     d[1] = 2; 
- 231              		.loc 1 57 5 is_stmt 1 view .LVU61
- 232              		.loc 1 57 10 is_stmt 0 view .LVU62
- 233 000e 0225     		movs	r5, #2
- 234 0010 4570     		strb	r5, [r0, #1]
+ 244              		.loc 1 57 5 is_stmt 1 view .LVU62
+ 245              		.loc 1 57 10 is_stmt 0 view .LVU63
+ 246 000e 0225     		movs	r5, #2
+ 247 0010 4570     		strb	r5, [r0, #1]
   58:Core/Src/frame_resolve.c ****   
   59:Core/Src/frame_resolve.c ****     // Resolve float to 4 bytes binary.
   60:Core/Src/frame_resolve.c ****     float2byte(&vel_linear, &d[2], 4);
- 235              		.loc 1 60 5 is_stmt 1 view .LVU63
- 236 0012 0422     		movs	r2, #4
- 237              	.LVL18:
- 238              		.loc 1 60 5 is_stmt 0 view .LVU64
- 239 0014 4119     		adds	r1, r0, r5
- 240              	.LVL19:
- 241              		.loc 1 60 5 view .LVU65
- 242 0016 0DEB0200 		add	r0, sp, r2
- 243              	.LVL20:
- 244              		.loc 1 60 5 view .LVU66
- 245 001a FFF7FEFF 		bl	float2byte
- 246              	.LVL21:
+ 248              		.loc 1 60 5 is_stmt 1 view .LVU64
+ 249 0012 0422     		movs	r2, #4
+ 250              	.LVL18:
+ 251              		.loc 1 60 5 is_stmt 0 view .LVU65
+ 252 0014 4119     		adds	r1, r0, r5
+ 253              	.LVL19:
+ 254              		.loc 1 60 5 view .LVU66
+ 255 0016 0DEB0200 		add	r0, sp, r2
+ 256              	.LVL20:
+ 257              		.loc 1 60 5 view .LVU67
+ 258 001a FFF7FEFF 		bl	float2byte
+ 259              	.LVL21:
   61:Core/Src/frame_resolve.c ****     float2byte(&vel_angular, &d[6], 4);
- 247              		.loc 1 61 5 is_stmt 1 view .LVU67
- 248 001e 0422     		movs	r2, #4
- 249 0020 A11D     		adds	r1, r4, #6
- 250 0022 6846     		mov	r0, sp
- 251 0024 FFF7FEFF 		bl	float2byte
- 252              	.LVL22:
+ 260              		.loc 1 61 5 is_stmt 1 view .LVU68
+ 261 001e 0422     		movs	r2, #4
+ 262 0020 A11D     		adds	r1, r4, #6
+ 263 0022 6846     		mov	r0, sp
+ 264 0024 FFF7FEFF 		bl	float2byte
+ 265              	.LVL22:
   62:Core/Src/frame_resolve.c **** 
   63:Core/Src/frame_resolve.c ****     uint32_t crc = checksum(d, 2 , 10);   
- 253              		.loc 1 63 5 view .LVU68
- 254              		.loc 1 63 20 is_stmt 0 view .LVU69
- 255 0028 0A22     		movs	r2, #10
- 256 002a 2946     		mov	r1, r5
- 257 002c 2046     		mov	r0, r4
- 258 002e FFF7FEFF 		bl	checksum
- 259              	.LVL23:
+ 266              		.loc 1 63 5 view .LVU69
+ 267              		.loc 1 63 20 is_stmt 0 view .LVU70
+ 268 0028 0A22     		movs	r2, #10
+ 269 002a 2946     		mov	r1, r5
+ 270 002c 2046     		mov	r0, r4
+ARM GAS  /tmp/ccjtPk73.s 			page 7
+
+
+ 271 002e FFF7FEFF 		bl	checksum
+ 272              	.LVL23:
   64:Core/Src/frame_resolve.c ****    
   65:Core/Src/frame_resolve.c ****     d[10] = (crc >> 24) & 0xFF;
- 260              		.loc 1 65 5 is_stmt 1 view .LVU70
- 261              		.loc 1 65 18 is_stmt 0 view .LVU71
- 262 0032 030E     		lsrs	r3, r0, #24
- 263              		.loc 1 65 11 view .LVU72
- 264 0034 A372     		strb	r3, [r4, #10]
+ 273              		.loc 1 65 5 is_stmt 1 view .LVU71
+ 274              		.loc 1 65 18 is_stmt 0 view .LVU72
+ 275 0032 030E     		lsrs	r3, r0, #24
+ 276              		.loc 1 65 11 view .LVU73
+ 277 0034 A372     		strb	r3, [r4, #10]
   66:Core/Src/frame_resolve.c ****     d[11] = (crc >> 16)  & 0xFF; 
- 265              		.loc 1 66 5 is_stmt 1 view .LVU73
- 266              		.loc 1 66 18 is_stmt 0 view .LVU74
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 7
-
-
- 267 0036 030C     		lsrs	r3, r0, #16
- 268              		.loc 1 66 11 view .LVU75
- 269 0038 E372     		strb	r3, [r4, #11]
+ 278              		.loc 1 66 5 is_stmt 1 view .LVU74
+ 279              		.loc 1 66 18 is_stmt 0 view .LVU75
+ 280 0036 030C     		lsrs	r3, r0, #16
+ 281              		.loc 1 66 11 view .LVU76
+ 282 0038 E372     		strb	r3, [r4, #11]
   67:Core/Src/frame_resolve.c ****     d[12] = (crc >> 8)  & 0xFF; 
- 270              		.loc 1 67 5 is_stmt 1 view .LVU76
- 271              		.loc 1 67 18 is_stmt 0 view .LVU77
- 272 003a 030A     		lsrs	r3, r0, #8
- 273              		.loc 1 67 11 view .LVU78
- 274 003c 2373     		strb	r3, [r4, #12]
+ 283              		.loc 1 67 5 is_stmt 1 view .LVU77
+ 284              		.loc 1 67 18 is_stmt 0 view .LVU78
+ 285 003a 030A     		lsrs	r3, r0, #8
+ 286              		.loc 1 67 11 view .LVU79
+ 287 003c 2373     		strb	r3, [r4, #12]
   68:Core/Src/frame_resolve.c ****     d[13] = (crc )  & 0xFF; 
- 275              		.loc 1 68 5 is_stmt 1 view .LVU79
- 276              		.loc 1 68 11 is_stmt 0 view .LVU80
- 277 003e 6073     		strb	r0, [r4, #13]
+ 288              		.loc 1 68 5 is_stmt 1 view .LVU80
+ 289              		.loc 1 68 11 is_stmt 0 view .LVU81
+ 290 003e 6073     		strb	r0, [r4, #13]
   69:Core/Src/frame_resolve.c ****     
   70:Core/Src/frame_resolve.c ****     // EOF
   71:Core/Src/frame_resolve.c ****     d[14] = '\r';
- 278              		.loc 1 71 5 is_stmt 1 view .LVU81
- 279              		.loc 1 71 11 is_stmt 0 view .LVU82
- 280 0040 0D23     		movs	r3, #13
- 281 0042 A373     		strb	r3, [r4, #14]
+ 291              		.loc 1 71 5 is_stmt 1 view .LVU82
+ 292              		.loc 1 71 11 is_stmt 0 view .LVU83
+ 293 0040 0D23     		movs	r3, #13
+ 294 0042 A373     		strb	r3, [r4, #14]
   72:Core/Src/frame_resolve.c ****     d[15] = '\n';
- 282              		.loc 1 72 5 is_stmt 1 view .LVU83
- 283              		.loc 1 72 11 is_stmt 0 view .LVU84
- 284 0044 0A23     		movs	r3, #10
- 285 0046 E373     		strb	r3, [r4, #15]
+ 295              		.loc 1 72 5 is_stmt 1 view .LVU84
+ 296              		.loc 1 72 11 is_stmt 0 view .LVU85
+ 297 0044 0A23     		movs	r3, #10
+ 298 0046 E373     		strb	r3, [r4, #15]
   73:Core/Src/frame_resolve.c **** }
- 286              		.loc 1 73 1 view .LVU85
- 287 0048 03B0     		add	sp, sp, #12
- 288              	.LCFI6:
- 289              		.cfi_def_cfa_offset 12
- 290              		@ sp needed
- 291 004a 30BD     		pop	{r4, r5, pc}
- 292              		.loc 1 73 1 view .LVU86
- 293              		.cfi_endproc
- 294              	.LFE71:
- 296              		.section	.text.parseTxStateFrame,"ax",%progbits
- 297              		.align	1
- 298              		.global	parseTxStateFrame
- 299              		.syntax unified
- 300              		.thumb
- 301              		.thumb_func
- 302              		.fpu softvfp
- 304              	parseTxStateFrame:
- 305              	.LVL24:
- 306              	.LFB72:
+ 299              		.loc 1 73 1 view .LVU86
+ 300 0048 03B0     		add	sp, sp, #12
+ 301              	.LCFI8:
+ 302              		.cfi_def_cfa_offset 12
+ 303              		@ sp needed
+ 304 004a 30BD     		pop	{r4, r5, pc}
+ 305              		.loc 1 73 1 view .LVU87
+ 306              		.cfi_endproc
+ 307              	.LFE71:
+ 309              		.section	.text.parseTxStateFrame,"ax",%progbits
+ 310              		.align	1
+ 311              		.global	parseTxStateFrame
+ 312              		.syntax unified
+ 313              		.thumb
+ 314              		.thumb_func
+ 315              		.fpu softvfp
+ 317              	parseTxStateFrame:
+ 318              	.LVL24:
+ 319              	.LFB72:
+ARM GAS  /tmp/ccjtPk73.s 			page 8
+
+
   74:Core/Src/frame_resolve.c **** 
   75:Core/Src/frame_resolve.c **** void parseTxStateFrame(uint8_t *d /*18bytes*/, double x, double y, double th)
   76:Core/Src/frame_resolve.c **** {
- 307              		.loc 1 76 1 is_stmt 1 view -0
- 308              		.cfi_startproc
- 309              		@ args = 16, pretend = 0, frame = 8
- 310              		@ frame_needed = 0, uses_anonymous_args = 0
- 311              		.loc 1 76 1 is_stmt 0 view .LVU88
- 312 0000 30B5     		push	{r4, r5, lr}
- 313              	.LCFI7:
- 314              		.cfi_def_cfa_offset 12
- 315              		.cfi_offset 4, -12
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 8
-
-
- 316              		.cfi_offset 5, -8
- 317              		.cfi_offset 14, -4
- 318 0002 83B0     		sub	sp, sp, #12
- 319              	.LCFI8:
- 320              		.cfi_def_cfa_offset 24
- 321 0004 0446     		mov	r4, r0
- 322 0006 CDE90023 		strd	r2, [sp]
+ 320              		.loc 1 76 1 is_stmt 1 view -0
+ 321              		.cfi_startproc
+ 322              		@ args = 16, pretend = 0, frame = 8
+ 323              		@ frame_needed = 0, uses_anonymous_args = 0
+ 324              		.loc 1 76 1 is_stmt 0 view .LVU89
+ 325 0000 30B5     		push	{r4, r5, lr}
+ 326              	.LCFI9:
+ 327              		.cfi_def_cfa_offset 12
+ 328              		.cfi_offset 4, -12
+ 329              		.cfi_offset 5, -8
+ 330              		.cfi_offset 14, -4
+ 331 0002 83B0     		sub	sp, sp, #12
+ 332              	.LCFI10:
+ 333              		.cfi_def_cfa_offset 24
+ 334 0004 0446     		mov	r4, r0
+ 335 0006 CDE90023 		strd	r2, [sp]
   77:Core/Src/frame_resolve.c ****     // Header
   78:Core/Src/frame_resolve.c ****     d[0] = 1;
- 323              		.loc 1 78 5 is_stmt 1 view .LVU89
- 324              		.loc 1 78 10 is_stmt 0 view .LVU90
- 325 000a 0123     		movs	r3, #1
- 326 000c 0370     		strb	r3, [r0]
- 327              	.LVL25:
+ 336              		.loc 1 78 5 is_stmt 1 view .LVU90
+ 337              		.loc 1 78 10 is_stmt 0 view .LVU91
+ 338 000a 0123     		movs	r3, #1
+ 339 000c 0370     		strb	r3, [r0]
+ 340              	.LVL25:
   79:Core/Src/frame_resolve.c ****     d[1] = 2; 
- 328              		.loc 1 79 5 is_stmt 1 view .LVU91
- 329              		.loc 1 79 10 is_stmt 0 view .LVU92
- 330 000e 0225     		movs	r5, #2
- 331 0010 4570     		strb	r5, [r0, #1]
+ 341              		.loc 1 79 5 is_stmt 1 view .LVU92
+ 342              		.loc 1 79 10 is_stmt 0 view .LVU93
+ 343 000e 0225     		movs	r5, #2
+ 344 0010 4570     		strb	r5, [r0, #1]
   80:Core/Src/frame_resolve.c ****   
   81:Core/Src/frame_resolve.c ****     // Resolve float to 4 bytes binary.
   82:Core/Src/frame_resolve.c ****     double2byte(&x, &d[2], 8);
- 332              		.loc 1 82 5 is_stmt 1 view .LVU93
- 333 0012 0822     		movs	r2, #8
- 334              	.LVL26:
- 335              		.loc 1 82 5 is_stmt 0 view .LVU94
- 336 0014 4119     		adds	r1, r0, r5
- 337 0016 6846     		mov	r0, sp
- 338              	.LVL27:
- 339              		.loc 1 82 5 view .LVU95
- 340 0018 FFF7FEFF 		bl	double2byte
- 341              	.LVL28:
+ 345              		.loc 1 82 5 is_stmt 1 view .LVU94
+ 346 0012 0822     		movs	r2, #8
+ 347              	.LVL26:
+ 348              		.loc 1 82 5 is_stmt 0 view .LVU95
+ 349 0014 4119     		adds	r1, r0, r5
+ 350 0016 6846     		mov	r0, sp
+ 351              	.LVL27:
+ 352              		.loc 1 82 5 view .LVU96
+ 353 0018 FFF7FEFF 		bl	double2byte
+ 354              	.LVL28:
   83:Core/Src/frame_resolve.c ****     double2byte(&y, &d[10], 8);
- 342              		.loc 1 83 5 is_stmt 1 view .LVU96
- 343 001c 0822     		movs	r2, #8
- 344 001e 04F10A01 		add	r1, r4, #10
- 345 0022 06A8     		add	r0, sp, #24
- 346 0024 FFF7FEFF 		bl	double2byte
- 347              	.LVL29:
+ 355              		.loc 1 83 5 is_stmt 1 view .LVU97
+ 356 001c 0822     		movs	r2, #8
+ 357 001e 04F10A01 		add	r1, r4, #10
+ 358 0022 06A8     		add	r0, sp, #24
+ 359 0024 FFF7FEFF 		bl	double2byte
+ 360              	.LVL29:
   84:Core/Src/frame_resolve.c ****     double2byte(&th, &d[18], 8);
- 348              		.loc 1 84 5 view .LVU97
- 349 0028 0822     		movs	r2, #8
- 350 002a 04F11201 		add	r1, r4, #18
- 351 002e 08A8     		add	r0, sp, #32
- 352 0030 FFF7FEFF 		bl	double2byte
- 353              	.LVL30:
+ 361              		.loc 1 84 5 view .LVU98
+ 362 0028 0822     		movs	r2, #8
+ 363 002a 04F11201 		add	r1, r4, #18
+ 364 002e 08A8     		add	r0, sp, #32
+ 365 0030 FFF7FEFF 		bl	double2byte
+ARM GAS  /tmp/ccjtPk73.s 			page 9
+
+
+ 366              	.LVL30:
   85:Core/Src/frame_resolve.c **** 
   86:Core/Src/frame_resolve.c ****     uint32_t crc = checksum(d, 2, 26);   
- 354              		.loc 1 86 5 view .LVU98
- 355              		.loc 1 86 20 is_stmt 0 view .LVU99
- 356 0034 1A22     		movs	r2, #26
- 357 0036 2946     		mov	r1, r5
- 358 0038 2046     		mov	r0, r4
- 359 003a FFF7FEFF 		bl	checksum
- 360              	.LVL31:
+ 367              		.loc 1 86 5 view .LVU99
+ 368              		.loc 1 86 20 is_stmt 0 view .LVU100
+ 369 0034 1A22     		movs	r2, #26
+ 370 0036 2946     		mov	r1, r5
+ 371 0038 2046     		mov	r0, r4
+ 372 003a FFF7FEFF 		bl	checksum
+ 373              	.LVL31:
   87:Core/Src/frame_resolve.c ****    
   88:Core/Src/frame_resolve.c ****     d[26] = (crc >> 24) & 0xFF;
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 9
-
-
- 361              		.loc 1 88 5 is_stmt 1 view .LVU100
- 362              		.loc 1 88 18 is_stmt 0 view .LVU101
- 363 003e 030E     		lsrs	r3, r0, #24
- 364              		.loc 1 88 11 view .LVU102
- 365 0040 A376     		strb	r3, [r4, #26]
+ 374              		.loc 1 88 5 is_stmt 1 view .LVU101
+ 375              		.loc 1 88 18 is_stmt 0 view .LVU102
+ 376 003e 030E     		lsrs	r3, r0, #24
+ 377              		.loc 1 88 11 view .LVU103
+ 378 0040 A376     		strb	r3, [r4, #26]
   89:Core/Src/frame_resolve.c ****     d[27] = (crc >> 16)  & 0xFF; 
- 366              		.loc 1 89 5 is_stmt 1 view .LVU103
- 367              		.loc 1 89 18 is_stmt 0 view .LVU104
- 368 0042 030C     		lsrs	r3, r0, #16
- 369              		.loc 1 89 11 view .LVU105
- 370 0044 E376     		strb	r3, [r4, #27]
+ 379              		.loc 1 89 5 is_stmt 1 view .LVU104
+ 380              		.loc 1 89 18 is_stmt 0 view .LVU105
+ 381 0042 030C     		lsrs	r3, r0, #16
+ 382              		.loc 1 89 11 view .LVU106
+ 383 0044 E376     		strb	r3, [r4, #27]
   90:Core/Src/frame_resolve.c ****     d[28] = (crc >> 8)  & 0xFF; 
- 371              		.loc 1 90 5 is_stmt 1 view .LVU106
- 372              		.loc 1 90 18 is_stmt 0 view .LVU107
- 373 0046 030A     		lsrs	r3, r0, #8
- 374              		.loc 1 90 11 view .LVU108
- 375 0048 2377     		strb	r3, [r4, #28]
+ 384              		.loc 1 90 5 is_stmt 1 view .LVU107
+ 385              		.loc 1 90 18 is_stmt 0 view .LVU108
+ 386 0046 030A     		lsrs	r3, r0, #8
+ 387              		.loc 1 90 11 view .LVU109
+ 388 0048 2377     		strb	r3, [r4, #28]
   91:Core/Src/frame_resolve.c ****     d[29] = (crc )  & 0xFF; 
- 376              		.loc 1 91 5 is_stmt 1 view .LVU109
- 377              		.loc 1 91 11 is_stmt 0 view .LVU110
- 378 004a 6077     		strb	r0, [r4, #29]
+ 389              		.loc 1 91 5 is_stmt 1 view .LVU110
+ 390              		.loc 1 91 11 is_stmt 0 view .LVU111
+ 391 004a 6077     		strb	r0, [r4, #29]
   92:Core/Src/frame_resolve.c ****     
   93:Core/Src/frame_resolve.c ****     // EOF
   94:Core/Src/frame_resolve.c ****     d[30] = '\r';
- 379              		.loc 1 94 5 is_stmt 1 view .LVU111
- 380              		.loc 1 94 11 is_stmt 0 view .LVU112
- 381 004c 0D23     		movs	r3, #13
- 382 004e A377     		strb	r3, [r4, #30]
+ 392              		.loc 1 94 5 is_stmt 1 view .LVU112
+ 393              		.loc 1 94 11 is_stmt 0 view .LVU113
+ 394 004c 0D23     		movs	r3, #13
+ 395 004e A377     		strb	r3, [r4, #30]
   95:Core/Src/frame_resolve.c ****     d[31] = '\n';
- 383              		.loc 1 95 5 is_stmt 1 view .LVU113
- 384              		.loc 1 95 11 is_stmt 0 view .LVU114
- 385 0050 0A23     		movs	r3, #10
- 386 0052 E377     		strb	r3, [r4, #31]
+ 396              		.loc 1 95 5 is_stmt 1 view .LVU114
+ 397              		.loc 1 95 11 is_stmt 0 view .LVU115
+ 398 0050 0A23     		movs	r3, #10
+ 399 0052 E377     		strb	r3, [r4, #31]
   96:Core/Src/frame_resolve.c **** }
- 387              		.loc 1 96 1 view .LVU115
- 388 0054 03B0     		add	sp, sp, #12
- 389              	.LCFI9:
- 390              		.cfi_def_cfa_offset 12
- 391              		@ sp needed
- 392 0056 30BD     		pop	{r4, r5, pc}
- 393              		.loc 1 96 1 view .LVU116
- 394              		.cfi_endproc
- 395              	.LFE72:
- 397              		.section	.text.resolveRxFrame,"ax",%progbits
- 398              		.align	1
- 399              		.global	resolveRxFrame
- 400              		.syntax unified
- 401              		.thumb
- 402              		.thumb_func
- 403              		.fpu softvfp
- 405              	resolveRxFrame:
- 406              	.LVL32:
- 407              	.LFB73:
+ 400              		.loc 1 96 1 view .LVU116
+ 401 0054 03B0     		add	sp, sp, #12
+ 402              	.LCFI11:
+ 403              		.cfi_def_cfa_offset 12
+ 404              		@ sp needed
+ 405 0056 30BD     		pop	{r4, r5, pc}
+ 406              		.loc 1 96 1 view .LVU117
+ 407              		.cfi_endproc
+ 408              	.LFE72:
+ 410              		.section	.text.resolveRxFrame,"ax",%progbits
+ 411              		.align	1
+ARM GAS  /tmp/ccjtPk73.s 			page 10
+
+
+ 412              		.global	resolveRxFrame
+ 413              		.syntax unified
+ 414              		.thumb
+ 415              		.thumb_func
+ 416              		.fpu softvfp
+ 418              	resolveRxFrame:
+ 419              	.LVL32:
+ 420              	.LFB73:
   97:Core/Src/frame_resolve.c **** 
   98:Core/Src/frame_resolve.c **** 
   99:Core/Src/frame_resolve.c **** void resolveRxFrame(uint8_t * d, float * linear, float * angular)
  100:Core/Src/frame_resolve.c **** {
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 10
-
-
- 408              		.loc 1 100 1 is_stmt 1 view -0
- 409              		.cfi_startproc
- 410              		@ args = 0, pretend = 0, frame = 0
- 411              		@ frame_needed = 0, uses_anonymous_args = 0
- 412              		.loc 1 100 1 is_stmt 0 view .LVU118
- 413 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
- 414              	.LCFI10:
- 415              		.cfi_def_cfa_offset 24
- 416              		.cfi_offset 4, -24
- 417              		.cfi_offset 5, -20
- 418              		.cfi_offset 6, -16
- 419              		.cfi_offset 7, -12
- 420              		.cfi_offset 8, -8
- 421              		.cfi_offset 14, -4
- 422 0004 0F46     		mov	r7, r1
- 423 0006 1646     		mov	r6, r2
+ 421              		.loc 1 100 1 is_stmt 1 view -0
+ 422              		.cfi_startproc
+ 423              		@ args = 0, pretend = 0, frame = 0
+ 424              		@ frame_needed = 0, uses_anonymous_args = 0
+ 425              		.loc 1 100 1 is_stmt 0 view .LVU119
+ 426 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 427              	.LCFI12:
+ 428              		.cfi_def_cfa_offset 24
+ 429              		.cfi_offset 4, -24
+ 430              		.cfi_offset 5, -20
+ 431              		.cfi_offset 6, -16
+ 432              		.cfi_offset 7, -12
+ 433              		.cfi_offset 8, -8
+ 434              		.cfi_offset 14, -4
+ 435 0004 8846     		mov	r8, r1
+ 436 0006 1746     		mov	r7, r2
  101:Core/Src/frame_resolve.c ****     uint32_t tmp1 = 0;
- 424              		.loc 1 101 5 is_stmt 1 view .LVU119
- 425              	.LVL33:
+ 437              		.loc 1 101 5 is_stmt 1 view .LVU120
+ 438              	.LVL33:
  102:Core/Src/frame_resolve.c ****     uint32_t tmp2 = 0;
- 426              		.loc 1 102 5 view .LVU120
+ 439              		.loc 1 102 5 view .LVU121
  103:Core/Src/frame_resolve.c ****     uint32_t rx_crc, local_crc;
- 427              		.loc 1 103 5 view .LVU121
+ 440              		.loc 1 103 5 view .LVU122
  104:Core/Src/frame_resolve.c ****     
  105:Core/Src/frame_resolve.c ****     rx_crc = d[10] << 24 | d[11]<<16 | d[12]<<8 | d[13]; 
- 428              		.loc 1 105 5 view .LVU122
- 429              		.loc 1 105 15 is_stmt 0 view .LVU123
- 430 0008 827A     		ldrb	r2, [r0, #10]	@ zero_extendqisi2
- 431              	.LVL34:
- 432              		.loc 1 105 29 view .LVU124
- 433 000a C57A     		ldrb	r5, [r0, #11]	@ zero_extendqisi2
- 434              		.loc 1 105 33 view .LVU125
- 435 000c 2D04     		lsls	r5, r5, #16
- 436              		.loc 1 105 26 view .LVU126
- 437 000e 45EA0265 		orr	r5, r5, r2, lsl #24
- 438              		.loc 1 105 41 view .LVU127
- 439 0012 027B     		ldrb	r2, [r0, #12]	@ zero_extendqisi2
- 440              		.loc 1 105 38 view .LVU128
- 441 0014 45EA0225 		orr	r5, r5, r2, lsl #8
- 442              		.loc 1 105 52 view .LVU129
- 443 0018 427B     		ldrb	r2, [r0, #13]	@ zero_extendqisi2
- 444              		.loc 1 105 49 view .LVU130
- 445 001a 1543     		orrs	r5, r5, r2
- 446              	.LVL35:
+ 441              		.loc 1 105 5 view .LVU123
+ 442              		.loc 1 105 15 is_stmt 0 view .LVU124
+ 443 0008 827A     		ldrb	r2, [r0, #10]	@ zero_extendqisi2
+ 444              	.LVL34:
+ 445              		.loc 1 105 29 view .LVU125
+ 446 000a C67A     		ldrb	r6, [r0, #11]	@ zero_extendqisi2
+ 447              		.loc 1 105 33 view .LVU126
+ 448 000c 3604     		lsls	r6, r6, #16
+ 449              		.loc 1 105 26 view .LVU127
+ 450 000e 46EA0266 		orr	r6, r6, r2, lsl #24
+ 451              		.loc 1 105 41 view .LVU128
+ 452 0012 027B     		ldrb	r2, [r0, #12]	@ zero_extendqisi2
+ 453              		.loc 1 105 38 view .LVU129
+ 454 0014 46EA0226 		orr	r6, r6, r2, lsl #8
+ 455              		.loc 1 105 52 view .LVU130
+ 456 0018 427B     		ldrb	r2, [r0, #13]	@ zero_extendqisi2
+ 457              		.loc 1 105 49 view .LVU131
+ 458 001a 1643     		orrs	r6, r6, r2
+ 459              	.LVL35:
  106:Core/Src/frame_resolve.c ****     tmp1 = d[2] << 24 | d[3]<<16 | d[4]<<8 | d[5];
- 447              		.loc 1 106 5 is_stmt 1 view .LVU131
- 448              		.loc 1 106 13 is_stmt 0 view .LVU132
- 449 001c 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
- 450              		.loc 1 106 26 view .LVU133
- 451 001e C478     		ldrb	r4, [r0, #3]	@ zero_extendqisi2
- 452              		.loc 1 106 29 view .LVU134
- 453 0020 2404     		lsls	r4, r4, #16
- 454              		.loc 1 106 23 view .LVU135
- 455 0022 44EA0264 		orr	r4, r4, r2, lsl #24
- 456              		.loc 1 106 37 view .LVU136
- 457 0026 0279     		ldrb	r2, [r0, #4]	@ zero_extendqisi2
- 458              		.loc 1 106 34 view .LVU137
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 11
+ARM GAS  /tmp/ccjtPk73.s 			page 11
 
 
- 459 0028 44EA0224 		orr	r4, r4, r2, lsl #8
- 460              		.loc 1 106 47 view .LVU138
- 461 002c 4279     		ldrb	r2, [r0, #5]	@ zero_extendqisi2
- 462              		.loc 1 106 44 view .LVU139
- 463 002e 1443     		orrs	r4, r4, r2
- 464              	.LVL36:
+ 460              		.loc 1 106 5 is_stmt 1 view .LVU132
+ 461              		.loc 1 106 13 is_stmt 0 view .LVU133
+ 462 001c 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+ 463              		.loc 1 106 26 view .LVU134
+ 464 001e C578     		ldrb	r5, [r0, #3]	@ zero_extendqisi2
+ 465              		.loc 1 106 29 view .LVU135
+ 466 0020 2D04     		lsls	r5, r5, #16
+ 467              		.loc 1 106 23 view .LVU136
+ 468 0022 45EA0265 		orr	r5, r5, r2, lsl #24
+ 469              		.loc 1 106 37 view .LVU137
+ 470 0026 0279     		ldrb	r2, [r0, #4]	@ zero_extendqisi2
+ 471              		.loc 1 106 34 view .LVU138
+ 472 0028 45EA0225 		orr	r5, r5, r2, lsl #8
+ 473              		.loc 1 106 47 view .LVU139
+ 474 002c 4279     		ldrb	r2, [r0, #5]	@ zero_extendqisi2
+ 475              		.loc 1 106 44 view .LVU140
+ 476 002e 1543     		orrs	r5, r5, r2
+ 477              	.LVL36:
  107:Core/Src/frame_resolve.c ****     tmp2 = d[6] << 24 | d[7]<<16 | d[8]<<8 | d[9];
- 465              		.loc 1 107 5 is_stmt 1 view .LVU140
- 466              		.loc 1 107 13 is_stmt 0 view .LVU141
- 467 0030 8279     		ldrb	r2, [r0, #6]	@ zero_extendqisi2
- 468              		.loc 1 107 26 view .LVU142
- 469 0032 90F807C0 		ldrb	ip, [r0, #7]	@ zero_extendqisi2
- 470              		.loc 1 107 29 view .LVU143
- 471 0036 4FEA0C4C 		lsl	ip, ip, #16
- 472              		.loc 1 107 23 view .LVU144
- 473 003a 4CEA026C 		orr	ip, ip, r2, lsl #24
- 474              		.loc 1 107 37 view .LVU145
- 475 003e 027A     		ldrb	r2, [r0, #8]	@ zero_extendqisi2
- 476              		.loc 1 107 34 view .LVU146
- 477 0040 4CEA022C 		orr	ip, ip, r2, lsl #8
- 478              		.loc 1 107 47 view .LVU147
- 479 0044 90F80980 		ldrb	r8, [r0, #9]	@ zero_extendqisi2
- 480              		.loc 1 107 44 view .LVU148
- 481 0048 4CEA0808 		orr	r8, ip, r8
- 482              	.LVL37:
+ 478              		.loc 1 107 5 is_stmt 1 view .LVU141
+ 479              		.loc 1 107 13 is_stmt 0 view .LVU142
+ 480 0030 8279     		ldrb	r2, [r0, #6]	@ zero_extendqisi2
+ 481              		.loc 1 107 26 view .LVU143
+ 482 0032 C479     		ldrb	r4, [r0, #7]	@ zero_extendqisi2
+ 483              		.loc 1 107 29 view .LVU144
+ 484 0034 2404     		lsls	r4, r4, #16
+ 485              		.loc 1 107 23 view .LVU145
+ 486 0036 44EA0264 		orr	r4, r4, r2, lsl #24
+ 487              		.loc 1 107 37 view .LVU146
+ 488 003a 027A     		ldrb	r2, [r0, #8]	@ zero_extendqisi2
+ 489              		.loc 1 107 34 view .LVU147
+ 490 003c 44EA0224 		orr	r4, r4, r2, lsl #8
+ 491              		.loc 1 107 47 view .LVU148
+ 492 0040 437A     		ldrb	r3, [r0, #9]	@ zero_extendqisi2
+ 493              		.loc 1 107 44 view .LVU149
+ 494 0042 1C43     		orrs	r4, r4, r3
+ 495              	.LVL37:
  108:Core/Src/frame_resolve.c ****     
  109:Core/Src/frame_resolve.c ****     local_crc = checksum(d, 2, 10);
- 483              		.loc 1 109 5 is_stmt 1 view .LVU149
- 484              		.loc 1 109 17 is_stmt 0 view .LVU150
- 485 004c 0A22     		movs	r2, #10
- 486 004e 0221     		movs	r1, #2
- 487              	.LVL38:
- 488              		.loc 1 109 17 view .LVU151
- 489 0050 FFF7FEFF 		bl	checksum
- 490              	.LVL39:
+ 496              		.loc 1 109 5 is_stmt 1 view .LVU150
+ 497              		.loc 1 109 17 is_stmt 0 view .LVU151
+ 498 0044 0A22     		movs	r2, #10
+ 499 0046 0221     		movs	r1, #2
+ 500              	.LVL38:
+ 501              		.loc 1 109 17 view .LVU152
+ 502 0048 FFF7FEFF 		bl	checksum
+ 503              	.LVL39:
  110:Core/Src/frame_resolve.c **** 
  111:Core/Src/frame_resolve.c ****     if (local_crc == rx_crc)
- 491              		.loc 1 111 5 is_stmt 1 view .LVU152
- 492              		.loc 1 111 8 is_stmt 0 view .LVU153
- 493 0054 8542     		cmp	r5, r0
- 494 0056 01D0     		beq	.L22
- 495              	.LVL40:
- 496              	.L19:
+ 504              		.loc 1 111 5 is_stmt 1 view .LVU153
+ 505              		.loc 1 111 8 is_stmt 0 view .LVU154
+ 506 004c 8642     		cmp	r6, r0
+ 507 004e 01D0     		beq	.L24
+ 508              	.LVL40:
+ 509              	.L21:
  112:Core/Src/frame_resolve.c ****     {
  113:Core/Src/frame_resolve.c ****         *linear = *(float *)&tmp1;
+ARM GAS  /tmp/ccjtPk73.s 			page 12
+
+
  114:Core/Src/frame_resolve.c ****         *angular = *(float *)&tmp2;
  115:Core/Src/frame_resolve.c ****     }
  116:Core/Src/frame_resolve.c **** }
- 497              		.loc 1 116 1 view .LVU154
- 498 0058 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 499              	.LVL41:
- 500              	.L22:
+ 510              		.loc 1 116 1 view .LVU155
+ 511 0050 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 512              	.LVL41:
+ 513              	.L24:
  113:Core/Src/frame_resolve.c ****         *angular = *(float *)&tmp2;
- 501              		.loc 1 113 9 is_stmt 1 view .LVU155
+ 514              		.loc 1 113 9 is_stmt 1 view .LVU156
  113:Core/Src/frame_resolve.c ****         *angular = *(float *)&tmp2;
- 502              		.loc 1 113 17 is_stmt 0 view .LVU156
- 503 005c 3C60     		str	r4, [r7]	@ float
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 12
-
-
+ 515              		.loc 1 113 17 is_stmt 0 view .LVU157
+ 516 0054 C8F80050 		str	r5, [r8]	@ float
  114:Core/Src/frame_resolve.c ****     }
- 504              		.loc 1 114 9 is_stmt 1 view .LVU157
+ 517              		.loc 1 114 9 is_stmt 1 view .LVU158
  114:Core/Src/frame_resolve.c ****     }
- 505              		.loc 1 114 18 is_stmt 0 view .LVU158
- 506 005e C6F80080 		str	r8, [r6]	@ float
- 507              	.LVL42:
- 508              		.loc 1 116 1 view .LVU159
- 509 0062 F9E7     		b	.L19
- 510              		.cfi_endproc
- 511              	.LFE73:
- 513              		.text
- 514              	.Letext0:
- 515              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
- 516              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2020-q4-major\\arm-none-eabi\\inc
-ARM GAS  C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s 			page 13
+ 518              		.loc 1 114 18 is_stmt 0 view .LVU159
+ 519 0058 3C60     		str	r4, [r7]	@ float
+ 520              	.LVL42:
+ 521              		.loc 1 116 1 view .LVU160
+ 522 005a F9E7     		b	.L21
+ 523              		.cfi_endproc
+ 524              	.LFE73:
+ 526              		.text
+ 527              	.Letext0:
+ 528              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 529              		.file 3 "Drivers/CMSIS/Include/core_cm3.h"
+ 530              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 531              		.file 5 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 532              		.file 6 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 533              		.file 7 "/usr/include/newlib/sys/_types.h"
+ 534              		.file 8 "/usr/include/newlib/sys/reent.h"
+ 535              		.file 9 "/usr/include/newlib/sys/lock.h"
+ARM GAS  /tmp/ccjtPk73.s 			page 13
 
 
 DEFINED SYMBOLS
-                            *ABS*:00000000 frame_resolve.c
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:16     .text.float2byte:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:24     .text.float2byte:00000000 float2byte
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:81     .text.double2byte:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:88     .text.double2byte:00000000 double2byte
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:147    .text.checksum:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:154    .text.checksum:00000000 checksum
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:200    .text.parseTxFrame:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:207    .text.parseTxFrame:00000000 parseTxFrame
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:297    .text.parseTxStateFrame:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:304    .text.parseTxStateFrame:00000000 parseTxStateFrame
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:398    .text.resolveRxFrame:00000000 $t
-C:\Users\Duy_Linh\AppData\Local\Temp\ccZTw6KN.s:405    .text.resolveRxFrame:00000000 resolveRxFrame
+                            *ABS*:0000000000000000 frame_resolve.c
+     /tmp/ccjtPk73.s:16     .text.float2byte:0000000000000000 $t
+     /tmp/ccjtPk73.s:24     .text.float2byte:0000000000000000 float2byte
+     /tmp/ccjtPk73.s:86     .text.double2byte:0000000000000000 $t
+     /tmp/ccjtPk73.s:93     .text.double2byte:0000000000000000 double2byte
+     /tmp/ccjtPk73.s:152    .text.checksum:0000000000000000 $t
+     /tmp/ccjtPk73.s:159    .text.checksum:0000000000000000 checksum
+     /tmp/ccjtPk73.s:213    .text.parseTxFrame:0000000000000000 $t
+     /tmp/ccjtPk73.s:220    .text.parseTxFrame:0000000000000000 parseTxFrame
+     /tmp/ccjtPk73.s:310    .text.parseTxStateFrame:0000000000000000 $t
+     /tmp/ccjtPk73.s:317    .text.parseTxStateFrame:0000000000000000 parseTxStateFrame
+     /tmp/ccjtPk73.s:411    .text.resolveRxFrame:0000000000000000 $t
+     /tmp/ccjtPk73.s:418    .text.resolveRxFrame:0000000000000000 resolveRxFrame
 
 NO UNDEFINED SYMBOLS

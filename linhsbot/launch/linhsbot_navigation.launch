@@ -11,9 +11,9 @@
 
   <arg name="open_rviz" default="true"/>
   <arg name="rtabmapviz" default="false"/>
-  <arg name="hardware_ready" default="false"/>
+  <arg name="hardware_bringup" default="false"/>
   <arg name="man_teleop" default="true"/>
-  <arg name="rgbd_odometry" default="true"/>
+  <arg name="visual_odometry" default="false"/>
   <arg name="with_camera" default="true"/>
   <arg name="localization" default="false"/>
   <arg name="database_path" default="~/.ros/rtabmap.db"/>
@@ -38,7 +38,7 @@
 
   <!-- RTAB-MAP Ultilities set up -->
   <group ns="rtabmap">
-    <node if="$(eval model=='waffle')" pkg="rtabmap_ros" type="rgbd_sync" name="rgbd_sync" output="screen">
+    <node pkg="rtabmap_ros" type="rgbd_sync" name="rgbd_sync" output="screen">
       <remap from="rgb/image"         to="/camera/rgb/image_raw"/>
       <remap from="depth/image"       to="/camera/depth/image_raw"/>
       <remap from="rgb/camera_info"   to="/camera/rgb/camera_info"/>
@@ -91,7 +91,7 @@
     </node>
 
     <!-- Visual Odometry -->
-    <node if="$(arg rgbd_odometry)" pkg="rtabmap_ros" type="rgbd_odometry" name="rgbd_odometry" output="screen">
+    <node if="$(arg visual_odometry)" pkg="rtabmap_ros" type="rgbd_odometry" name="rgbd_odometry" output="screen">
       <param name="frame_id"                    type="string" value="base_link"/>
       <param name="wait_for_transform_duration" type="double" value="$(arg wait_for_transform)"/>
       <param name="Reg/Force3DoF"               type="string" value="true"/>
